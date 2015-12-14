@@ -14,4 +14,9 @@ jQuery ->
 		modal.find('.modal-body input#year').val(year)
 		modal.find('.modal-body input#painterId').val(painter_id)
 		modal.find('.modal-body textarea#notes').val(notes)
+
+	$('.chosen-select').chosen
+		allow_single_deselect: true
+		no_results_text: 'No results matched'
+		width: '200px'
 	

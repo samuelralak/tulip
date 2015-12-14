@@ -9,10 +9,12 @@ gem 'pg'
 # user interface
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
+gem 'compass-rails', '~> 2.0.4'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem "haml-rails"
 gem "font-awesome-rails"
+gem 'chosen-rails'
 
 # javascript
 gem 'jquery-rails'
