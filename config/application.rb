@@ -24,5 +24,7 @@ module Novel
     config.active_record.raise_in_transactional_callbacks = true
     config.beginning_of_week = :sunday
     config.end_of_week = :saturday
+
+    config.serve_static_assets = true
   end
 end
