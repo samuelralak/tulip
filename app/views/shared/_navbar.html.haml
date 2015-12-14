@@ -1,0 +1,19 @@
+%nav{ :class => "navbar navbar-inverse navbar-fixed-top" }
+	.container-fluid
+		.navbar-header
+			%button{ :type => "button", :class => "navbar-toggle collapsed", :data => { :toggle => "collapse", :target => "#navbar" } }
+				%span.sr-only
+					Toggle navigation
+				%span.icon-bar
+				%span.icon-bar
+				%span.icon-bar
+			= link_to 'Novel', '#', class: 'navbar-brand'
+
+		#navbar.navbar-collapse.collapse
+			%ul.nav.navbar-nav.navbar-right
+				%li= link_to 'Dashboard', '#'
+				%li= link_to 'Settings', '#'
+				%li= link_to 'Profile', '#'
+				%li= link_to 'Help', '#'
+			%form.navbar-form.navbar-right
+				%input{ :type => "text", :class => "form-control", :placeholder => "Search..." }

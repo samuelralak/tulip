@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  basic_pay: 9.99
+  daily_wage: 
+  daily_allowance: 
+  employment_type_id: 
+
+two:
+  name: MyString
+  basic_pay: 9.99
+  daily_wage: 
+  daily_allowance: 
+  employment_type_id: 

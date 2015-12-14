@@ -1,0 +1,23 @@
+.row
+	.col-md-6
+		= simple_form_for(@site) do |f|
+			= f.error_notification
+			.form-inputs
+				= f.input :name
+				= f.input :head
+				= f.input :address
+				= field_set_tag 'Square Metres' do
+					= f.simple_fields_for :site_square_metre do |c|
+						= c.input :internal
+						= c.input :external
+				= field_set_tag 'Rate' do
+					= f.simple_fields_for :site_rate do |c|
+						= c.input :internal
+						= c.input :external
+				= field_set_tag 'Agreed Amount' do
+					= f.simple_fields_for :site_agreed_amount do |c|
+						= c.input :internal
+						= c.input :external
+				= f.input :notes
+			.form-actions
+				= f.button :submit

@@ -1,0 +1,3 @@
+%ul.nav.nav-pills.nav-stacked
+	- @painters.each do |painter|
+		%li= link_to painter.name, painter_monthly_wage_path(painter.id)

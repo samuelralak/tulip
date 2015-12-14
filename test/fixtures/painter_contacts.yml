@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  address: MyText
+  telephone_one: MyString
+  telephone_two: MyString
+  telephone_three: MyString
+  painter_id: 
+
+two:
+  address: MyText
+  telephone_one: MyString
+  telephone_two: MyString
+  telephone_three: MyString
+  painter_id: 

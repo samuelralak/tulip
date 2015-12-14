@@ -1,0 +1,30 @@
+= simple_form_for(@painter) do |f|
+	= f.error_notification
+	.row
+		.col-md-6
+			.form-inputs
+				= field_set_tag 'Personal Details' do
+					= f.input :name
+					= f.input :employment_type_id, collection: EmploymentType.all, prompt: "Select Type of Employment"
+					= f.input :basic_pay
+					= f.input :daily_wage
+					= f.input :daily_allowance
+					%br
+				= field_set_tag 'Skills' do
+					= f.association :skills 
+		.col-md-6
+			.form-inputs
+				= field_set_tag 'Contact Details' do
+					= f.simple_fields_for :painter_contact do |c|
+						= c.input :telephone_one, label: 'Telephone #1'
+						= c.input :telephone_two, label: 'Telephone #2'
+						= c.input :telephone_three, label: 'Telephone #3'
+						= c.input :address
+				%br
+				= field_set_tag 'Next of Kin' do
+					= f.simple_fields_for :next_of_kin do |c|
+						= c.input :name
+						= c.input :relation
+						= c.input :telephone
+	.form-actions
+		= f.button :submit

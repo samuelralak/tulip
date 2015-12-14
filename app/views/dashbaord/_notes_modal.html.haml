@@ -1,0 +1,21 @@
+#notesModal.modal.fade
+  .modal-dialog{ :role => "document" }
+    .modal-content
+      .modal-header
+        %button.close{ :data => { :dismiss => "modal" } }
+          %span{ :aria => { :hidden => true } }
+            = "&times;".html_safe
+        %h4.modal-title{ :id => "notesModalLabel"}
+          Add Notes
+      .modal-body
+        = form_tag(add_notes_path) do
+          = text_area_tag 'notes', '', rows: 7, class: 'form-control', id: 'notes'
+          = hidden_field_tag 'track_painter_id', '', id: "trackId"
+          = hidden_field_tag 'start_date', '', id: "startDate"
+          = hidden_field_tag 'week_number', '', id: "weekNumber"
+          = hidden_field_tag 'year', '', id: "year"
+          = hidden_field_tag 'painter_id', '', id: "painterId"
+          .modal-footer
+            %button{ :type => "button", :class => "btn btn-default", :data => { :dismiss => "modal" } }
+              Close
+            = submit_tag "Save Changes", class: "btn btn-primary"

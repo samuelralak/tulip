@@ -1,0 +1,65 @@
+= render 'shared/navbar'
+.container-fluid
+	.row
+		.col-sm-3.col-md-2.sidebar
+			= render 'shared/side_nav'
+
+		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			%h1.page-header Monthly Wages
+			.row
+				.col-md-3
+					= render 'wages/painters'
+				.col-md-9
+					= month_calendar do |date|
+						= date
+					%h3 Payable
+					.row
+						.col-md-6
+							.table-responsive
+								%table.table
+									%thead
+										%tr
+											%th
+											%th
+												days
+											%th
+												daily wage
+											%th{ :style => 'text-align: right'}
+												total
+									%tbody
+										%tr
+											%td
+												%strong Basic Pay
+											%td
+												= @sites_attended.length
+											%td
+												= "-"
+											%td{ :style => 'text-align: right'}
+												= @painter.basic_pay
+										%tr
+											%td
+												%strong Allowance
+											%td
+												= (@sites_attended.length - @holidays_worked.length)
+											%td
+												= @painter.daily_allowance
+											%td{ :style => 'text-align: right'}
+												= total_allowance(@sites_attended.length, @holidays_worked.length, @painter)
+										%tr
+											%td
+												%strong Holidays
+											%td
+												= @holidays_worked.length
+											%td
+												= @painter.daily_wage
+											%td{ :style => 'text-align: right'}
+												= total_wage(@holidays_worked.length, @painter)
+										%tr
+											%td{ :colspan => '3', :style => 'text-align: right'}
+												%strong Total Payable
+											%td{ :style => 'text-align: right'}
+												= total_payable(@sites_attended.length, @holidays_worked.length, @painter)
+
+
+
+

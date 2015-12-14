@@ -1,0 +1,31 @@
+<tbody>
+        <% collection.each_slice(7) do |week| %>
+          <%- @painters.each do |painter| %>
+            <tr>
+              <td><%= painter.name %></td>
+              <td><%= painter.employment_type.name %></td>
+              <% week.each do |day| %>
+                <%= content_tag :td, class: locals[:calendar].td_classes_for(day) do %>
+                  <%= form_tag(assign_site_path, remote: true, id: "#{day.strftime('%d%m%Y')}") do %>
+                    <%= select_tag "site_id", options_from_collection_for_select(Site.all, "id", "name", find_site(locals[:start_date].strftime("%U").to_i, day, painter.id)), onchange: ("javascript: this.form.submit();"), prompt: "-- select --", class: 'form-control input-sm' %>
+                    <%= hidden_field_tag 'date', day %>
+                    <%= hidden_field_tag 'week_number', locals[:start_date].strftime("%U").to_i %>
+                    <%= hidden_field_tag 'year', day.strftime("%Y").to_i %>
+                    <%= hidden_field_tag 'painter_id', painter.id %>
+
+                    <% if request.params[:start_date] %>
+                      <%= hidden_field_tag 'start_date', locals[:start_date] %>
+                    <% end %>
+                  <% end %>
+                  
+                <% end %>
+              <% end %>
+              <td class="text-center">
+                <%= link_to '#', data: { :toggle => "modal", :target => "#notesModal", :track => TrackPainter.where(["week_number = ? and painter_id = ?", locals[:start_date].strftime("%U").to_i, painter.id]).try(:first).try(:id), :startdate => locals[:start_date], :week => locals[:start_date].strftime("%U").to_i, :year => locals[:start_date].strftime("%y").to_i, :painter => painter.id, :notes => TrackPainter.where(["week_number = ? and painter_id = ?", locals[:start_date].strftime("%U").to_i, painter.id]).try(:first).try(:notes) } do %>
+                  <%= fa_icon 'plus' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end -%>
+        <% end %>
+      </tbody>

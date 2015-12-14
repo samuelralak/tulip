@@ -1,0 +1,43 @@
+= render 'shared/navbar'
+.container-fluid
+	.row
+		.col-sm-3.col-md-2.sidebar
+			= render 'shared/side_nav'
+
+		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			%h1.page-header Weekly Wages
+			= week_calendar do |date|
+				= date
+
+			%h2.sub-header Site Totals
+			.table-responsive
+				%table.table.table-striped
+					%thead
+						%tr
+							%th Site
+							%th Sum
+					%tbody
+						- site_total = 0.0
+						- @sites_attended.each do |s|
+							- total = 0.0
+							%tr
+								%td= s[0]
+								%td
+									- s[1].each_with_index do |t, index|
+										- total += t.track_painter.weekly_total
+										- site_total += total
+										- if index.eql?(s[1].length - 1) 
+											= total
+						%tr
+							%td Other*
+							%td
+								- other = (@track_painters.sum(:weekly_total) - site_total)
+								= other
+						%tr
+							%td{ :style => "text-align: right"} 
+								%strong Total:
+							%td
+								= (site_total + other)
+
+
+

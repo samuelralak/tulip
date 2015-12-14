@@ -1,0 +1,72 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to edit_site_path(@site), class: 'btn btn-success' do
+          = fa_icon 'edit', text: 'Edit'
+        = link_to 'Back', sites_path, class: 'btn btn-default'
+      %h1.page-header 
+        =  @site.name
+      .row
+        .col-md-3
+          %strong Name
+        .col-md-9
+          = @site.name
+      %br
+      .row
+        .col-md-3
+          %strong Site Head
+        .col-md-9
+          = @site.head
+      %br
+      .row
+        .col-md-3
+          %strong Address
+        .col-md-9
+          = @site.address
+      %br
+      .row
+        .col-md-3
+          %strong Internal Square Metres
+        .col-md-9
+          = @site.site_square_metre.internal
+      %br
+      .row
+        .col-md-3
+          %strong External Square Metres
+        .col-md-9
+          = @site.site_square_metre.external
+      %br
+      .row
+        .col-md-3
+          %strong Internal Rate
+        .col-md-9
+          = @site.site_rate.internal
+      %br
+      .row
+        .col-md-3
+          %strong External Rate
+        .col-md-9
+          = @site.site_rate.external
+      %br
+      .row
+        .col-md-3
+          %strong Internal Agreed Amount
+        .col-md-9
+          = @site.site_agreed_amount.internal
+      %br
+      .row
+        .col-md-3
+          %strong External Agreed Amount
+        .col-md-9
+          = @site.site_agreed_amount.external
+      %br
+      .row
+        .col-md-3
+          %strong Notes
+        .col-md-9
+          = @site.notes

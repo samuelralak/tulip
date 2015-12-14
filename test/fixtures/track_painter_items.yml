@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site_id: 
+  date_attended: 2015-12-12
+  daily_wage: 9.99
+
+two:
+  site_id: 
+  date_attended: 2015-12-12
+  daily_wage: 9.99

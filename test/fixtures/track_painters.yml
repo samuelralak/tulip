@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  week_number: 1
+  year: 1
+  weekly_total: 9.99
+  painter_id: 
+
+two:
+  week_number: 1
+  year: 1
+  weekly_total: 9.99
+  painter_id: 
