@@ -11,9 +11,21 @@
 
 		#navbar.navbar-collapse.collapse
 			%ul.nav.navbar-nav.navbar-right
-				%li= link_to 'Dashboard', '#'
-				%li= link_to 'Settings', '#'
-				%li= link_to 'Profile', '#'
-				%li= link_to 'Help', '#'
+				%li
+					= link_to '#' do
+						= fa_icon 'users', text: 'Users'
+				%li
+					= link_to '#', class: "dropdown-toggle", data: { toggle: 'dropdown' } do
+						= fa_icon 'user', text: current_user.name
+					%ul.dropdown-menu
+						%li
+							= link_to '#' do
+								= fa_icon 'cogs', text: 'Settings'
+						%li
+							= link_to '#' do
+								= fa_icon 'question-circle', text: 'Help'
+				%li
+					= link_to destroy_user_session_path, :method => :delete do
+						= fa_icon 'sign-out', text: 'Sign Out'
 			%form.navbar-form.navbar-right
 				%input{ :type => "text", :class => "form-control", :placeholder => "Search..." }

@@ -1,4 +1,4 @@
 %ul.nav.nav-pills.nav-stacked
 	- @painters.each do |painter|
 		%li{ :class => "#{'active' if painter.id.eql?(@painter.try(:id))}" }
-			= link_to painter.name, painter_monthly_wage_path(painter.id)
+			= link_to painter.name, painter_deductions_path(painter.id)

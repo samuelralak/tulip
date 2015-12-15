@@ -25,6 +25,6 @@ module Novel
     config.beginning_of_week = :sunday
     config.end_of_week = :saturday
 
-    config.serve_static_assets = true
+    config.serve_static_files = true
   end
 end

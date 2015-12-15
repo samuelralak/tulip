@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @deduction.date
+%p
+  %b Reason:
+  = @deduction.reason
+%p
+  %b Amount:
+  = @deduction.amount
+
+= link_to 'Edit', edit_deduction_path(@deduction)
+\|
+= link_to 'Back', deductions_path
