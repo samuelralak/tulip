@@ -16,10 +16,12 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "haml-rails"
 gem "font-awesome-rails"
 gem 'chosen-rails'
+gem 'bootstrap-chosen-rails'
 
 # javascript
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # bundle exec rake doc:rails generates the API under doc/api.

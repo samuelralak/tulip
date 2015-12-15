@@ -1,4 +1,5 @@
 class DashbaordController < ApplicationController
+  before_action :set_start_date, only: [:add_notes]
 	skip_before_filter :verify_authenticity_token, only: [:assign_site, :add_notes]
   def index
   	@painters = Painter.all
@@ -17,7 +18,7 @@ class DashbaordController < ApplicationController
 
     respond_to do |format|
       if params[:start_date]
-        format.html { redirect_to "/?start_date=#{params[:start_date]}" }  
+        format.html { redirect_to "/?start_date=#{@start_date}" }  
       else
         format.html { redirect_to root_path }  
       end
@@ -58,4 +59,9 @@ class DashbaordController < ApplicationController
   		format.json {}
   	end
   end
+
+  private
+    def set_start_date
+      @start_date = params[:start_date] ? Date.parse(params[:start_date]) : DateTime.now
+    end
 end

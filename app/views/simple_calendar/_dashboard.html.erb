@@ -21,8 +21,16 @@
                 <% end %>
               <% end %>
               <td class="text-center">
-                <%= link_to '#', data: { :toggle => "modal", :target => "#notesModal", :track => TrackPainter.where(["week_number = ? and painter_id = ?", locals[:start_date].strftime("%U").to_i, painter.id]).try(:first).try(:id), :startdate => locals[:start_date], :week => locals[:start_date].strftime("%U").to_i, :year => locals[:start_date].strftime("%y").to_i, :painter => painter.id, :notes => TrackPainter.where(["week_number = ? and painter_id = ?", locals[:start_date].strftime("%U").to_i, painter.id]).try(:first).try(:notes) } do %>
-                  <%= fa_icon 'plus' %>
+                <%= link_to '#', data: { 
+                    :toggle => "modal", 
+                    :target => "#notesModal", 
+                    :track => TrackPainter.where(["week_number = ? and painter_id = ?", locals[:start_date].strftime("%U").to_i, painter.id]).try(:first).try(:id), 
+                    :startdate => locals[:start_date], 
+                    :week => locals[:start_date].strftime("%U").to_i, 
+                    :year => locals[:start_date].strftime("%y").to_i, 
+                    :painter => painter.id, 
+                    :notes => TrackPainter.where(["week_number = ? and painter_id = ?", locals[:start_date].strftime("%U").to_i, painter.id]).try(:first).try(:notes) } do %>
+                        <%= fa_icon 'plus' %>
                 <% end %>
               </td>
             </tr>

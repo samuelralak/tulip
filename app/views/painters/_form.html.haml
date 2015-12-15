@@ -11,7 +11,7 @@
 					= f.input :daily_allowance
 					%br
 				= field_set_tag 'Skills' do
-					= f.association :skills, collection: Skill.all, include_blank: true, input_html: { class: 'chosen-select' }
+					= f.association :skills, collection: Skill.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
 		.col-md-6
 			.form-inputs
 				= field_set_tag 'Contact Details' do

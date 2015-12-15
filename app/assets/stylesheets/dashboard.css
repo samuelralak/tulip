@@ -103,3 +103,7 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+#painterSkills_chosen {
+  width: 100% !important;
+}
