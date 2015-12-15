@@ -5,7 +5,6 @@ module ApplicationHelper
 	end
 
 	def total_allowance(total_days, holidays, painter)
-		painter.daily_allowance = painter.daily_allowance.nil? ? 0 : painter.daily_allowance.nil?
 		total = (total_days - holidays ) * painter.daily_allowance
 		return total
 	end
