@@ -26,11 +26,11 @@
           %tbody
             - @painters.each do |painter|
               %tr
-                %td= painter.name
-                %td= painter.basic_pay
-                %td= painter.daily_wage
-                %td= painter.daily_allowance
-                %td= painter.employment_type.name
+                %td= painter.try(:name)
+                %td= painter.try(:basic_pay)
+                %td= painter.try(:daily_wage)
+                %td= painter.try(:daily_allowance)
+                %td= painter.try(:employment_type).try(:name)
                 %td= link_to 'Show', painter
                 %td= link_to 'Edit', edit_painter_path(painter)
                 %td= link_to 'Destroy', painter, :method => :delete, :data => { :confirm => 'Are you sure?' }

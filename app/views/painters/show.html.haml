@@ -10,77 +10,77 @@
           = fa_icon 'edit', text: 'Edit'
         = link_to 'Back', painters_path, class: 'btn btn-default'
       %h1.page-header 
-        =  @painter.name
+        =  @painter.try(:name)
       .row
         .col-md-3
           %strong Name
         .col-md-9
-          = @painter.name
+          = @painter.try(:name)
       %br
       .row
         .col-md-3
           %strong Basic pay
         .col-md-9
-          = @painter.basic_pay
+          = @painter.try(:basic_pay)
       %br
       .row
         .col-md-3
           %strong Daily wage
         .col-md-9
-          = @painter.daily_wage
+          = @painter.try(:daily_wage)
       %br
       .row
         .col-md-3
           %strong Daily allowance
         .col-md-9
-          = @painter.daily_allowance
+          = @painter.try(:daily_allowance)
       %br
       .row
         .col-md-3
           %strong Employment type
         .col-md-9
-          = @painter.employment_type.name
+          = @painter.try(:employment_type).try(:name)
       %br    
       %h2.sub-header Contact Details
       .row
         .col-md-3
           %strong Telephone #1
         .col-md-9
-          = @painter.painter_contact.telephone_one
+          = @painter.try(:painter_contact).try(:telephone_one)
       %br
       .row
         .col-md-3
           %strong Telephone #2
         .col-md-9
-          = @painter.painter_contact.telephone_two
+          = @painter.try(:painter_contact).try(:telephone_two)
       %br
       .row
         .col-md-3
           %strong Telephone #3
         .col-md-9
-          = @painter.painter_contact.telephone_three
+          = @painter.try(:painter_contact).try(:telephone_three)
       %br
       .row
         .col-md-3
           %strong Address
         .col-md-9
-          = @painter.painter_contact.address
+          = @painter.try(:painter_contact).try(:address)
       %br
       %h2.sub-header Next of Kin
       .row
         .col-md-3
           %strong Name
         .col-md-9
-          = @painter.next_of_kin.name
+          = @painter.try(:next_of_kin).try(:name)
       %br
       .row
         .col-md-3
           %strong Relation
         .col-md-9
-          = @painter.next_of_kin.relation
+          = @painter.try(:next_of_kin).try(:relation)
       %br
       .row
         .col-md-3
           %strong Telephone No
         .col-md-9
-          = @painter.next_of_kin.telephone
+          = @painter.try(:next_of_kin).try(:telephone)
