@@ -2,8 +2,8 @@
         <% collection.each_slice(7) do |week| %>
           <%- @painters.each do |painter| %>
             <tr>
-              <td><%= painter.name %></td>
-              <td><%= painter.employment_type.name %></td>
+              <td><%= painter.try(:name) %></td>
+              <td><%= painter.try(:employment_type).try(:name) %></td>
               <% week.each do |day| %>
                 <%= content_tag :td, class: locals[:calendar].td_classes_for(day) do %>
                   <%= form_tag(assign_site_path, remote: true, id: "#{day.strftime('%d%m%Y')}") do %>
