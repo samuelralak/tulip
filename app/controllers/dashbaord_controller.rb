@@ -7,7 +7,7 @@ class DashbaordController < ApplicationController
   end
 
   def add_notes
-    if params[:track_painter_id].empty?
+    if params[:track_painter_id].nil? || params[:track_painter_id].empty?
       new_track_painter = TrackPainter.create!(notes: params[:notes], week_number: params[:week_number], 
         year: params[:year].to_i, painter_id: params[:painter_id])
     else
@@ -16,7 +16,11 @@ class DashbaordController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to "/?start_date=#{params[:start_date]}" }  
+      if params[:start_date]
+        format.html { redirect_to "/?start_date=#{params[:start_date]}" }  
+      else
+        format.html { redirect_to root_path }  
+      end
     end
   end
 

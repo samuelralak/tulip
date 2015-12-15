@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :painters do
     resources :deductions
   end
+  
   resources :sites
+  resources :skills
+  resources :holidays
 
   post 'dashbaord/assign_site', as: :assign_site
   post 'dashbaord/add_notes', 	as: :add_notes

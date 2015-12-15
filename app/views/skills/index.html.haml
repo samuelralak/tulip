@@ -1,0 +1,29 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_skill_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "New Skill"
+      %h1.page-header Skills
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Name
+              %th Code
+              %th
+              %th
+              %th
+
+          %tbody
+            - @skills.each do |skill|
+              %tr
+                %td= skill.name
+                %td= skill.code
+                %td= link_to 'Show', skill
+                %td= link_to 'Edit', edit_skill_path(skill)
+                %td= link_to 'Destroy', skill, :method => :delete, :data => { :confirm => 'Are you sure?' }

@@ -12,3 +12,5 @@
 		= link_to 'Painters', painters_path
 	%li{ :class => "#{'active' if request.params[:controller].eql?('sites')}" }
 		= link_to 'Sites', 	 sites_path
+	%li{ :class => "#{'active' if request.params[:controller].eql?('skills')}" }
+		= link_to 'Skills', skills_path
