@@ -3,7 +3,7 @@ class WagesController < ApplicationController
   before_action :set_permanent_painters, only: [:monthly, :painter_monthly]
 
   def weekly
-  	@painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'TEMPORARY').id)
+  	@painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'TEMPORARY').id, is_active: true)
   	@track_painters = TrackPainter.where(
   		['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i]
   	)
@@ -33,6 +33,6 @@ class WagesController < ApplicationController
     end
 
     def set_permanent_painters
-      @painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'PERMANENT').id)  
+      @painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'PERMANENT').id, is_active: true)  
     end
 end

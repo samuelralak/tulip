@@ -6,6 +6,9 @@
 
 		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 			%h1.page-header Dashboard
+			= form_tag root_path, method: :get, class: 'form-inline' do
+				= select_tag :query, options_from_collection_for_select(EmploymentType.all, "id", "name", @selected), prompt: "- filter by employment type -", class: 'form-control'
+				= submit_tag "Filter", class: 'btn btn-default'
 			= week_calendar do |date|
 				= date
 = render 'dashbaord/notes_modal'

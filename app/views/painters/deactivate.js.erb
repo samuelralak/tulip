@@ -1,0 +1,4 @@
+<% logger.debug "This is the js file"%>
+console.log("JAVASCRIPT FILE");
+console.log("PAINTER ID: " + <%= @painter.id %> );
+$("#<%= @painter.id %>").remove();

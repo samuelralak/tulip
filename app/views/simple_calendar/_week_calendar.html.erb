@@ -2,9 +2,15 @@
   <div class="text-center">
     <nav>
       <ul class="pager">
+      <% if params[:query] %>
+        <li class="previous"><%= link_to("Previous", {start_date: date_range.first - 1.day, query: params[:query]})  %></li>
+        <li>Week <%= start_date.strftime("%U").to_i %></li>
+        <li class="next"><%= link_to("Next", {start_date: date_range.last + 1.day, query: params[:query]})  %></li>
+      <% else %>
         <li class="previous"><%= link_to "Previous", start_date: date_range.first - 1.day  %></li>
         <li>Week <%= start_date.strftime("%U").to_i %></li>
         <li class="next"><%= link_to "Next", start_date: date_range.last + 1.day  %></li>
+      <% end%>
       </ul>
     </nav>
     
@@ -26,6 +32,9 @@
         <% end -%>
         <% if request.params[:controller].eql?('wages') %>
           <th>Weekly Total</th>
+        <% end -%>
+        <% if request.params[:controller].eql?('dashbaord') %>
+          <th></th>
         <% end -%>
       </tr>
     </thead>

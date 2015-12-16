@@ -19,4 +19,15 @@ jQuery ->
 		allow_single_deselect: true
 		no_results_text: 'No results matched'
 		width: '200px'
+
+	$('.deactivatePainter').on 'click', (event) -> 
+		painterId = $(this).data('painterid')
+		$.ajax
+			url: "painters/#{painterId}/deactivate"
+			type: 'POST'
+			data:
+				id: painterId
+			success: (data, status, response) -> 
+				$("#" + painterId).remove()
+				toastr.success('Painter successfully deactivated', {timeOut: 1000})
 	

@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   resources :painters do
     resources :deductions
+
+    member do
+      post :deactivate
+    end
   end
   
   resources :sites

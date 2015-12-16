@@ -9,6 +9,7 @@
 					= f.input :basic_pay
 					= f.input :daily_wage
 					= f.input :daily_allowance
+					= f.input :is_active
 					%br
 				= field_set_tag 'Skills' do
 					= f.association :skills, collection: Skill.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }

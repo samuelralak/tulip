@@ -1,8 +1,15 @@
 class DashbaordController < ApplicationController
+  before_action :check_query
   before_action :set_start_date, only: [:add_notes]
 	skip_before_filter :verify_authenticity_token, only: [:assign_site, :add_notes]
+
   def index
-  	@painters = Painter.all
+    if @selected
+      employment_type = EmploymentType.find(@selected)
+      @painters = employment_type.painters.where(is_active: true).order('name ASC')
+    else
+      @painters = Painter.where(is_active: true).order('name ASC')
+    end
     # logger.info "####### WEEK: #{start_date.strftime("%U").to_i}"
     
   end
@@ -51,9 +58,9 @@ class DashbaordController < ApplicationController
   	respond_to do |format|
       puts params[:start_date].present?
       if params[:start_date].present?
-        format.html { redirect_to "/?start_date=#{params[:start_date]}" }  
+        format.html { redirect_to "/?start_date=#{params[:start_date]}&query=#{@selected}" }  
       else
-        format.html { redirect_to root_path }
+        format.html { redirect_to "/?query=#{@selected}" }
       end
   		
   		format.json {}
@@ -63,5 +70,11 @@ class DashbaordController < ApplicationController
   private
     def set_start_date
       @start_date = params[:start_date] ? Date.parse(params[:start_date]) : DateTime.now
+    end
+
+    def check_query
+      if params[:query] && !params[:query].eql?('')
+        @selected = params[:query]
+      end
     end
 end

@@ -1,5 +1,5 @@
 class PaintersController < ApplicationController
-  before_action :set_painter, only: [:show, :edit, :update, :destroy]
+  before_action :set_painter, only: [:show, :edit, :update, :destroy, :deactivate]
 
   # GET /painters
   # GET /painters.json
@@ -63,6 +63,16 @@ class PaintersController < ApplicationController
     end
   end
 
+  def deactivate
+    @painter.is_active = false;
+
+    respond_to do |format|
+      if @painter.save
+        format.json { render json: @painter }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_painter
@@ -71,7 +81,7 @@ class PaintersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def painter_params
-      params.require(:painter).permit(:name, :basic_pay, :daily_wage, :daily_allowance, :employment_type_id,
+      params.require(:painter).permit(:name, :basic_pay, :daily_wage, :daily_allowance, :employment_type_id, :is_active,
         painter_contact_attributes: [:id, :address, :telephone_one, :telephone_two, :telephone_three, :painter_id],
         next_of_kin_attributes: [:id, :name, :relation, :telephone, :painter_id], skill_ids: []
       )

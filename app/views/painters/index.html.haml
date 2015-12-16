@@ -19,6 +19,7 @@
               %th Daily wage
               %th Daily allowance
               %th Employment type
+              %th Active
               %th
               %th
               %th
@@ -31,6 +32,7 @@
                 %td= painter.try(:daily_wage)
                 %td= painter.try(:daily_allowance)
                 %td= painter.try(:employment_type).try(:name)
+                %td= painter.try(:is_active)
                 %td= link_to 'Show', painter
                 %td= link_to 'Edit', edit_painter_path(painter)
                 %td= link_to 'Destroy', painter, :method => :delete, :data => { :confirm => 'Are you sure?' }

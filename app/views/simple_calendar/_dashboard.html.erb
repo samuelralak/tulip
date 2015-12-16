@@ -1,7 +1,7 @@
 <tbody>
         <% collection.each_slice(7) do |week| %>
           <%- @painters.each do |painter| %>
-            <tr>
+            <tr id="<%= painter.id %>">
               <td><%= painter.try(:name) %></td>
               <td><%= painter.try(:employment_type).try(:name) %></td>
               <% week.each do |day| %>
@@ -15,6 +15,9 @@
 
                     <% if request.params[:start_date] %>
                       <%= hidden_field_tag 'start_date', locals[:start_date] %>
+                    <% end %>
+                    <% if request.params[:query] && !params[:query].eql?('') %>
+                      <%= hidden_field_tag 'query', params[:query] %>
                     <% end %>
                   <% end %>
                   
@@ -32,6 +35,12 @@
                     :notes => TrackPainter.where(["week_number = ? and painter_id = ?", locals[:start_date].strftime("%U").to_i, painter.id]).try(:first).try(:notes) } do %>
                         <%= fa_icon 'plus' %>
                 <% end %>
+              </td>
+              <td>
+                <%= link_to '#', class: 'deactivatePainter', style: "color: maroon", data: { toggle: 'tooltip', placement: 'left', painterid: painter.id }, title: 'deactivate user' do %>
+                  <%= fa_icon 'times' %>
+                <% end -%>
+                <%#= link_to deactivate_painter_path(painter.id), remote: true, method: :post, style: "color: maroon"  %>
               </td>
             </tr>
           <% end -%>
