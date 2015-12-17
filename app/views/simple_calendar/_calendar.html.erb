@@ -38,11 +38,11 @@
         </tr>
 
         <%- @total += payable_total(painter, @start_date) %>
-        <tr>
+      <% end -%>
+      <tr>
           <td colspan="8" style="text-align:right"><strong>Total</strong> </td>
           <td><%= @total %></td>
         </tr>
-      <% end -%>
     </tbody>
   </table>
 
