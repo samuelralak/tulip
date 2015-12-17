@@ -11,19 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216075729) do
+ActiveRecord::Schema.define(version: 20151217045256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "bonus", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.decimal  "amount"
+    t.date     "date_applicable"
+    t.uuid     "painter_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "bonus", ["painter_id"], name: "index_bonus_on_painter_id", using: :btree
+
+  create_table "deduction_installments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.date     "date"
+    t.decimal  "amount"
+    t.uuid     "deduction_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "deduction_installments", ["deduction_id"], name: "index_deduction_installments_on_deduction_id", using: :btree
 
   create_table "deductions", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.date     "date"
     t.string   "reason"
     t.decimal  "amount"
     t.uuid     "painter_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.decimal  "rate",       default: 0.0, null: false
   end
 
   add_index "deductions", ["painter_id"], name: "index_deductions_on_painter_id", using: :btree
@@ -136,8 +157,9 @@ ActiveRecord::Schema.define(version: 20151216075729) do
     t.string   "head"
     t.string   "address"
     t.text     "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.decimal  "start_amount", default: 0.0, null: false
   end
 
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -153,8 +175,9 @@ ActiveRecord::Schema.define(version: 20151216075729) do
     t.date     "date_attended"
     t.decimal  "daily_wage"
     t.uuid     "track_painter_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.decimal  "daily_allowance",  default: 0.0, null: false
   end
 
   add_index "track_painter_items", ["site_id"], name: "index_track_painter_items_on_site_id", using: :btree

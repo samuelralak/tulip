@@ -16,5 +16,8 @@
 //= require bootstrap-sprockets
 //= require chosen-jquery
 //= require toastr
+//= require moment
+//= require bootstrap-datetimepicker
+//= require pickers
 //= require_tree .
 //= require turbolinks

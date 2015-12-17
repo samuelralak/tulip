@@ -18,6 +18,7 @@
 					= f.simple_fields_for :site_agreed_amount do |c|
 						= c.input :internal
 						= c.input :external
+				= f.input :start_amount, label: 'Start Total Amount'
 				= f.input :notes
 			.form-actions
 				= f.button :submit

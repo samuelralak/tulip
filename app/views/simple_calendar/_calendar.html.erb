@@ -1,33 +1,78 @@
 <div class="simple-calendar">
-  <%= link_to "Previous", start_date: date_range.first - 1.day  %>
-  <%= I18n.t("date.month_names")[start_date.month] %> <%= start_date.year %>
-  <%= link_to "Next", start_date: date_range.last + 1.day  %>
+  <div class="text-center">
+    <nav>
+      <ul class="pager">
+        <li class="previous"><%= link_to "Previous", start_date: date_range.first - 1.day  %></li>
+        <li><%= I18n.t("date.month_names")[start_date.month] %> <%= start_date.year %></li>
+        <li class="next"><%= link_to "Next", start_date: date_range.last + 1.day  %></li>
+      </ul>
+    </nav>
+  </div>
 
   <table class="table table-striped">
     <thead>
       <tr>
-        <% date_range.slice(0, 7).each do |day| %>
-          <th><%= I18n.t("date.abbr_day_names")[day.wday] %></th>
-        <% end %>
+        <th></th>
+        <th>Basic Pay</th>
+        <th>Days Worked</th>
+        <th>Holidays Worked</th>
+        <th>Total Allowance</th>
+        <th>Total Wages (Holidays)</th>
+        <th>Deductions (IOU)</th>
+        <th>Bonuses</th>
+        <th>Payable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @painters.each do |painter| %>
+        <tr>
+          <td><%= painter.name %></td>
+          <td><%= painter.basic_pay %></td>
+          <td><%= days_worked(painter, @start_date) %></td>
+          <td><%= holidays_worked(painter, @start_date) %></td>
+          <td><%= allowance_total(painter, @start_date) %></td>
+          <td><%= wages_total(painter, @start_date) %></td>
+          <td><%= deductions_total(painter, @start_date) %></td>
+          <td><%= bonus_total(painter, @start_date) %></td>
+          <td><%= payable_total(painter, @start_date) %></td>
+        </tr>
+
+        <%- @total += payable_total(painter, @start_date) %>
+        <tr>
+          <td colspan="8" style="text-align:right"><strong>Total</strong> </td>
+          <td><%= @total %></td>
+        </tr>
+      <% end -%>
+    </tbody>
+  </table>
+
+<!--
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <%# date_range.slice(0, 7).each do |day| %>
+          <th><%#= I18n.t("date.abbr_day_names")[day.wday] %></th>
+        <%# end %>
       </tr>
     </thead>
 
     <tbody>
-      <% date_range.each_slice(7) do |week| %>
+      <%# date_range.each_slice(7) do |week| %>
         <tr>
-          <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day) do %>
-              <% if defined?(Haml) && block_is_haml?(block) %>
-                <% capture_haml do %>
-                  <% block.call day, sorted_events.fetch(day, []) %>
-                <% end %>
-              <% else %>
-                <% block.call day, sorted_events.fetch(day, []) %>
-              <% end %>
-            <% end %>
-          <% end %>
+          <%# week.each do |day| %>
+            <%#= content_tag :td, class: calendar.td_classes_for(day) do %>
+              <%# if defined?(Haml) && block_is_haml?(block) %>
+                <%# capture_haml do %>
+                  <%# block.call day, sorted_events.fetch(day, []) %>
+                <%# end %>
+              <%# else %>
+                <%# block.call day, sorted_events.fetch(day, []) %>
+              <%# end %>
+            <%# end %>
+          <%# end %>
         </tr>
-      <% end %>
+      <%# end %>
     </tbody>
   </table>
+-->
 </div>

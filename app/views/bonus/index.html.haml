@@ -1,0 +1,34 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_bonu_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "New Bonus"
+      %h1.page-header Bonus
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Painter
+              %th Date applicable
+              %th Amount
+              %th
+              %th
+              %th
+
+          %tbody
+            - @bonus.each do |bonu|
+              %tr
+                %td= bonu.painter.name
+                %td= bonu.date_applicable
+                %td= bonu.amount
+                %td= link_to 'Show', bonu
+                %td= link_to 'Edit', edit_bonu_path(bonu)
+                %td= link_to 'Destroy', bonu, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+

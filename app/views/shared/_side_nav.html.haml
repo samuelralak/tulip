@@ -5,8 +5,13 @@
 		= link_to 'Weekly Wages', weekly_wages_path
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && (request.params[:action].eql?('monthly') || request.params[:action].eql?('painter_monthly'))}" }
 		= link_to 'Monthly Wages', monthly_wages_path
+
+%ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('deductions')}" }
 		= link_to 'Deductions (IOU)', deductions_path
+	%li{ :class => "#{'active' if request.params[:controller].eql?('bonus')}" }
+		= link_to 'Bonus', bonus_path
+
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('painters')}" }
 		= link_to 'Painters', painters_path

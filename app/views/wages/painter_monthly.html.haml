@@ -7,9 +7,9 @@
 		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 			%h1.page-header Monthly Wages
 			.row
-				.col-md-3
+				.col-md-2
 					= render 'wages/painters'
-				.col-md-9
+				.col-md-10
 					= month_calendar do |date|
 						= date
 					%h3 Payable
@@ -31,20 +31,18 @@
 											%td
 												%strong Basic Pay
 											%td
-												= @sites_attended.length
 											%td
-												= "-"
 											%td{ :style => 'text-align: right'}
 												= @painter.basic_pay
 										%tr
 											%td
 												%strong Allowance
 											%td
-												= (@sites_attended.length - @holidays_worked.length)
+												= @sites_attended.length - @holidays_worked.length
 											%td
 												= @painter.daily_allowance
 											%td{ :style => 'text-align: right'}
-												= total_allowance(@sites_attended.length, @holidays_worked.length, @painter)
+												= allowance_total(@painter, @start_date)
 										%tr
 											%td
 												%strong Holidays
@@ -53,12 +51,26 @@
 											%td
 												= @painter.daily_wage
 											%td{ :style => 'text-align: right'}
-												= total_wage(@holidays_worked.length, @painter)
+												= wages_total(@painter, @start_date)
+										%tr
+											%td
+												%strong Bonus
+											%td
+											%td
+											%td{ :style => 'text-align: right'}
+												= bonus_total(@painter, @start_date)
+										%tr{ :style => 'color: maroon'}
+											%td
+												%strong Deduction (IOU)
+											%td
+											%td
+											%td{ :style => 'text-align: right'}
+												= "- #{deductions_total(@painter, @start_date)}"
 										%tr
 											%td{ :colspan => '3', :style => 'text-align: right'}
 												%strong Total Payable
 											%td{ :style => 'text-align: right'}
-												= total_payable(@sites_attended.length, @holidays_worked.length, @painter)
+												= payable_total(@painter, @start_date)
 
 
 

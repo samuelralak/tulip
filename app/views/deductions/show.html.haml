@@ -10,6 +10,6 @@
   %b Amount:
   = @deduction.amount
 
-= link_to 'Edit', edit_deduction_path(@deduction)
+= link_to 'Edit', edit_painter_deduction_path(@painter, @deduction)
 \|
-= link_to 'Back', deductions_path
+= link_to 'Back', painter_deductions_path(@painter)

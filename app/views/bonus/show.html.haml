@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Amount:
+  = @bonu.amount
+%p
+  %b Date applicable:
+  = @bonu.date_applicable
+%p
+  %b Painter:
+  = @bonu.painter_id
+
+= link_to 'Edit', edit_bonu_path(@bonu)
+\|
+= link_to 'Back', bonus_path

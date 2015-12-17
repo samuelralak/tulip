@@ -1,5 +1,18 @@
-%h1 New deduction
+= render 'shared/navbar'
+.container-fluid
+	.row
+		.col-sm-3.col-md-2.sidebar
+			= render 'shared/side_nav'
 
-= render 'form'
-
-= link_to 'Back', deductions_path
+		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			%h1.page-header Monthly Wages
+			.row
+				.col-md-2
+					= render 'deductions/painters'
+				.col-md-10 
+					.pull-right
+						= link_to 'Back', deductions_path
+					%h3.sub-header New deduction
+					.row
+						.col-md-6
+							= render 'form'

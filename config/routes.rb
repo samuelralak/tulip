@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   
   resources :sites
+  resources :bonus
   resources :skills
   resources :holidays
 

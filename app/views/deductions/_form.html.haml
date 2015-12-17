@@ -1,10 +1,11 @@
-= simple_form_for(@deduction) do |f|
+= simple_form_for([@painter, @deduction]) do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :date
+    = f.input :date, :as => :date_picker
     = f.input :reason
     = f.input :amount
+    = f.input :rate, label: 'Rate to be deducted per month'
 
   .form-actions
     = f.button :submit

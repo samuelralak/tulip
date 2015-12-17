@@ -8,6 +8,8 @@ class Painter < ActiveRecord::Base
 	accepts_nested_attributes_for :next_of_kin
 
 	has_many :track_painters, inverse_of: :painter
+	has_many :deductions, 	  inverse_of: :painter
+	has_many :bonus, 	  	  inverse_of: :painter
 
 	has_many :painter_skills
   	has_many :skills, through: :painter_skills

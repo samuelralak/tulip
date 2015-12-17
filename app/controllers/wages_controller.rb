@@ -15,6 +15,7 @@ class WagesController < ApplicationController
   end
 
   def monthly
+    @total = 0.0
   end
 
   def painter_monthly
