@@ -21,6 +21,8 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require pickers
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .
 //= require turbolinks
 
