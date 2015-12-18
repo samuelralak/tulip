@@ -3,6 +3,8 @@ class DashbaordController < ApplicationController
   before_action :set_start_date, only: [:add_notes]
 	skip_before_filter :verify_authenticity_token, only: [:assign_site, :add_notes]
 
+  caches_action :index
+
   def index
     if @selected
       employment_type ||= EmploymentType.find(@selected)
