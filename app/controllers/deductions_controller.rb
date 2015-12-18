@@ -10,7 +10,7 @@ class DeductionsController < ApplicationController
   # GET /deductions
   # GET /deductions.json
   def index
-    @deductions = Deduction.all
+    @deductions = @painter.deductions.all
   end
 
   # GET /deductions/1
