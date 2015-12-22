@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
 						self.add_role :admin
 					when "STAFF"
 						self.add_role :staff
+					when "SUPER-USER"
+						self.add_role :super
 					else
 						return
 					end

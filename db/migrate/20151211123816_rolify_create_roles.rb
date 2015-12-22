@@ -7,7 +7,8 @@ class RolifyCreateRoles < ActiveRecord::Migration
       name: 'Super', 
       email: 'superuser@novel.com', 
       password: '12345678', 
-      password_confirmation: '12345678'
+      password_confirmation: '12345678',
+      user_type_id: user_type.id
     )
 
     user.add_role :super
