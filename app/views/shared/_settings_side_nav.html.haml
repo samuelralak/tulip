@@ -1,0 +1,15 @@
+%ul.nav.nav-sidebar
+	%li{ :class => "" }
+		= link_to root_path do 
+			= fa_icon 'home', text: 'Dashboard'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('user_accounts')}".html_safe }
+		= link_to user_accounts_path do 
+			= fa_icon 'users', text: 'Users'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('devise/registrations')}" }
+		= link_to edit_user_registration_path do 
+			= fa_icon 'cogs', text: 'Settings'
+
+%ul.nav.nav-sidebar
+	%li{ :class => "" }
+		= link_to root_path do 
+			= fa_icon 'question-circle', text: 'Help'

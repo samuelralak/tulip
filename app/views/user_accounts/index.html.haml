@@ -1,0 +1,32 @@
+= render 'shared/navbar'
+.container-fluid
+	.row
+		.col-sm-3.col-md-2.sidebar
+			= render 'shared/settings_side_nav'
+
+		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			.pull-right
+				= link_to new_user_account_path, class: 'btn btn-info' do
+					= fa_icon 'plus', text: 'New User'
+			%h1.page-header Users
+			.table-response
+				%table.table.table-striped
+					%thead
+						%tr 
+							%th Name
+							%th email
+							%th Role
+							%th Last Sign In
+							%th
+							%th
+					%tbody
+						- @users.each do |user|
+							%tr
+								%td= user.name
+								%td= user.email
+								%td= user.try(:user_type).try(:name)
+								%td= user.try(:last_sign_in_at).strftime("%m/%d/%Y at %I:%M%p") unless user.last_sign_in_at.nil?
+								%td
+									= link_to 'Edit', '#'
+								%td
+									= link_to 'Destroy', '#'

@@ -24,8 +24,18 @@ class WagesController < ApplicationController
     @sites_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
       @track_painters.pluck(:id), @start_date.beginning_of_month, @start_date.end_of_month 
     )
+
+    # get all days excluding sundays
+    @working_days = (@start_date.beginning_of_month..@start_date.end_of_month).select { |d| (1..6).include?(d.wday) }
+
+    # get all days worked excluding sundays
+    @days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended IN (?) AND date_attended BETWEEN ? AND ?', 
+      @track_painters.pluck(:id), @working_days, @start_date.beginning_of_month, @start_date.end_of_month 
+    )
+
     @holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
     @holidays_worked = @sites_attended.where('date_attended IN (?)', @holidays)
+    @days_worked_final = @days_worked.where('date_attended IN (?)', @holidays)
   end
 
   private

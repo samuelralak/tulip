@@ -1,0 +1,35 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_material_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "Material"
+      %h1.page-header Materials
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Site
+              %th Material name
+              %th Date bought
+              %th Total spent
+              %th Reason
+              %th
+              %th
+
+          %tbody
+            - @materials.each do |material|
+              %tr
+                %td= material.try(:site).try(:name)
+                %td= material.material_name
+                %td= material.date
+                %td= material.total_spent
+                %td= material.reason
+                %td= link_to 'Show', material
+                %td= link_to 'Edit', edit_material_path(material)
+                %td= link_to 'Destroy', material, :method => :delete, :data => { :confirm => 'Are you sure?' }
+

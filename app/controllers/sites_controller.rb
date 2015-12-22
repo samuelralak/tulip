@@ -75,6 +75,6 @@ class SitesController < ApplicationController
       params.require(:site).permit(:name, :head, :address, :notes, :start_amount,
         site_agreed_amount_attributes: [:id, :internal, :external, :site_id],
         site_square_metre_attributes: [:id, :internal, :external, :site_id],
-        site_rate_attributes: [:id, :internal, :external, :site_id],)
+        site_rate_attributes: [:id, :internal, :external, :site_id], :additional_costs)
     end
 end

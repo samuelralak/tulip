@@ -1,21 +1,35 @@
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('dashbaord')}".html_safe }
-		= link_to 'Dashbord', root_path
+		= link_to root_path do
+			= fa_icon 'home', text: 'Dashboard'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly')}" }
-		= link_to 'Weekly Wages', weekly_wages_path
+		= link_to weekly_wages_path do
+			= fa_icon 'caret-right', text: 'Weekly wages'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && (request.params[:action].eql?('monthly') || request.params[:action].eql?('painter_monthly'))}" }
-		= link_to 'Monthly Wages', monthly_wages_path
+		= link_to monthly_wages_path do
+			= fa_icon 'caret-right', text: 'Monthly wages'
 
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('deductions')}" }
-		= link_to 'Deductions (IOU)', deductions_path
+		= link_to deductions_path do
+			= fa_icon 'caret-right', text: 'Deductions (IOU)'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('bonus')}" }
-		= link_to 'Bonus', bonus_path
+		= link_to bonus_path do
+			= fa_icon 'caret-right', text: 'Bonus'
 
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('painters')}" }
-		= link_to 'Painters', painters_path
+		= link_to painters_path do
+			= fa_icon 'caret-right', text: 'Painters'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('sites')}" }
-		= link_to 'Sites', 	 sites_path
+		= link_to sites_path do
+			= fa_icon 'caret-right', text: 'Sites'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('materials')}" }
+		= link_to materials_path do
+			= fa_icon 'caret-right', text: 'Materials'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('skills')}" }
-		= link_to 'Skills', skills_path
+		= link_to skills_path do
+			= fa_icon 'caret-right', text: 'Skills'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('holidays')}" }
+		= link_to holidays_path do 
+			= fa_icon 'caret-right', text: 'Holidays'

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  painter_id: 
+  date: 2015-12-22
+  total_spent: 9.99
+  reason: MyText
+
+two:
+  painter_id: 
+  date: 2015-12-22
+  total_spent: 9.99
+  reason: MyText

@@ -12,14 +12,14 @@
 		#navbar.navbar-collapse.collapse
 			%ul.nav.navbar-nav.navbar-right
 				%li
-					= link_to '#' do
+					= link_to user_accounts_path do
 						= fa_icon 'users', text: 'Users'
 				%li
 					= link_to '#', class: "dropdown-toggle", data: { toggle: 'dropdown' } do
 						= fa_icon 'user', text: current_user.name
 					%ul.dropdown-menu
 						%li
-							= link_to '#' do
+							= link_to edit_user_registration_path do
 								= fa_icon 'cogs', text: 'Settings'
 						%li
 							= link_to '#' do

@@ -1,0 +1,11 @@
+.row
+	.col-md-6
+		= simple_form_for(@material) do |f|
+			= f.error_notification
+			.form-inputs
+				= f.input :site_id, collection: Site.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
+				= f.input :date
+				= f.input :total_spent
+				= f.input :reason
+			.form-actions
+				= f.button :submit

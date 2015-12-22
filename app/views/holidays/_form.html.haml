@@ -1,0 +1,11 @@
+.row
+	.col-md-6
+		= simple_form_for(@holiday) do |f|
+			= f.error_notification
+
+			.form-inputs
+				= f.input :date, placeholder: "e.g January, 02"
+				= f.input :name
+				= f.input :comments
+			.form-actions
+				= f.button :submit

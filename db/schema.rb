@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217045256) do
+ActiveRecord::Schema.define(version: 20151222103440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,18 @@ ActiveRecord::Schema.define(version: 20151217045256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "materials", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.date     "date"
+    t.decimal  "total_spent"
+    t.text     "reason"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "material_name"
+    t.uuid     "site_id"
+  end
+
+  add_index "materials", ["site_id"], name: "index_materials_on_site_id", using: :btree
 
   create_table "next_of_kins", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
@@ -157,9 +169,10 @@ ActiveRecord::Schema.define(version: 20151217045256) do
     t.string   "head"
     t.string   "address"
     t.text     "notes"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.decimal  "start_amount", default: 0.0, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.decimal  "start_amount",     default: 0.0, null: false
+    t.decimal  "additional_costs", default: 0.0, null: false
   end
 
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

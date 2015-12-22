@@ -1,0 +1,13 @@
+.row
+	.col-md-6
+		= simple_form_for(@user, url: user_accounts_path) do |f|
+			= f.error_notification
+
+			.form-inputs
+				= f.input :name
+				= f.input :email
+				= f.input :user_type_id, collection: UserType.where('code != ?', 'SUPER-USER')
+				= f.input :password
+				= f.input :password_confirmation
+			.form-actions
+				= f.button :submit

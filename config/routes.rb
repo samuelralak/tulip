@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :materials
+  devise_for :users, skip: [:registrations] 
+    devise_scope :user do
+      get "/users/edit" => "devise/registrations#edit",   as: :edit_user_registration
+      put "/users" => "devise/registrations#update", as: :user_registration                                             
+    end
 
   resources :painters do
     resources :deductions
@@ -12,7 +17,8 @@ Rails.application.routes.draw do
   resources :sites
   resources :bonus
   resources :skills
-  resources :holidays
+  resources :holidays, except: [:show]
+  resources :user_accounts
 
   post 'dashbaord/assign_site', as: :assign_site
   post 'dashbaord/add_notes', 	as: :add_notes
