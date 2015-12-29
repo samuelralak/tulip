@@ -44,6 +44,6 @@ class WagesController < ApplicationController
     end
 
     def set_permanent_painters
-      @painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'PERMANENT').id, is_active: true)  
+      @painters = Painter.where('employment_type_id != ? AND is_active = ?', EmploymentType.find_by(code: 'TEMPORARY').id, true)  
     end
 end

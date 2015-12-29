@@ -80,7 +80,8 @@ class DeductionsController < ApplicationController
     end
 
     def get_painters
-      @painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'PERMANENT').id).order('name ASC')
+      @painters = Painter.where(
+        'employment_type_id != ?', EmploymentType.find_by(code: 'TEMPORARY').id).order('name ASC')
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_deduction

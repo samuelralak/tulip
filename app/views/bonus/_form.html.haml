@@ -4,7 +4,7 @@
   .form-inputs
     = f.input :amount
     = f.input :date_applicable, as: :date_picker
-    = f.input :painter_id, collection: Painter.where(employment_type_id: EmploymentType.find_by(code: 'PERMANENT').id), include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
+    = f.input :painter_id, collection: Painter.where('employment_type_id != ?', EmploymentType.find_by(code: 'TEMPORARY').id), include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
 
   .form-actions
     = f.button :submit
