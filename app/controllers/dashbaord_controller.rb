@@ -3,14 +3,12 @@ class DashbaordController < ApplicationController
   before_action :set_start_date, only: [:add_notes]
 	skip_before_filter :verify_authenticity_token, only: [:assign_site, :add_notes]
 
-  caches_action :index
-
   def index
     if @selected
-      employment_type ||= EmploymentType.find(@selected)
-      @painters ||= employment_type.painters.where(is_active: true).order('name ASC')
+      employment_type = EmploymentType.find(@selected)
+      @painters = employment_type.painters.where(is_active: true).order('name ASC')
     else
-      @painters ||= Painter.where(is_active: true).order('name ASC')
+      @painters = Painter.where(is_active: true).order('name ASC')
     end
     # logger.info "####### WEEK: #{start_date.strftime("%U").to_i}"
     
