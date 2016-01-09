@@ -31,10 +31,10 @@
                 <% end -%>
                 <%- if @holidays_worked.pluck(:date_attended).include?(site.date_attended) %>
                   <div style="color: maroon !important">
-                    <%= site.site.name%> (<%= day.strftime("#{day.day.ordinalize}") %>)  
+                    <%= site.try(:site).try(:name)%> (<%= day.strftime("#{day.day.ordinalize}") %>)  
                   </div>
                 <% else %>
-                  <%= site.site.name%> (<%= day.strftime("#{day.day.ordinalize}") %>)  
+                  <%= site.try(:site).try(:name)%> (<%= day.strftime("#{day.day.ordinalize}") %>)  
                 <% end -%>
                 
               <% end -%>
