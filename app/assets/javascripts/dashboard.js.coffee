@@ -1,4 +1,15 @@
 jQuery -> 
+	$(".site-select").change () ->	
+		formID = $(this).closest('form').attr('id')
+		serializeData = $("#" + formID).serialize()
+		$.ajax
+			url: "/dashbaord/assign_site?" + serializeData
+			type: "POST"
+			success: (data, status, response) -> 
+				console.log(JSON.stringify(data))
+			dataType: "JSON"
+			
+
 	$('#notesModal').on 'show.bs.modal', (event) -> 
 		button = $(event.relatedTarget);
 		track_painter_id = button.data('track')

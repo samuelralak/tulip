@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invoice_number: 1
+  invoice_date: 2016-01-09
+  sub_total: 9.99
+  value_added_tax: 9.99
+  total: 9.99
+  site_id: 
+
+two:
+  invoice_number: 1
+  invoice_date: 2016-01-09
+  sub_total: 9.99
+  value_added_tax: 9.99
+  total: 9.99
+  site_id: 

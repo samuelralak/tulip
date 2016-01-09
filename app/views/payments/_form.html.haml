@@ -4,11 +4,12 @@
       = f.error_notification
 
       .form-inputs
-        = f.input :from
-        = f.input :to
-        = f.input :payment_date, :as => :date_picker, label: 'Date'
-        = f.input :reason
         = f.input :amount
+        = f.input :reference
+        = f.input :bank
+        = f.input :account_number
+        = f.input :payment_date, :as => :date_picker, label: 'Date'
+        = f.input :client_id, collection: Site.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
         = f.association :payment_type
 
       .form-actions

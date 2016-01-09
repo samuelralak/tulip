@@ -13,11 +13,12 @@
         %table.table.table-striped
           %thead
             %tr
-              %th From
-              %th To
               %th Date
-              %th Reason
+              %th Client
               %th Amount
+              %th Reference
+              %th Bank
+              %th Account number
               %th Payment type
               %th
               %th
@@ -25,11 +26,12 @@
           %tbody
             - @payments.each do |payment|
               %tr
-                %td= payment.from
-                %td= payment.to
-                %td= payment.payment_date
-                %td= payment.reason
-                %td= payment.amount
-                %td= payment.payment_type.name
+                %td= payment.try(:payment_date)
+                %td= payment.try(:client).try(:name)
+                %td= payment.try(:amount)
+                %td= payment.try(:reference)
+                %td= payment.try(:bank)
+                %td= payment.try(:account_number)
+                %td= payment.try(:payment_type).try(:name)
                 %td= link_to 'Edit', edit_payment_path(payment)
                 %td= link_to 'Destroy', payment, :method => :delete, :data => { :confirm => 'Are you sure?' }

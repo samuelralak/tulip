@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :sites
   resources :bonus
   resources :skills
+  resources :invoices
   resources :payments, except: [:show]
   resources :holidays, except: [:show]
   resources :petty_cashes, except: [:show]

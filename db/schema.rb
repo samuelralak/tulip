@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108204737) do
+ActiveRecord::Schema.define(version: 20160109111703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,30 @@ ActiveRecord::Schema.define(version: 20160108204737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "invoice_items", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.text     "description"
+    t.decimal  "amount"
+    t.uuid     "invoice_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "invoice_items", ["invoice_id"], name: "index_invoice_items_on_invoice_id", using: :btree
+
+  create_table "invoices", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "invoice_number",                null: false
+    t.date     "invoice_date"
+    t.decimal  "sub_total",       default: 0.0, null: false
+    t.decimal  "value_added_tax", default: 0.0, null: false
+    t.decimal  "total",           default: 0.0, null: false
+    t.uuid     "site_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "invoices", ["invoice_number"], name: "index_invoices_on_invoice_number", unique: true, using: :btree
+  add_index "invoices", ["site_id"], name: "index_invoices_on_site_id", using: :btree
 
   create_table "materials", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.date     "date"
@@ -132,16 +156,18 @@ ActiveRecord::Schema.define(version: 20160108204737) do
   end
 
   create_table "payments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "from"
-    t.string   "to"
-    t.text     "reason"
+    t.text     "reference"
     t.decimal  "amount"
     t.uuid     "payment_type_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.date     "payment_date"
+    t.string   "bank"
+    t.string   "account_number"
+    t.uuid     "client_id"
   end
 
+  add_index "payments", ["client_id"], name: "index_payments_on_client_id", using: :btree
   add_index "payments", ["payment_type_id"], name: "index_payments_on_payment_type_id", using: :btree
 
   create_table "petty_cashes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

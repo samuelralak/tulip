@@ -58,14 +58,14 @@ class DashbaordController < ApplicationController
     end
 
   	respond_to do |format|
-      puts params[:start_date].present?
+      # puts params[:start_date].present?
       if params[:start_date].present?
         format.html { redirect_to "/?start_date=#{params[:start_date]}&query=#{@selected}" }  
       else
         format.html { redirect_to "/?query=#{@selected}" }
       end
   		
-  		format.json {}
+  		format.json { render json: { data: 'success' }, status: :ok }
   	end
   end
 
