@@ -4,32 +4,38 @@
 			= fa_icon 'home', text: 'Dashboard'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly')}" }
 		= link_to weekly_wages_path do
-			= fa_icon 'caret-right', text: 'Weekly wages'
+			= fa_icon 'circle-o', text: 'Weekly wages'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && (request.params[:action].eql?('monthly') || request.params[:action].eql?('painter_monthly'))}" }
 		= link_to monthly_wages_path do
-			= fa_icon 'caret-right', text: 'Monthly wages'
+			= fa_icon 'circle-o', text: 'Monthly wages'
 
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('deductions')}" }
 		= link_to deductions_path do
-			= fa_icon 'caret-right', text: 'Deductions (IOU)'
+			= fa_icon 'circle-o', text: 'Deductions (IOU)'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('bonus')}" }
 		= link_to bonus_path do
-			= fa_icon 'caret-right', text: 'Bonus'
+			= fa_icon 'circle-o', text: 'Bonus'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('payments')}" }
+		= link_to payments_path do
+			= fa_icon 'circle-o', text: 'Payments'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('petty_cashes')}" }
+		= link_to petty_cashes_path do
+			= fa_icon 'circle-o', text: 'Petty Cash'
 
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('painters')}" }
 		= link_to painters_path do
-			= fa_icon 'caret-right', text: 'Painters'
+			= fa_icon 'circle-o', text: 'Painters'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('sites')}" }
 		= link_to sites_path do
-			= fa_icon 'caret-right', text: 'Sites'
+			= fa_icon 'circle-o', text: 'Sites'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('materials')}" }
 		= link_to materials_path do
-			= fa_icon 'caret-right', text: 'Materials'
+			= fa_icon 'circle-o', text: 'Materials'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('skills')}" }
 		= link_to skills_path do
-			= fa_icon 'caret-right', text: 'Skills'
+			= fa_icon 'circle-o', text: 'Skills'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('holidays')}" }
 		= link_to holidays_path do 
-			= fa_icon 'caret-right', text: 'Holidays'
+			= fa_icon 'circle-o', text: 'Holidays'

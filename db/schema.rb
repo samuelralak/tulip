@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222103440) do
+ActiveRecord::Schema.define(version: 20160108204737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,36 @@ ActiveRecord::Schema.define(version: 20151222103440) do
   end
 
   add_index "painters", ["employment_type_id"], name: "index_painters_on_employment_type_id", using: :btree
+
+  create_table "payment_types", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.boolean  "is_active",  default: true, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "payments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "from"
+    t.string   "to"
+    t.text     "reason"
+    t.decimal  "amount"
+    t.uuid     "payment_type_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.date     "payment_date"
+  end
+
+  add_index "payments", ["payment_type_id"], name: "index_payments_on_payment_type_id", using: :btree
+
+  create_table "petty_cashes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "paid_to"
+    t.decimal  "amount"
+    t.text     "reason"
+    t.date     "date_paid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"

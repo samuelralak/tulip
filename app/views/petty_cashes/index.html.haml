@@ -1,0 +1,31 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_petty_cash_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "Petty Cash"
+      %h1.page-header Petty Cash
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Paid to
+              %th Amount
+              %th Reason
+              %th Date paid
+              %th
+              %th
+
+          %tbody
+            - @petty_cashes.each do |petty_cash|
+              %tr
+                %td= petty_cash.paid_to
+                %td= petty_cash.amount
+                %td= petty_cash.reason
+                %td= petty_cash.date_paid
+                %td= link_to 'Edit', edit_petty_cash_path(petty_cash)
+                %td= link_to 'Destroy', petty_cash, :method => :delete, :data => { :confirm => 'Are you sure?' }

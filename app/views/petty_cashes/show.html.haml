@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Paid to:
+  = @petty_cash.paid_to
+%p
+  %b Amount:
+  = @petty_cash.amount
+%p
+  %b Reason:
+  = @petty_cash.reason
+%p
+  %b Date paid:
+  = @petty_cash.date_paid
+
+= link_to 'Edit', edit_petty_cash_path(@petty_cash)
+\|
+= link_to 'Back', petty_cashes_path

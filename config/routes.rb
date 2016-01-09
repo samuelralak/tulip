@@ -17,8 +17,11 @@ Rails.application.routes.draw do
   resources :sites
   resources :bonus
   resources :skills
+  resources :payments, except: [:show]
   resources :holidays, except: [:show]
+  resources :petty_cashes, except: [:show]
   resources :user_accounts
+
 
   post 'dashbaord/assign_site', as: :assign_site
   post 'dashbaord/add_notes', 	as: :add_notes

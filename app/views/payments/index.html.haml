@@ -1,0 +1,35 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_payment_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "Payment"
+      %h1.page-header Payments
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th From
+              %th To
+              %th Date
+              %th Reason
+              %th Amount
+              %th Payment type
+              %th
+              %th
+
+          %tbody
+            - @payments.each do |payment|
+              %tr
+                %td= payment.from
+                %td= payment.to
+                %td= payment.payment_date
+                %td= payment.reason
+                %td= payment.amount
+                %td= payment.payment_type.name
+                %td= link_to 'Edit', edit_payment_path(payment)
+                %td= link_to 'Destroy', payment, :method => :delete, :data => { :confirm => 'Are you sure?' }

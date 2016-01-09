@@ -1,0 +1,15 @@
+.row
+  .col-md-6
+    = simple_form_for(@payment) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :from
+        = f.input :to
+        = f.input :payment_date, :as => :date_picker, label: 'Date'
+        = f.input :reason
+        = f.input :amount
+        = f.association :payment_type
+
+      .form-actions
+        = f.button :submit

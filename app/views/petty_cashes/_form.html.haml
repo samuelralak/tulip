@@ -1,0 +1,13 @@
+.row
+	.col-md-6
+		= simple_form_for(@petty_cash) do |f|
+			= f.error_notification
+
+			.form-inputs
+				= f.input :paid_to
+				= f.input :amount
+				= f.input :reason
+				= f.input :date_paid, :as => :date_picker
+
+			.form-actions
+				= f.button :submit
