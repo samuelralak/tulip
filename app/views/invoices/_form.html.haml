@@ -1,0 +1,16 @@
+.row
+	.col-md-6
+		= simple_form_for(@invoice) do |f|
+			= f.error_notification
+
+			.form-inputs
+				= f.input :invoice_date, :as => :date_picker
+				= f.input :note
+				= f.input :amount
+				= f.input :sub_total
+				= f.input :value_added_tax
+				= f.input :total
+				= f.association :site, collection: Site.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
+
+			.form-actions
+				= f.button :submit

@@ -11,6 +11,8 @@
           = render 'deductions/painters'
         .col-md-10 
           = link_to 'New Deduction', new_painter_deduction_path(@painter.id), class: 'btn btn-info pull-right', style: ""
+          %h2.sub-header
+            = "Listing deductions for #{@painter.name}"
 
           .table-responsive{ :style => "margin-top: 50px !important"}
             %table.table.table-striped
@@ -22,7 +24,6 @@
                   %th Rate (per month)
                   %th
                   %th
-                  %th
 
               %tbody
                 - @deductions.each do |deduction|
@@ -31,7 +32,6 @@
                     %td= deduction.try(:amount)
                     %td= deduction.try(:reason)
                     %td= deduction.try(:rate)
-                    %td= link_to 'Show', painter_deduction_path(@painter, deduction)
                     %td= link_to 'Edit', edit_painter_deduction_path(@painter, deduction)
                     %td= link_to 'Destroy', painter_deduction_path(@painter, deduction), :method => :delete, :data => { :confirm => 'Are you sure?' }
 

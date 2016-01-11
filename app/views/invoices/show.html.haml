@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Invoice date:
+  = @invoice.invoice_date
+%p
+  %b Sub total:
+  = @invoice.sub_total
+%p
+  %b Value added tax:
+  = @invoice.value_added_tax
+%p
+  %b Total:
+  = @invoice.total
+%p
+  %b Site:
+  = @invoice.site
+
+= link_to 'Edit', edit_invoice_path(@invoice)
+\|
+= link_to 'Back', invoices_path

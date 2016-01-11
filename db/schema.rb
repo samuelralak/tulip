@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109111703) do
+ActiveRecord::Schema.define(version: 20160109125458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,14 +76,16 @@ ActiveRecord::Schema.define(version: 20160109111703) do
   add_index "invoice_items", ["invoice_id"], name: "index_invoice_items_on_invoice_id", using: :btree
 
   create_table "invoices", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.integer  "invoice_number",                null: false
+    t.integer  "invoice_number",                                 null: false
     t.date     "invoice_date"
-    t.decimal  "sub_total",       default: 0.0, null: false
-    t.decimal  "value_added_tax", default: 0.0, null: false
-    t.decimal  "total",           default: 0.0, null: false
+    t.decimal  "sub_total",       default: 0.0,                  null: false
+    t.decimal  "value_added_tax", default: 0.0,                  null: false
+    t.decimal  "total",           default: 0.0,                  null: false
     t.uuid     "site_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.text     "note",            default: "Supply of paint...", null: false
+    t.decimal  "amount",          default: 0.0,                  null: false
   end
 
   add_index "invoices", ["invoice_number"], name: "index_invoices_on_invoice_number", unique: true, using: :btree

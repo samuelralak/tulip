@@ -1,0 +1,45 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_invoice_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "Invoice"
+      %h1.page-header Invoices
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Number
+              %th Date
+              %th Site
+              %th Amount
+              %th Note
+              %th Sub total
+              %th V.A.T
+              %th Total
+              %th
+              %th
+
+          %tbody
+            - @invoices.each do |invoice|
+              %tr
+                %td= invoice.try(:invoice_number)
+                %td= invoice.try(:invoice_date)
+                %td= invoice.try(:site).try(:name)
+                %td= invoice.try(:amont)
+                %td= invoice.try(:note)
+                %td= invoice.try(:sub_total)
+                %td= invoice.try(:value_added_tax)
+                %td= invoice.try(:total)
+                %td
+                  = link_to invoice_path(invoice.id, format: :pdf) do
+                    = fa_icon 'file-pdf-o'
+                %td
+                  = link_to edit_invoice_path(invoice) do
+                    = fa_icon 'edit'
+
+

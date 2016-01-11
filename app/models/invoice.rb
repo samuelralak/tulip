@@ -1,7 +1,9 @@
 class Invoice < ActiveRecord::Base
+	belongs_to :site
+
 	has_many :invoice_items
 	accepts_nested_attributes_for :invoice_items, allow_destroy: true
-	
+
 	before_save :assign_invoice_number
 
 	private

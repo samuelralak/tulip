@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
 
   resources :painters do
-    resources :deductions
+    resources :deductions, except: [:show]
 
     member do
       post :deactivate
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :sites
   resources :bonus
   resources :skills
-  resources :invoices
+  resources :invoices, except: [:destroy]
   resources :payments, except: [:show]
   resources :holidays, except: [:show]
   resources :petty_cashes, except: [:show]

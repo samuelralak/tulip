@@ -1,0 +1,76 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    = wicked_pdf_stylesheet_link_tag 'application'
+    = wicked_pdf_javascript_include_tag 'application'
+  %body
+    .container
+      .row
+        .col-md-4.col-md-offset-4.pull-right
+          %table
+            %tr
+              %td= "INVOICE NO<span class='pull-right'>:</span>".html_safe
+              %td= "&nbsp;&nbsp;##{@invoice.invoice_number}".html_safe
+            %tr
+              %td= "DATE<span class='pull-right'>:</span>".html_safe
+              %td= "&nbsp;&nbsp;#{@invoice.invoice_date}".html_safe
+      .row
+        %h3.text-center
+          INVOICE
+        .col-md-6.pull-right
+          %p Tel: 550760,
+          %p Tel/Fax: 553958
+          %p Mobile: 0708155226/ 0704114226
+          %p E-Mail: customerservice@novelpaints.com
+        .col-md-6
+          %p Garage Road,
+          %p Off Dar es Road
+          %p P.O. Box 3625-00506, Nairobi-Kenya
+      %br
+      .row
+        .col-md-4
+          %table
+            %tr
+              %td= "NAME&nbsp;<span class='pull-right'>:</span>".html_safe
+              %td= "&nbsp;&nbsp;#{@invoice.try(:site).try(:name)}".html_safe
+            %tr
+              %td= "ADDRESS&nbsp;<span class='pull-right'>:</span>".html_safe
+              %td= "&nbsp;&nbsp;#{@invoice.try(:site).try(:address)}".html_safe
+      %br
+      .row
+        .col-md-12
+          %table.table
+            %thead
+              %tr
+                %th DATE
+                %th NOTE
+                %th AMOUNT
+            %tbody
+              %tr
+                %td{ :style => "padding-bottom: 150px" }
+                  = @invoice.try(:invoice_date)
+                %td{ :style => "padding-bottom: 150px" }
+                  = @invoice.try(:note)
+                %td{ :style => "padding-bottom: 150px" }
+                  = @invoice.try(:amount)
+              %tr
+                %td{ :colspan => "2"}
+                  %strong.pull-right SUB-TOTAL
+                %td
+                  = @invoice.try(:sub_total)
+              %tr
+                %td{ :colspan => "2"}
+                  %strong.pull-right V.A.T
+                %td
+                  = @invoice.try(:value_added_tax)
+              %tr
+                %td{ :colspan => "2"}
+                  %strong.pull-right TOTAL
+                %td
+                  = @invoice.try(:total)
+
+    %footer.footer
+      .container.text-center
+        %p 
+          %strong Thank you very much for your business. We look forward to serving you better.
