@@ -7,29 +7,32 @@
     .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
       %h1.page-header Deductions
       .row
-        .col-md-2
+        .col-md-3
           = render 'deductions/painters'
-        .col-md-10 
+        .col-md-9
+          %h3.sub-header
+            = "All Deductions"
           .table-responsive
             %table.table.table-striped
               %thead
                 %tr
+                  %th Name
                   %th Date Borrowed
                   %th Amount
                   %th Reason
                   %th Rate (per month)
                   %th
                   %th
-                  %th
 
               %tbody
                 - @deductions.each do |deduction|
                   %tr
+                    %td
+                      = link_to deduction.try(:painter).try(:name), painter_deductions_path(deduction.try(:painter).try(:id)) 
                     %td= deduction.try(:date)
                     %td= deduction.try(:amount)
                     %td= deduction.try(:reason)
                     %td= deduction.try(:rate)
-                    %td= link_to 'Show', painter_deduction_path(deduction.painter.id, deduction.id)
                     %td= link_to 'Edit', edit_painter_deduction_path(deduction.painter.id, deduction.id)
                     %td= link_to 'Destroy', painter_deduction_path(deduction.painter.id, deduction.id), :method => :delete, :data => { :confirm => 'Are you sure?' }
 

@@ -5,7 +5,12 @@
 			= render 'shared/side_nav'
 
 		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-			.pull-right
-				= link_to 'Back', painter_deductions_path(@painter), class: 'btn btn-default'
-			%h1.page-header Editing deduction
-			= render 'form'
+			%h1.page-header Deductions
+			.row
+				.col-md-3
+					= render 'deductions/painters'
+				.col-md-9
+					.pull-right
+						= link_to 'Back', painter_deductions_path(@painter), class: 'btn btn-default'
+					%h1.page-header Editing deduction
+					= render 'form'

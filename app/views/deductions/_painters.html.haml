@@ -1,3 +1,5 @@
+%h3.sub-header
+	= "Painters"
 %ul.nav.nav-pills.nav-stacked
 	- @painters.each do |painter|
 		%li{ :class => "#{'active' if painter.id.eql?(@painter.try(:id))}" }
