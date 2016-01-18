@@ -2,7 +2,7 @@ class TrackPainterItem < ActiveRecord::Base
 	belongs_to :track_painter, inverse_of: :track_painter_items
 	belongs_to :site, 		inverse_of: :track_painter_items
 
-	after_save :update_weekly_total
+	after_commit :update_weekly_total
 
 	private
 		def update_weekly_total

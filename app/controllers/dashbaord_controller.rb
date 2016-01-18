@@ -37,11 +37,17 @@ class DashbaordController < ApplicationController
     @track_painter =  TrackPainter.where(["week_number = ? and painter_id = ?", 
       params[:week_number].to_i, params[:painter_id]]).first
 
+    logger.info "PARAMS: #{params.inspect}"
+
     if @track_painter
       track_painter_item = @track_painter.track_painter_items.find_by(date_attended: params[:date])
 
       if track_painter_item
-        track_painter_item.update_attributes!(site_id: params[:site_id])
+        if params[:site_id].empty?
+          track_painter_item.destroy
+        else
+          track_painter_item.update_attributes!(site_id: params[:site_id])
+        end
       else
         @track_painter.track_painter_items.create!(
           site_id: params[:site_id], date_attended: params[:date], daily_wage: @painter.daily_wage,
