@@ -18,7 +18,7 @@
               %th Address
               %th Notes
               %th Total Spent
-              %th Additional COsts
+              %th Additional Costs
               %th
               %th
               %th
@@ -26,7 +26,8 @@
           %tbody
             - @sites.each do |site|
               %tr
-                %td= site.name
+                / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
+                %td= link_to site.name, transactions_path(site.id), remote: true 
                 %td= site.head
                 %td= site.address
                 %td= site.notes
@@ -35,4 +36,5 @@
                 %td= link_to 'Show', site
                 %td= link_to 'Edit', edit_site_path(site)
                 %td= link_to 'Destroy', site, :method => :delete, :data => { :confirm => 'Are you sure?' }
+= render 'sites/invoice_payment_modal'
 

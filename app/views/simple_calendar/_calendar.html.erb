@@ -9,42 +9,12 @@
     </nav>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Basic Pay</th>
-        <th>Days Worked</th>
-        <th>Holidays Worked</th>
-        <th>Total Allowance</th>
-        <th>Total Wages (Holidays)</th>
-        <th>Deductions (IOU)</th>
-        <th>Bonuses</th>
-        <th>Payable</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%- @painters.each do |painter| %>
-        <tr>
-          <td><%= painter.name %></td>
-          <td><%= painter.basic_pay %></td>
-          <td><%= days_worked(painter, @start_date) %></td>
-          <td><%= holidays_worked(painter, @start_date) %></td>
-          <td><%= allowance_total(painter, @start_date) %></td>
-          <td><%= wages_total(painter, @start_date) %></td>
-          <td><%= deductions_total(painter, @start_date) %></td>
-          <td><%= bonus_total(painter, @start_date) %></td>
-          <td><%= payable_total(painter, @start_date) %></td>
-        </tr>
-
-        <%- @total += payable_total(painter, @start_date) %>
-      <% end -%>
-      <tr>
-          <td colspan="8" style="text-align:right"><strong>Total</strong> </td>
-          <td><%= @total %></td>
-        </tr>
-    </tbody>
-  </table>
+<%- if request.params[:action].eql?('permanent') %>
+  <%= render 'simple_calendar/permanent_wages'%>
+<% end -%>
+<%- if request.params[:action].eql?('monthly') %>
+  <%= render 'simple_calendar/monthly_wages'%>
+<% end -%>
 
 <!--
   <table class="table table-striped">

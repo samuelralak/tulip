@@ -1,0 +1,3 @@
+console.log('site clicked');
+$('#invoicePaymentModal .modal-body').html("<%= escape_javascript(render('sites/invoice_payment_content', site: @site)) %>");
+$('#invoicePaymentModal').modal();

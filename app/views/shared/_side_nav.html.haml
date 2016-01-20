@@ -4,10 +4,13 @@
 			= fa_icon 'home', text: 'Dashboard'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly')}" }
 		= link_to weekly_wages_path do
-			= fa_icon 'circle-o', text: 'Weekly wages'
+			= fa_icon 'circle-o', text: 'Weekly P. Wages'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && (request.params[:action].eql?('monthly') || request.params[:action].eql?('painter_monthly'))}" }
 		= link_to monthly_wages_path do
-			= fa_icon 'circle-o', text: 'Monthly wages'
+			= fa_icon 'circle-o', text: 'Monthly P. Wages'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && (request.params[:action].eql?('permanent') || request.params[:action].eql?('painter_permanent'))}" }
+		= link_to permanent_wages_path do
+			= fa_icon 'circle-o', text: 'Permanent P. Wages'
 
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('deductions')}" }
@@ -22,6 +25,9 @@
 	%li{ :class => "#{'active' if request.params[:controller].eql?('petty_cashes')}" }
 		= link_to petty_cashes_path do
 			= fa_icon 'circle-o', text: 'Petty Cash'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('invoices')}" }
+		= link_to invoices_path do
+			= fa_icon 'circle-o', text: 'Invoices'
 
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('painters')}" }

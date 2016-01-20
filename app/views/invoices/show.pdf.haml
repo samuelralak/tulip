@@ -7,7 +7,7 @@
   %body
     .container
       .row
-        .col-md-4.col-md-offset-4.pull-right
+        .col-md-6.pull-right
           %table
             %tr
               %td= "INVOICE NO<span class='pull-right'>:</span>".html_safe
@@ -15,6 +15,8 @@
             %tr
               %td= "DATE<span class='pull-right'>:</span>".html_safe
               %td= "&nbsp;&nbsp;#{@invoice.invoice_date}".html_safe
+        .col-md-6
+          = wicked_pdf_image_tag 'tulip.png' 
       .row
         %h3.text-center
           INVOICE

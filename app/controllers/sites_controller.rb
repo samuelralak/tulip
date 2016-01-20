@@ -64,6 +64,14 @@ class SitesController < ApplicationController
     end
   end
 
+  def site_transactions
+    @site = Site.find(params[:site_id])
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_site

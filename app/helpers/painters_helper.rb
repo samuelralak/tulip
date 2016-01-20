@@ -22,9 +22,17 @@ module PaintersHelper
 
 	def allowance_total(painter, start_date)
 		track_painters = painter.track_painters.all
-		total_allowance = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
+		days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month 
-		).sum(:daily_allowance)		
+		)
+		sundays_total = 0.0
+		sundays_worked = days_worked.select { |d| d.date_attended.wday.eql?(0) }
+		sundays_worked.each { |s| sundays_total += s.daily_wage }
+		if painter.employment_type.code.eql?('MONTHLY')
+			total_allowance = days_worked.sum(:daily_allowance)
+		else
+			total_allowance = days_worked.sum(:daily_allowance)	+ sundays_total
+		end
 
 		return total_allowance
 	end
@@ -37,8 +45,10 @@ module PaintersHelper
 
 		holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
 		total_wage = track_painter_items.where('date_attended IN (?)', holidays).sum(:daily_wage)
+		total_allowance = track_painter_items.where('date_attended IN (?)', holidays).sum(:daily_allowance)
+		total = total_wage
 
-		return total_wage
+		return total
 	end
 
 	def deductions_total(painter, start_date)
@@ -64,7 +74,15 @@ module PaintersHelper
 		wages = wages_total(painter, start_date)
 		deductions = deductions_total(painter, start_date)
 		bonus = bonus_total(painter, start_date)
-		total_pay = (basic_pay + allowance + wages + bonus) - deductions
+		if painter.employment_type.code.eql?('MONTHLY')
+			track_painters = painter.track_painters.all
+			total_pay = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
+				track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month 
+			).sum(:daily_allowance)
+			total_pay = (total_pay + bonus) - deductions
+		else
+			total_pay = (basic_pay + allowance + wages + bonus) - deductions
+		end
 
 		return total_pay
 	end

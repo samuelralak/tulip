@@ -1,0 +1,14 @@
+#invoicePaymentModal.modal.fade
+  .modal-dialog.modal-lg{ :role => "document" }
+    .modal-content
+      .modal-header
+        %button.close{ :data => { :dismiss => "modal" } }
+          %span{ :aria => { :hidden => true } }
+            = "&times;".html_safe
+        %h4.modal-title{ :id => "invoicePaymentModalLabel"}
+          Add Notes
+      .modal-body
+        
+      .modal-footer
+        %button{ :type => "button", :class => "btn btn-default", :data => { :dismiss => "modal" } }
+          Close

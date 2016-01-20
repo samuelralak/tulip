@@ -1,0 +1,38 @@
+.row
+	.col-md-4
+		%h4.text-center Agreed Amount
+		%p
+			%strong Internal Agreed Amount
+			%span.pull-right
+				= site.site_agreed_amount.internal
+		%p
+			%strong External Agreed Amount
+			%span.pull-right
+				= site.site_agreed_amount.external
+	.col-md-4
+		%h4.text-center Invoices
+		- site.invoices.each do |invoice|
+			%p
+				%strong= "invoice number ##{invoice.try(:invoice_number)}"
+				%span.pull-right
+					= "#{invoice.try(:total)}"
+	.col-md-4
+		%h4.text-center Payments
+		- site.payments.each do |payment|
+			%p.text-center
+				= "#{payment.try(:amount)}"
+%hr
+.row
+	.col-md-4
+		%p
+			%strong Totals
+			%span.pull-right
+				= (site.site_agreed_amount.internal + site.site_agreed_amount.external)
+	.col-md-4
+		%p
+			%span.pull-right
+				= site.invoices.sum(:total)
+	.col-md-4
+		%p.text-center
+			%span
+				= site.payments.sum(:amount)

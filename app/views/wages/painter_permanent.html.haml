@@ -5,7 +5,7 @@
 			= render 'shared/side_nav'
 
 		.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-			%h1.page-header Monthly Wages
+			%h1.page-header Permanent Wages
 			.row
 				.col-md-2
 					= render 'wages/painters'
@@ -29,13 +29,29 @@
 									%tbody
 										%tr
 											%td
-												%strong Wages
+												%strong Basic Pay
+											%td
+											%td
+											%td{ :style => 'text-align: right'}
+												= @painter.basic_pay
+										%tr
+											%td
+												%strong Allowance
 											%td
 												= @sites_attended.length
 											%td
 												= @painter.daily_allowance
 											%td{ :style => 'text-align: right'}
-												= (allowance_total(@painter, @start_date))
+												= allowance_total(@painter, @start_date)
+										%tr
+											%td
+												%strong Holidays
+											%td
+												= @holidays_worked.length
+											%td
+												= @painter.daily_wage
+											%td{ :style => 'text-align: right'}
+												= wages_total(@painter, @start_date)
 										%tr
 											%td
 												%strong Bonus
