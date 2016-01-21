@@ -4,7 +4,7 @@ class Invoice < ActiveRecord::Base
 	has_many :invoice_items
 	accepts_nested_attributes_for :invoice_items, allow_destroy: true
 
-	before_save :assign_invoice_number
+	before_create :assign_invoice_number
 
 	private
 		def assign_invoice_number
