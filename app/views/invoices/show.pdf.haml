@@ -35,10 +35,16 @@
           %table
             %tr
               %td= "NAME&nbsp;<span class='pull-right'>:</span>".html_safe
-              %td= "&nbsp;&nbsp;#{@invoice.try(:site).try(:name)}".html_safe
+              %td= "&nbsp;&nbsp;#{@invoice.try(:site).try(:client)}".html_safe
             %tr
               %td= "ADDRESS&nbsp;<span class='pull-right'>:</span>".html_safe
               %td= "&nbsp;&nbsp;#{@invoice.try(:site).try(:address)}".html_safe
+            %tr
+              %td= "CITY&nbsp;<span class='pull-right'>:</span>".html_safe
+              %td= "&nbsp;&nbsp;#{@invoice.try(:site).try(:city)}".html_safe
+            %tr
+              %td= "MOBILE&nbsp;<span class='pull-right'>:</span>".html_safe
+              %td= "&nbsp;&nbsp;#{@invoice.try(:site).try(:mobile)}".html_safe
       %br
       .row
         .col-md-12

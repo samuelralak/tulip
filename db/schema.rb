@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109125458) do
+ActiveRecord::Schema.define(version: 20160121101608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20160109125458) do
   end
 
   add_index "bonus", ["painter_id"], name: "index_bonus_on_painter_id", using: :btree
+
+  create_table "clients", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "city"
+    t.string   "mobile"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "deduction_installments", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.date     "date"
@@ -231,6 +240,9 @@ ActiveRecord::Schema.define(version: 20160109125458) do
     t.datetime "updated_at",                     null: false
     t.decimal  "start_amount",     default: 0.0, null: false
     t.decimal  "additional_costs", default: 0.0, null: false
+    t.string   "client"
+    t.string   "city"
+    t.string   "mobile"
   end
 
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
