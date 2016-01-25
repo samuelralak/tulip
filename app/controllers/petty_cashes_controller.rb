@@ -4,7 +4,7 @@ class PettyCashesController < ApplicationController
   # GET /petty_cashes
   # GET /petty_cashes.json
   def index
-    @petty_cashes = PettyCash.all
+    @petty_cashes = PettyCash.order("created_at DESC")
   end
 
   # GET /petty_cashes/1
@@ -69,6 +69,6 @@ class PettyCashesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def petty_cash_params
-      params.require(:petty_cash).permit(:paid_to, :amount, :reason, :date_paid)
+      params.require(:petty_cash).permit(:paid_to, :amount, :reason, :date_paid, :source, :balance)
     end
 end

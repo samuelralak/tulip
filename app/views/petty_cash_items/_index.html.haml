@@ -1,0 +1,21 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th Amount
+      %th Paid to
+      %th Reason
+      %th Date
+
+  %tbody
+    - petty_cash_items.each do |petty_cash_item|
+      %tr
+        %td= petty_cash_item.date
+        %td= petty_cash_item.paid_to
+        %td= petty_cash_item.reason
+        %td{:style => "color: maroon"}
+          = "- #{petty_cash_item.amount}"
+    %tr
+      %td{ :colspan => "3"}
+        %strong.pull-right Total
+      %td{:style => "color: maroon"}
+        = "- #{petty_cash_items.sum(:amount)}"

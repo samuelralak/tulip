@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Amount:
+  = @petty_cash_item.amount
+%p
+  %b Paid to:
+  = @petty_cash_item.paid_to
+%p
+  %b Reason:
+  = @petty_cash_item.reason
+%p
+  %b Date:
+  = @petty_cash_item.date
+%p
+  %b Bal carried forward:
+  = @petty_cash_item.bal_carried_forward
+
+= link_to 'Edit', edit_petty_cash_item_path(@petty_cash_item)
+\|
+= link_to 'Back', petty_cash_items_path

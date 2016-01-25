@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resources :invoices, except: [:destroy]
   resources :payments, except: [:show]
   resources :holidays, except: [:show]
-  resources :petty_cashes, except: [:show]
+  resources :petty_cashes, except: [:show] do
+    resources :petty_cash_items, only: [:index, :create, :new]
+  end
   resources :user_accounts
 
 

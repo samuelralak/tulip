@@ -7,25 +7,44 @@
     .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
       .pull-right
         = link_to new_petty_cash_path, class: 'btn btn-info' do
-          = fa_icon "plus", text: "Petty Cash"
+          = fa_icon "plus", text: "Reimburse"
       %h1.page-header Petty Cash
       .table-responsive
         %table.table.table-striped
           %thead
             %tr
-              %th Paid to
+              %th Date
+              %th Source
               %th Amount
-              %th Reason
-              %th Date paid
+              %th Balance Carried Forward
+              %th Total
+              %th Balance
+              %th Last Updated
+              %th
               %th
               %th
 
           %tbody
-            - @petty_cashes.each do |petty_cash|
+            - @petty_cashes.each_with_index do |petty_cash, i|
               %tr
-                %td= petty_cash.paid_to
-                %td= petty_cash.amount
-                %td= petty_cash.reason
-                %td= petty_cash.date_paid
-                %td= link_to 'Edit', edit_petty_cash_path(petty_cash)
-                %td= link_to 'Destroy', petty_cash, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                %td= petty_cash.try(:date_paid)
+                %td= petty_cash.try(:source)
+                %td= petty_cash.try(:amount)
+                %td{:style => "color: green"}
+                  = "+ #{petty_cash.try(:bal_carried_forward)}"
+                %td= petty_cash.try(:total)
+                %td= petty_cash.try(:balance)
+                %td= petty_cash.try(:updated_at)
+                %td
+                  = link_to petty_cash_petty_cash_items_path(petty_cash), remote: true, class: 'btn btn-default btn-xs' do
+                    = "transactions <strong>(#{petty_cash.petty_cash_items.count})</strong>".html_safe
+                %td
+                  - if i.eql?(0)
+                    = link_to new_petty_cash_petty_cash_item_path(petty_cash), remote: true, class: 'btn btn-default btn-xs' do
+                      = fa_icon 'plus', text: 'payment'
+                %td
+                  - if i.eql?(0)
+                    = link_to petty_cash, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
+                      = fa_icon 'trash'
+= render 'petty_cashes/petty_cash_item_modal'
+= render 'petty_cashes/petty_cash_items_modal'

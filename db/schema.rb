@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121101608) do
+ActiveRecord::Schema.define(version: 20160125123556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -181,13 +181,30 @@ ActiveRecord::Schema.define(version: 20160121101608) do
   add_index "payments", ["client_id"], name: "index_payments_on_client_id", using: :btree
   add_index "payments", ["payment_type_id"], name: "index_payments_on_payment_type_id", using: :btree
 
+  create_table "petty_cash_items", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "petty_cash_id"
+    t.decimal  "amount"
+    t.string   "paid_to"
+    t.text     "reason"
+    t.date     "date"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.decimal  "bal_carried_forward"
+  end
+
+  add_index "petty_cash_items", ["petty_cash_id"], name: "index_petty_cash_items_on_petty_cash_id", using: :btree
+
   create_table "petty_cashes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "paid_to"
     t.decimal  "amount"
     t.text     "reason"
     t.date     "date_paid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "source"
+    t.decimal  "balance"
+    t.decimal  "bal_carried_forward"
+    t.decimal  "total",               default: 0.0, null: false
   end
 
   create_table "roles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

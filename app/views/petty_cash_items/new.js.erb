@@ -1,0 +1,2 @@
+$('#pettyCashItemModal .modal-body').html("<%= escape_javascript(render('petty_cash_items/form', locals: { petty_cash: @petty_cash, petty_cash_item: @petty_cash_item })) %>");
+$('#pettyCashItemModal').modal();
