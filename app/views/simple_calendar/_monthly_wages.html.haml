@@ -3,6 +3,7 @@
     %tr
       %th
       %th Days Worked
+      %th Daily Wage
       %th Deductions (IOU)
       %th Bonuses
       %th Payable
@@ -11,6 +12,7 @@
       %tr
         %td= painter.name
         %td= days_worked(painter, @start_date)
+        %td= painter.daily_allowance
         %td= deductions_total(painter, @start_date)
         %td= bonus_total(painter, @start_date)
         %td= payable_total(painter, @start_date)

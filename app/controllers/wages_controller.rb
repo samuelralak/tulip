@@ -70,10 +70,10 @@ class WagesController < ApplicationController
     end
 
     def set_monthly_painters
-      @painters = Painter.where('employment_type_id = ? AND is_active = ?', EmploymentType.find_by(code: 'MONTHLY').id, true)  
+      @painters = Painter.where('employment_type_id = ?', EmploymentType.find_by(code: 'MONTHLY').id)  
     end
 
     def set_permanent_painters
-      @painters = Painter.where('employment_type_id = ? AND is_active = ?', EmploymentType.find_by(code: 'PERMANENT').id, true)  
+      @painters = Painter.where('employment_type_id = ?', EmploymentType.find_by(code: 'PERMANENT').id)  
     end
 end

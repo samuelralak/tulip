@@ -4,6 +4,7 @@
       %th
       %th Basic Pay
       %th Days Worked
+      %th Sundays Worked
       %th Holidays Worked
       %th Total Allowance
       %th Total Wages (Holidays)
@@ -16,6 +17,7 @@
         %td= painter.name
         %td= painter.basic_pay
         %td= days_worked(painter, @start_date)
+        %td= sundays_worked(painter, @start_date)
         %td= holidays_worked(painter, @start_date)
         %td= allowance_total(painter, @start_date)
         %td= wages_total(painter, @start_date)

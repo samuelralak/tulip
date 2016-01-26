@@ -20,6 +20,17 @@ module PaintersHelper
 		return no_of_days
 	end
 
+	def sundays_worked(painter, start_date)
+		track_painters = painter.track_painters.all
+		days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
+			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month 
+		)
+		sundays_total = 0.0
+		sundays_worked = days_worked.select { |d| d.date_attended.wday.eql?(0) }
+
+		return sundays_worked.length
+	end
+
 	def allowance_total(painter, start_date)
 		track_painters = painter.track_painters.all
 		days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 

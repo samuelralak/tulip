@@ -25,7 +25,7 @@ class BonusController < ApplicationController
   # POST /bonus.json
   def create
     @bonu = Bonu.new(bonu_params)
-    @bonu.date_applicable = @bonu.date_applicable.end_of_month
+    # @bonu.date_applicable = @bonu.date_applicable.end_of_month
     respond_to do |format|
       if @bonu.save
         format.html { redirect_to bonus_path, notice: 'Bonu was successfully created.' }
@@ -40,7 +40,7 @@ class BonusController < ApplicationController
   # PATCH/PUT /bonus/1
   # PATCH/PUT /bonus/1.json
   def update
-    @bonu.date_applicable = @bonu.date_applicable.end_of_month
+    # @bonu.date_applicable = @bonu.date_applicable.end_of_month
     respond_to do |format|
       if @bonu.update(bonu_params)
         format.html { redirect_to @bonu, notice: 'Bonu was successfully updated.' }

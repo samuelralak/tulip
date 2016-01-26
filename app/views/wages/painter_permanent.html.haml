@@ -45,6 +45,14 @@
 												= allowance_total(@painter, @start_date)
 										%tr
 											%td
+												%strong Sundays
+											%td
+												= sundays_worked(@painter, @start_date)
+											%td
+												= @painter.daily_wage
+											%td{ :style => 'text-align: right'}
+										%tr
+											%td
 												%strong Holidays
 											%td
 												= @holidays_worked.length
