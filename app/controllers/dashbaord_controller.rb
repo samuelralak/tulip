@@ -5,8 +5,11 @@ class DashbaordController < ApplicationController
 
   def index
     if @selected
-      employment_type = EmploymentType.find(@selected)
-      @painters = employment_type.painters.where(is_active: true).order('name ASC')
+      track_painter_ids = TrackPainterItem.where(site_id: @selected).pluck(:track_painter_id)
+      painter_ids = TrackPainter.where('id in (?)', track_painter_ids).pluck(:painter_id)
+      @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true)
+      # employment_type = EmploymentType.find(@selected)
+      # @painters = employment_type.painters.where(is_active: true).order('name ASC')
     else
       @painters = Painter.where(is_active: true).order('name ASC')
     end
