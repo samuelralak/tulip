@@ -43,7 +43,7 @@ class BonusController < ApplicationController
     # @bonu.date_applicable = @bonu.date_applicable.end_of_month
     respond_to do |format|
       if @bonu.update(bonu_params)
-        format.html { redirect_to @bonu, notice: 'Bonu was successfully updated.' }
+        format.html { redirect_to bonus_path, notice: 'Bonu was successfully updated.' }
         format.json { render :show, status: :ok, location: @bonu }
       else
         format.html { render :edit }

@@ -18,7 +18,6 @@
               %th Amount
               %th
               %th
-              %th
 
           %tbody
             - @bonus.each do |bonu|
@@ -26,7 +25,6 @@
                 %td= bonu.painter.name
                 %td= bonu.date_applicable
                 %td= bonu.amount
-                %td= link_to 'Show', bonu
                 %td= link_to 'Edit', edit_bonu_path(bonu)
                 %td= link_to 'Destroy', bonu, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
