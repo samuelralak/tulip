@@ -31,8 +31,8 @@
 						%tr
 							%td Other*
 							%td
-								- other = (@track_painters.sum(:weekly_total) - site_total)
-								= other
+								- other = (@track_painters.sum(:weekly_total) - site_total) 
+								= other > 0 ? other : 0.0
 						%tr
 							%td{ :style => "text-align: right"} 
 								%strong Total:
