@@ -10,6 +10,7 @@ class Site < ActiveRecord::Base
 
 	has_many :track_painter_items, inverse_of: :site
 	has_many :materials, 		   inverse_of: :site
+	has_many :paints, 		   	   inverse_of: :site
 
 	has_many :invoices
 	has_many :payments, foreign_key: "client_id"

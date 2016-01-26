@@ -1,0 +1,13 @@
+.row
+	.col-md-6
+		= simple_form_for(@paint) do |f|
+			= f.error_notification
+
+			.form-inputs
+				= f.input :month
+				= f.input :year
+				= f.input :amount
+				= f.input :site_id, collection: Site.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
+
+			.form-actions
+				= f.button :submit

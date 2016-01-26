@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Month:
+  = @paint.month
+%p
+  %b Year:
+  = @paint.year
+%p
+  %b Amount:
+  = @paint.amount
+%p
+  %b Site:
+  = @paint.site
+
+= link_to 'Edit', edit_paint_path(@paint)
+\|
+= link_to 'Back', paints_path

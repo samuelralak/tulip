@@ -39,6 +39,9 @@
 	%li{ :class => "#{'active' if request.params[:controller].eql?('materials')}" }
 		= link_to materials_path do
 			= fa_icon 'circle-o', text: 'Materials'
+	%li{ :class => "#{'active' if request.params[:controller].eql?('paints')}" }
+		= link_to paints_path do
+			= fa_icon 'circle-o', text: 'Paints'
 	%li{ :class => "#{'active' if request.params[:controller].eql?('skills')}" }
 		= link_to skills_path do
 			= fa_icon 'circle-o', text: 'Skills'

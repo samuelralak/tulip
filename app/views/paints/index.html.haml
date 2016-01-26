@@ -1,0 +1,30 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_paint_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: " Paint Expense"
+      %h1.page-header Materials
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Date
+              %th Amount
+              %th Site
+              %th
+              %th
+
+          %tbody
+            - @paints.each do |paint|
+              %tr
+                %td= "#{paint.month}, #{paint.year}"
+                %td= paint.amount
+                %td= paint.try(:site).try(:name)
+                %td= link_to 'Edit', edit_paint_path(paint)
+                %td= link_to 'Destroy', paint, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
