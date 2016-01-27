@@ -7,8 +7,8 @@
 					= f.input :name
 					= f.input :employment_type_id, collection: EmploymentType.all, prompt: "Select Type of Employment"
 					= f.input :basic_pay
-					= f.input :daily_wage
-					= f.input :daily_allowance
+					= f.input :daily_wage, label: "Daily Wage for Permanent Painters"
+					= f.input :daily_allowance, label: "Daily Allowance / Daily Wage for Monthly & Weekly Painters"
 					= f.input :is_active
 					%br
 				= field_set_tag 'Skills' do
