@@ -1,4 +1,5 @@
 class PettyCashItemsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_petty_cash
   before_action :set_petty_cash_item, only: [:show, :edit, :update, :destroy]
 

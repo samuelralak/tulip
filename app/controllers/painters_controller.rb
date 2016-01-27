@@ -1,4 +1,5 @@
 class PaintersController < ApplicationController
+  load_and_authorize_resource
   before_action :set_painter, only: [:show, :edit, :update, :destroy, :deactivate]
 
   # GET /painters

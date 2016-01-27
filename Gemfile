@@ -40,6 +40,7 @@ gem 'simple_form'
 
 # Authentication & Authorization
 gem 'devise'
+gem 'cancancan'
 gem "rolify"
 
 # Calender

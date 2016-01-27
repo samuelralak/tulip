@@ -1,4 +1,5 @@
 class PaintsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_paint, only: [:show, :edit, :update, :destroy]
 
   # GET /paints

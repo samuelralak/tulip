@@ -67,6 +67,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (8.2.1)
+    cancancan (1.13.1)
     chosen-rails (1.4.3)
       coffee-rails (>= 3.2)
       compass-rails (>= 2.0.4)
@@ -256,6 +257,7 @@ DEPENDENCIES
   bootstrap-chosen-rails
   bootstrap-sass (~> 3.3.6)
   byebug
+  cancancan
   chosen-rails
   coffee-rails (~> 4.1.0)
   compass-rails (~> 2.0.4)

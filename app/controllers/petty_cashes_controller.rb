@@ -1,4 +1,5 @@
 class PettyCashesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_petty_cash, only: [:show, :edit, :update, :destroy]
 
   # GET /petty_cashes
