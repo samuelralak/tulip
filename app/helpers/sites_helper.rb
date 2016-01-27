@@ -17,7 +17,7 @@ module SitesHelper
 		track_painter_items = TrackPainterItem.where(site_id: site.id)
 
 		track_painter_items.each do |tpi|
-			if tpi.track_painter.painter.employment_type.code.eql?('PERMANENT')
+			if !tpi.track_painter.painter.nil? && tpi.track_painter.painter.employment_type.code.eql?('PERMANENT')
 				total += (tpi.daily_wage + tpi.daily_allowance)
 			else
 				total += tpi.daily_allowance

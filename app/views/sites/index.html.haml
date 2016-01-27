@@ -21,6 +21,7 @@
               %th Total Spent on Material
               %th Total Spent on Paint
               %th Total (Material, Paint & Labour)
+              %th Status
               %th
               %th
               %th
@@ -37,8 +38,15 @@
                 %td= (site.materials.sum(:total_spent) + site.initial_material_amount)
                 %td= (site.paints.sum(:amount) + site.old_paint_amount)
                 %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.initial_material_amount))
-                %td= link_to 'Show', site
-                %td= link_to 'Edit', edit_site_path(site)
-                %td= link_to 'Destroy', site, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                %td= site.is_active
+                %td
+                  = link_to site, class: 'btn btn-default btn-xs' do
+                    = fa_icon 'eye'
+                %td
+                  = link_to edit_site_path(site), class: 'btn btn-info btn-xs' do
+                    = fa_icon 'edit'
+                %td
+                  = link_to site, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
+                    = fa_icon 'trash'
 = render 'sites/invoice_payment_modal'
 
