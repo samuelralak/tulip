@@ -8,7 +8,6 @@
 						= field_set_tag 'Site Details' do
 							= f.input :name
 							= f.input :head
-							= f.input :start_amount, label: 'Start Total Amount'
 					.col-md-6
 						= field_set_tag 'Rate' do
 							= f.simple_fields_for :site_rate do |c|
@@ -37,6 +36,12 @@
 						= field_set_tag 'Other Details' do
 							= f.input :additional_costs
 							= f.input :notes
+				.row
+					.col-md-6
+						= field_set_tag 'Initial amounts for Labour, Material and Paint (KES)' do
+							= f.input :initial_labour_amount
+							= f.input :initial_material_amount
+							= f.input :old_paint_amount, label: "Initial paint amount"
 				
 			.form-actions
 				= f.button :submit

@@ -18,7 +18,9 @@
               %th Address
               %th Notes
               %th Total Spent on Labour
+              %th Total Spent on Material
               %th Total Spent on Paint
+              %th Total (Material, Paint & Labour)
               %th
               %th
               %th
@@ -31,8 +33,10 @@
                 %td= site.head
                 %td= site.address
                 %td= site.notes
-                %td= TrackPainterItem.where(site_id: site.id).sum(:daily_wage) + site.start_amount
+                %td= site_labour_amount(site)
+                %td= (site.materials.sum(:total_spent) + site.initial_material_amount)
                 %td= (site.paints.sum(:amount) + site.old_paint_amount)
+                %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.initial_material_amount))
                 %td= link_to 'Show', site
                 %td= link_to 'Edit', edit_site_path(site)
                 %td= link_to 'Destroy', site, :method => :delete, :data => { :confirm => 'Are you sure?' }
