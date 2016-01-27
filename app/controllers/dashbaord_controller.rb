@@ -48,6 +48,8 @@ class DashbaordController < ApplicationController
       if track_painter_item
         if params[:site_id].empty?
           track_painter_item.destroy
+          tpi_count = @track_painter.track_painter_items.count
+          @track_painter.destroy if tpi.eql?(0)
         else
           track_painter_item.update_attributes!(site_id: params[:site_id])
         end
