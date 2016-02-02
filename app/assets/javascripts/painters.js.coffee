@@ -1,4 +1,24 @@
 jQuery -> 
+	$.fn.editable.defaults.mode = 'inline'
+	$('#missedDays').editable({
+		type: 'text',
+		url: '/update_monthly_income',    
+		pk: 1,    
+		title: 'edit figure',
+		ajaxOptions: {
+        	type: 'PUT'
+    	}        
+	})
+
+	# $.ajax
+ #    	url: '/update_monthly_income'
+ #    	type: "PUT"
+ #    	responseTime: 200
+ #    	response: (settings) -> 
+ #    		console.log settings
+ #    	dataType: "JSON"
+
+
 	$("#painter_employment_type_id").change () ->	
 		selected = $(this).find("option:selected").text()
 

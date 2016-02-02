@@ -92,9 +92,43 @@ module PaintersHelper
 			).sum(:daily_allowance)
 			total_pay = (total_pay + bonus) - deductions
 		else
-			total_pay = (basic_pay + allowance + wages + bonus) - deductions
+			# missed_days = days_missed(painter, start_date) * 
+			total_pay = (basic_pay + allowance + wages + bonus) - (deductions + absent_total(painter, start_date))
 		end
 
 		return total_pay
+	end
+
+	def days_missed(painter, start_date)
+		days_in_month = (start_date.beginning_of_month..start_date.end_of_month).map { |e| Date.parse(e.to_s) }
+		track_painters = painter.track_painters.all
+		days_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
+			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month 
+		).pluck(:date_attended)
+
+		missed_days = days_in_month.select { |d| !days_attended.include?(d) }
+		missed_days = missed_days.select { |d| !d.wday.eql?(0) }
+		holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
+		missed_days = missed_days.select { |d| !holidays.include?(d) }
+
+		return 	missed_days
+	end
+
+	def absent_total(painter, start_date)
+		monthly_income = PainterMonthlyIncome.find_by('painter_id = ? AND month = ? AND year = ?', 
+			painter.id, start_date.strftime("%B"), start_date.strftime("%Y")
+		)
+
+		unless monthly_income
+			missed_days = days_missed(painter, start_date)
+			total = painter.try(:daily_allowance) * missed_days.length
+
+			monthly_income = PainterMonthlyIncome.create(
+				painter_id: painter.id, month: start_date.strftime("%B"), year: start_date.strftime("%Y"), 
+				absent_total: total, basic_pay: painter.basic_pay
+			)
+		end
+
+		return monthly_income.absent_total
 	end
 end

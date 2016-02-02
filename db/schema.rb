@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127130955) do
+ActiveRecord::Schema.define(version: 20160202100605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,18 @@ ActiveRecord::Schema.define(version: 20160127130955) do
   end
 
   add_index "painter_contacts", ["painter_id"], name: "index_painter_contacts_on_painter_id", using: :btree
+
+  create_table "painter_monthly_incomes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.uuid     "painter_id"
+    t.string   "month"
+    t.string   "year"
+    t.decimal  "absent_total", default: 0.0, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.decimal  "basic_pay",    default: 0.0, null: false
+  end
+
+  add_index "painter_monthly_incomes", ["painter_id"], name: "index_painter_monthly_incomes_on_painter_id", using: :btree
 
   create_table "painter_skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "painter_id"

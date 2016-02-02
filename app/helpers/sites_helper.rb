@@ -23,6 +23,9 @@ module SitesHelper
 				total += tpi.daily_allowance
 			end
 		end
+
+		total = total + site.initial_labour_amount
+		
 		return total
 	end
 end

@@ -14,7 +14,7 @@
 						= date
 					%h3 Payable
 					.row
-						.col-md-6
+						.col-md-8	
 							.table-responsive
 								%table.table
 									%thead
@@ -69,6 +69,17 @@
 												= bonus_total(@painter, @start_date)
 										%tr{ :style => 'color: maroon'}
 											%td
+												%strong Days missed
+											%td
+												= (days_missed(@painter, @start_date)).length
+											%td
+											%td{ :style => 'text-align: right'}
+												= "-"
+												%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
+													= "#{absent_total(@painter, @start_date)}"
+												
+										%tr{ :style => 'color: maroon'}
+											%td
 												%strong Deduction (IOU)
 											%td
 											%td
@@ -78,7 +89,8 @@
 											%td{ :colspan => '3', :style => 'text-align: right'}
 												%strong Total Payable
 											%td{ :style => 'text-align: right'}
-												= payable_total(@painter, @start_date)
+												#payableTotal
+													= payable_total(@painter, @start_date)
 
 
 

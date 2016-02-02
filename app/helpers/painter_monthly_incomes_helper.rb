@@ -1,0 +1,2 @@
+module PainterMonthlyIncomesHelper
+end

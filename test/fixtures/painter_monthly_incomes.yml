@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  painter_id: 
+  month: MyString
+  year: MyString
+  absent_total: MyString
+
+two:
+  painter_id: 
+  month: MyString
+  year: MyString
+  absent_total: MyString
