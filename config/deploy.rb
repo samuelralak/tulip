@@ -6,7 +6,7 @@ set :application,     'tulip'
 set :user,            'ascentnp'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
-set :tmp_dir, 		  "#{fetch(:home)}/tmp"
+set :tmp_dir, 		  "home/ascentnp/tmp"
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
