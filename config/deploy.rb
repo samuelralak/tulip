@@ -6,13 +6,13 @@ set :application,     'tulip'
 set :user,            'ascentnp'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
-set :tmp_dir, 		  "home/ascentnp/tmp"
+set :tmp_dir, 		  "/home/ascentnp/tmp"
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/home/#{fetch(:user)}/rails_apps/#{fetch(:application)}"
+set :deploy_to,       "/home/ascentnp/rails_apps/#{fetch(:application)}"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
