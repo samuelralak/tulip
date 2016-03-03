@@ -1,6 +1,6 @@
 %ul.nav.nav-pills.nav-stacked
 	- @painters.each do |painter|
-		%li{ :class => "#{'active' if (painter && painter.id.eql?(@painter.try(:id)))}" }
+		%li{ :class => "#{'active' if (!painter.nil? && painter.try(:id).eql?(@painter.try(:id)))}" }
 			- if request.params[:action].eql?('permanent') || request.params[:action].eql?('painter_permanent')
 				= link_to painter.name, painter_permanent_wage_path(painter.id)
 			- if request.params[:action].eql?('monthly') || request.params[:action].eql?('painter_monthly')
