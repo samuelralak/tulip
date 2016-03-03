@@ -1,7 +1,7 @@
 # Change these
 server '142.4.11.94', roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@example.com:samuelralak/tulip.git'
+set :repo_url,        'git@github.com:samuelralak/tulip.git'
 set :application,     'tulip'
 set :user,            'ascentnp'
 set :puma_threads,    [4, 16]
