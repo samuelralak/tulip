@@ -1,0 +1,45 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_site_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "New Site"
+      %h1.page-header Sites
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Name
+              %th Head
+              %th Address
+              %th Notes
+              %th Status
+              %th
+              %th
+              %th
+
+          %tbody
+            - @sites.each do |site|
+              %tr
+                / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
+                %td= link_to site.name, transactions_path(site.id), remote: true 
+                %td= site.head
+                %td= site.address
+                %td= site.notes
+                %td
+                  = "#{site.is_active} (#{link_to 'deactivate', '#'})".html_safe
+                %td
+                  = link_to site, class: 'btn btn-default btn-xs' do
+                    = fa_icon 'eye'
+                %td
+                  = link_to edit_site_path(site), class: 'btn btn-info btn-xs' do
+                    = fa_icon 'edit'
+                %td
+                  = link_to site, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
+                    = fa_icon 'trash'
+= render 'sites/invoice_payment_modal'
+

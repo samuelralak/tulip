@@ -1,0 +1,1 @@
+heroku pg:backups capture --app novel-production  && curl -o latest.dump `heroku pg:backups public-url --app novel-production` && pg_restore --verbose --clean --no-acl --no-owner -h localhost -U masud -d novel_development latest.dump

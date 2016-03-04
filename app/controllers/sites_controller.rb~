@@ -8,8 +8,9 @@ class SitesController < ApplicationController
     @sites = Site.all
   end
 
-  # GET /sites/urgent
-  def urgent
+  # GET /sites
+  # GET /sites.json
+  def site
     @sites = Site.all
   end
 

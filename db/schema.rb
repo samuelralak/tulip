@@ -206,12 +206,12 @@ ActiveRecord::Schema.define(version: 20160202100605) do
 
   create_table "petty_cash_items", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.uuid     "petty_cash_id"
-    t.decimal  "amount"
+    t.decimal  "amount",              default: 0.0, null: false
     t.string   "paid_to"
     t.text     "reason"
     t.date     "date"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.decimal  "bal_carried_forward"
   end
 
@@ -219,14 +219,14 @@ ActiveRecord::Schema.define(version: 20160202100605) do
 
   create_table "petty_cashes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "paid_to"
-    t.decimal  "amount"
+    t.decimal  "amount",              default: 0.0, null: false
     t.text     "reason"
     t.date     "date_paid"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.string   "source"
     t.decimal  "balance"
-    t.decimal  "bal_carried_forward"
+    t.decimal  "bal_carried_forward", default: 0.0, null: false
     t.decimal  "total",               default: 0.0, null: false
   end
 
