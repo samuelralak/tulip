@@ -43,7 +43,8 @@
                   %span#siteStatus
                     = site.is_active
                 %td
-                  = "(#{link_to 'deactivate', '#', class: 'siteStatusBtn', data: {id: site.id, active: site.is_active}})".html_safe
+                  = link_to '#', class: 'siteStatusBtn', data: {id: site.id, active: site.is_active} do
+                    = site.is_active ? 'deactivate' : 'activate'
                 %td
                   = link_to site, class: 'btn btn-default btn-xs' do
                     = fa_icon 'eye'
