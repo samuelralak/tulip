@@ -25,6 +25,7 @@
               %th
               %th
               %th
+              %th
 
           %tbody
             - @sites.each do |site|
@@ -39,7 +40,11 @@
                 %td= (site.paints.sum(:amount) + site.old_paint_amount)
                 %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.initial_material_amount))
                 %td
-                  = "#{site.is_active} (#{link_to 'deactivate', '#'})".html_safe
+                  %span#siteStatus
+                    = site.is_active
+                %td
+                  = link_to '#', class: 'siteStatusBtn', data: {id: site.id, active: site.is_active} do
+                    = site.is_active ? 'deactivate' : 'activate'
                 %td
                   = link_to site, class: 'btn btn-default btn-xs' do
                     = fa_icon 'eye'
