@@ -19,7 +19,10 @@ Rails.application.routes.draw do
      collection do 
         get :urgent
      end
+
   end
+
+
 
   resources :bonus
   resources :skills
@@ -39,6 +42,7 @@ Rails.application.routes.draw do
   put  'update_monthly_income', to: "painter_monthly_incomes#update" 
 
   get  'wages/weekly', 				to: 'wages#weekly',  		 as: :weekly_wages
+  get  'wages/planning', 			to: 'wages#planning',  		 as: :planning_wages
 
   get  'wages/monthly',       to: 'wages#monthly',     as: :monthly_wages
   get  'wages/monthly/:painter_id', to: 'wages#painter_monthly', as: :painter_monthly_wage

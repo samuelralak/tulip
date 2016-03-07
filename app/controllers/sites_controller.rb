@@ -10,8 +10,10 @@ class SitesController < ApplicationController
 
   # GET /sites/urgent
   def urgent
-    @sites = Site.all
+    @sites = Site.where("is_active = true")
+    @count = Site.where("is_active = true").count.to_s
   end
+
 
   # GET /sites/1
   # GET /sites/1.json
