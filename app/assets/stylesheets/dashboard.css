@@ -107,3 +107,7 @@ body {
 #painterSkills_chosen {
   width: 100% !important;
 }
+
+select.site-select {
+  width: 100px !important;
+}
