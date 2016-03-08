@@ -7,6 +7,7 @@ jQuery ->
 			type: "POST"
 			success: (data, status, response) -> 
 				console.log(JSON.stringify(data))
+				toastr.success('site successfully assigned!', 'Success')
 			dataType: "JSON"
 			
 

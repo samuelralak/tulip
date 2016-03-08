@@ -43,15 +43,23 @@ class DashbaordController < ApplicationController
     logger.info "PARAMS: #{params.inspect}"
 
     if @track_painter
-      track_painter_item = @track_painter.track_painter_items.find_by(date_attended: params[:date])
+      track_painter_item = @track_painter.track_painter_items.where(date_attended: params[:date])
 
-      if track_painter_item
+      if !track_painter_item.length.eql?(0)
         if params[:site_id].empty?
-          track_painter_item.destroy
+          track_painter_item.destroy_all
           tpi_count = @track_painter.track_painter_items.count
-          @track_painter.destroy if tpi.eql?(0)
+          @track_painter.destroy if tpi_count.eql?(0)
         else
-          track_painter_item.update_attributes!(site_id: params[:site_id])
+          unless track_painter_item.count.eql?(1)
+            track_painter_item.destroy_all
+            @track_painter.track_painter_items.create!(
+              site_id: params[:site_id], date_attended: params[:date], daily_wage: @painter.daily_wage,
+              daily_allowance: @painter.daily_allowance
+            )  
+          else
+            track_painter_item[0].update_attributes!(site_id: params[:site_id])
+          end
         end
       else
         @track_painter.track_painter_items.create!(
