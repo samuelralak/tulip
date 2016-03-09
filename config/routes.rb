@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  resources :track_painters
   resources :clients
   resources :materials
-  devise_for :users, skip: [:registrations] 
+  devise_for :users, skip: [:registrations]
     devise_scope :user do
       get "/users/edit" => "devise/registrations#edit",   as: :edit_user_registration
-      put "/users" => "devise/registrations#update", as: :user_registration                                             
+      put "/users" => "devise/registrations#update", as: :user_registration
     end
 
   resources :painters do
@@ -14,9 +15,9 @@ Rails.application.routes.draw do
       post :deactivate
     end
   end
-  
+
   resources :sites do
-     collection do 
+     collection do
         get :urgent
      end
 
@@ -39,7 +40,7 @@ Rails.application.routes.draw do
   post 'dashbaord/assign_site', as: :assign_site
   post 'dashbaord/add_notes', 	as: :add_notes
 
-  put  'update_monthly_income', to: "painter_monthly_incomes#update" 
+  put  'update_monthly_income', to: "painter_monthly_incomes#update"
 
   get  'wages/weekly', 				to: 'wages#weekly',  		 as: :weekly_wages
   get  'wages/planning', 			to: 'wages#planning',  		 as: :planning_wages

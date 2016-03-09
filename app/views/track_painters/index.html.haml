@@ -1,0 +1,27 @@
+%h1 Listing track_painters
+
+%table.table
+    %thead
+        %tr
+            %th Painter
+            %th Week number
+            %th Year
+            %th weekly total
+            %th
+            %th
+            %th
+
+    %tbody
+        - @track_painters.each do |track_painter|
+            %tr
+                %td= track_painter.painter.name
+                %td= track_painter.week_number
+                %td= track_painter.year
+                %td= track_painter.weekly_total
+                %td= link_to 'Show', track_painter
+                %td= link_to 'Edit', edit_track_painter_path(track_painter)
+                %td= link_to 'Destroy', track_painter, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+    %br
+
+= link_to 'New Track painter', new_track_painter_path
