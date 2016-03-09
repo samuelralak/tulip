@@ -1,0 +1,29 @@
+%h1 Listing track_painter_items
+
+%table.table
+  %thead
+    %tr
+      %th Site
+      %th Date attended
+      %th Daily wage
+      %th Track painter
+      %th Daily allowance
+      %th
+      %th
+      %th
+
+  %tbody
+    - @track_painter_items.each do |track_painter_item|
+      %tr
+        %td= track_painter_item.site.name
+        %td= track_painter_item.date_attended
+        %td= track_painter_item.daily_wage
+        %td= track_painter_item.track_painter.painter.name
+        %td= track_painter_item.daily_allowance
+        %td= link_to 'Show', track_painter_item
+        %td= link_to 'Edit', edit_track_painter_item_path(track_painter_item)
+        %td= link_to 'Destroy', track_painter_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Track painter item', new_track_painter_item_path

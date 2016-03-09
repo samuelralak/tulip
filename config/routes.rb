@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :track_painters
+  resources :track_painter_items
   resources :clients
   resources :materials
   devise_for :users, skip: [:registrations]

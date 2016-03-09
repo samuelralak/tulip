@@ -1,0 +1,12 @@
+= simple_form_for(@track_painter_item) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :site
+    = f.input :date_attended
+    = f.input :daily_wage
+    = f.association :track_painter
+    = f.input :daily_allowance
+
+  .form-actions
+    = f.button :submit

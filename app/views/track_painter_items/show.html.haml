@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Site:
+  = @track_painter_item.site
+%p
+  %b Date attended:
+  = @track_painter_item.date_attended
+%p
+  %b Daily wage:
+  = @track_painter_item.daily_wage
+%p
+  %b Track painter:
+  = @track_painter_item.track_painter
+%p
+  %b Daily allowance:
+  = @track_painter_item.daily_allowance
+
+= link_to 'Edit', edit_track_painter_item_path(@track_painter_item)
+\|
+= link_to 'Back', track_painter_items_path
