@@ -1,12 +1,15 @@
 class DashbaordController < ApplicationController
   before_action :check_query
-  before_action :set_start_date, only: [:add_notes]
+  before_action :set_start_date, only: [:index, :add_notes]
 	skip_before_filter :verify_authenticity_token, only: [:assign_site, :add_notes]
 
   def index
     if @selected
       track_painter_ids = TrackPainterItem.where(site_id: @selected).pluck(:track_painter_id)
-      painter_ids = TrackPainter.where('id in (?)', track_painter_ids).pluck(:painter_id)
+      painter_ids = TrackPainter.where(
+        'id in (?) AND week_number = ? AND year=?', 
+        track_painter_ids, @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i)
+        .pluck(:painter_id)
       @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true)
       # employment_type = EmploymentType.find(@selected)
       # @painters = employment_type.painters.where(is_active: true).order('name ASC')

@@ -11,6 +11,9 @@
 	%li{ :class => "#{'active' if request.params[:controller].eql?('wages') && (request.params[:action].eql?('permanent') || request.params[:action].eql?('painter_permanent'))}" }
 		= link_to permanent_wages_path do
 			= fa_icon 'circle-o', text: 'Permanent P. Wages'
+	%li
+		= link_to planning_wages_path do
+			= fa_icon 'circle-o', text: 'Weekly planning'
 
 %ul.nav.nav-sidebar
 	%li{ :class => "#{'active' if request.params[:controller].eql?('deductions')}" }

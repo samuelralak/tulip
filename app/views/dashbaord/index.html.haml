@@ -8,6 +8,7 @@
 			%h1.page-header Dashboard
 			= form_tag root_path, method: :get, class: 'form-inline' do
 				= select_tag :query, options_from_collection_for_select(Site.where(is_active: true), "id", "name", @selected), prompt: "- filter by site -", class: 'form-control'
+				= hidden_field_tag 'start_date', @start_date
 				= submit_tag "Filter", class: 'btn btn-default'
 			= week_calendar do |date|
 				= date
