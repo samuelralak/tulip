@@ -23,7 +23,7 @@ jQuery ->
 						start_date: currStartDate
 					dataType: "JSON"
 					success: (response) -> 
-						swal("Data successfully imported. Please refresh page!")
+						swal("Success!", "Data successfully imported. Please refresh page!", "success")
 			, 2000
 
 	$(".site-select").change () ->	
