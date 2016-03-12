@@ -6,9 +6,11 @@
 
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 			%h1.page-header Dashboard
+			= link_to '#', class: 'btn btn-info pull-right import-data' do
+				= fa_icon 'download', text: 'Import from previous week'
 			= form_tag root_path, method: :get, class: 'form-inline' do
 				= select_tag :query, options_from_collection_for_select(Site.where(is_active: true), "id", "name", @selected), prompt: "- filter by site -", class: 'form-control'
-				= hidden_field_tag 'start_date', @start_date
+				= hidden_field_tag 'start_date', @start_date.beginning_of_week
 				= submit_tag "Filter", class: 'btn btn-default'
 			= week_calendar do |date|
 				= date

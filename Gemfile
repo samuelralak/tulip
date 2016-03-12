@@ -30,6 +30,9 @@ gem 'jquery-datatables-rails'
 gem 'nprogress-rails'
 gem 'jquery-ui-rails'
 
+# sweet alert
+gem 'sweet-alert'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 

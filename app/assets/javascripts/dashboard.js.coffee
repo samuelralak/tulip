@@ -1,4 +1,31 @@
 jQuery -> 
+	$(".import-data").click () ->
+		currStartDate = $("input#start_date[type='hidden']").val()
+		currStartDate = new Date(currStartDate)
+		prevStartDate = new Date()
+		prevStartDate = prevStartDate.setDate(currStartDate.getDate() - 1)
+		prevStartDate = new Date(prevStartDate)
+
+		swal 
+			title: "Are you sure?"
+			text: "Click ok to import data or cancel to abort"
+			type: "info"
+			showCancelButton: true
+			closeOnConfirm: false
+			showLoaderOnConfirm: true
+		, () -> 
+			setTimeout () -> 
+				$.ajax 
+					url: "/dashbaord/import_from_previous"
+					type: "POST"
+					data:
+						prev_date: prevStartDate
+						start_date: currStartDate
+					dataType: "JSON"
+					success: (response) -> 
+						swal("Data successfully imported. Please refresh page!")
+			, 2000
+
 	$(".site-select").change () ->	
 		formID = $(this).closest('form').attr('id')
 		serializeData = $("#" + formID).serialize()
@@ -6,7 +33,6 @@ jQuery ->
 			url: "/dashbaord/assign_site?" + serializeData
 			type: "POST"
 			success: (data, status, response) -> 
-				console.log(JSON.stringify(data))
 				toastr.success('site successfully assigned!', 'Success')
 			dataType: "JSON"
 			

@@ -1,6 +1,6 @@
 class DashbaordController < ApplicationController
   before_action :check_query
-  before_action :set_start_date, only: [:index, :add_notes]
+  before_action :set_start_date, only: [:index, :add_notes, :import_from_previous]
 	skip_before_filter :verify_authenticity_token, only: [:assign_site, :add_notes]
 
   def index
@@ -89,6 +89,32 @@ class DashbaordController < ApplicationController
   		
   		format.json { render json: { data: 'success' }, status: :ok }
   	end
+  end
+
+  def import_from_previous
+    prev_start_date = Date.parse(params[:prev_date])
+    prev_date_year = prev_start_date.strftime("%Y").to_i
+    prev_week_number = prev_start_date.strftime("%U").to_i
+    curr_week_dates = (@start_date.beginning_of_week..@start_date.end_of_week).map { |e| Date.parse(e.to_s) }
+
+    track_painters = TrackPainter.where(week_number: prev_week_number, year: prev_date_year)
+    track_painters.each do |tp|
+      new_track_painter = TrackPainter.create(
+        week_number: @start_date.strftime("%U").to_i, year: @start_date.strftime("%Y").to_i, 
+        weekly_total: tp.weekly_total, painter_id: tp.painter_id, notes: tp.notes )
+      tp.track_painter_items.each do |tpi|
+        curr_week_dates.each do |d|
+          if d.strftime("%A").eql?tpi.date_attended.strftime("%A")
+            new_track_painter.track_painter_items.create(
+              site_id: tpi.site_id, date_attended: d, daily_wage: tpi.daily_wage, 
+              daily_allowance: tpi.daily_allowance
+            ) 
+          end
+        end
+      end
+    end
+
+    render json: { message: "data successfully imported" }, status: :ok 
   end
 
   private

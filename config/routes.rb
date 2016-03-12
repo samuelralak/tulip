@@ -24,8 +24,6 @@ Rails.application.routes.draw do
 
   end
 
-
-
   resources :bonus
   resources :skills
   resources :paints
@@ -37,9 +35,9 @@ Rails.application.routes.draw do
   end
   resources :user_accounts
 
-
-  post 'dashbaord/assign_site', as: :assign_site
-  post 'dashbaord/add_notes', 	as: :add_notes
+  post 'dashbaord/import_from_previous', as: :import_from_previous
+  post 'dashbaord/assign_site',          as: :assign_site
+  post 'dashbaord/add_notes', 	         as: :add_notes
 
   put  'update_monthly_income', to: "painter_monthly_incomes#update"
 

@@ -24,6 +24,7 @@
 //= require pickers
 //= require nprogress
 //= require nprogress-turbolinks
+//= require sweetalert.min
 //= require_tree .
 //= require turbolinks
 
