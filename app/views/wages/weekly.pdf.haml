@@ -1,0 +1,40 @@
+%html
+	%head
+		= wicked_pdf_stylesheet_link_tag "application", media: "all"
+.body
+	.container
+		.col-xs-12
+			= week_calendar do |date|
+				= date
+
+			%h2.sub-header Site Totals
+			%table.table.table-striped
+				%thead
+					%tr
+						%th Site
+						%th Sum
+				%tbody
+					- site_total = 0.0
+					- @sites_attended.each do |s|
+						- total = 0.0
+						%tr
+							%td= s[0]
+							%td
+								- s[1].each_with_index do |t, index|
+									- total += t.track_painter.weekly_total
+									- site_total += total
+									- if index.eql?(s[1].length - 1) 
+										= total
+					%tr
+						%td Other*
+						%td
+							- other = (@track_painters.sum(:weekly_total) - site_total) 
+							= other > 0 ? other : 0.0
+					%tr
+						%td{ :style => "text-align: right"} 
+							%strong Total:
+						%td
+							= (site_total + other)
+
+
+

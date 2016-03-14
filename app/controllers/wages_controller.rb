@@ -14,6 +14,11 @@ class WagesController < ApplicationController
   		.where(date_attended: @start_date.end_of_week)
   		.where('track_painter_id IN (?)', @track_painters.pluck(:id))
       .group_by{ |s| s.site.name }
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render pdf: 'weekly' }
+    end
   end
 
   def planning
@@ -27,6 +32,11 @@ class WagesController < ApplicationController
   		.where(date_attended: @start_date.end_of_week)
   		.where('track_painter_id IN (?)', @track_painters.pluck(:id))
       .group_by{ |s| s.site.name }
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render pdf: 'weekly' }
+    end
   end
 
   

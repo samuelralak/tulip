@@ -4,6 +4,7 @@
 		.col-xs-4.col-sm-3.col-md-2.sidebar
 			= render 'shared/side_nav'
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			= link_to "Export to PDF", planning_wages_url({format: "pdf", start_date: @start_date}), class: "btn btn-info pull-right"
 			%h1.page-header Weekly Planning
 			= week_calendar do |date|
 				= date
