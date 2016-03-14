@@ -5,6 +5,7 @@
 			= render 'shared/side_nav'
 
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			= flash_messages if show_layout_flash?
 			%h1.page-header Dashboard
 			= link_to '#', class: 'btn btn-info pull-right import-data' do
 				= fa_icon 'download', text: 'Import from previous week'

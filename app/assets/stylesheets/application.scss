@@ -11,3 +11,18 @@
 @import "nprogress-bootstrap";
 @import "sweetalert";
 @import "dashboard";
+
+#flash-notice {
+	@extend .alert;
+	@extend .alert-success;
+}
+
+#flash-error, #flash-alert {
+	@extend .alert;
+	@extend .alert-danger;
+}
+
+#flash-warning {
+	@extend .alert;
+	@extend .alert-warning;
+}

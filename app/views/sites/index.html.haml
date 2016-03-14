@@ -17,42 +17,47 @@
               %th Head
               %th Address
               %th Notes
-              %th Total Spent on Labour
-              %th Total Spent on Material
-              %th Total Spent on Paint
-              %th Total (Material, Paint & Labour)
-              %th Status
+              - if current_user.has_role?(:super)
+                %th Total Spent on Labour
+                %th Total Spent on Material
+                %th Total Spent on Paint
+                %th Total (Material, Paint & Labour)
+                %th Status
+                %th
               %th
               %th
-              %th
-              %th
+              - if current_user.has_role?(:super)
+                %th
 
           %tbody
             - @sites.each do |site|
               %tr
                 / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
-                %td= link_to site.name, transactions_path(site.id), remote: true 
+                %td
+                  = current_user.has_role?(:super) ? link_to(site.name, transactions_path(site.id), remote: true) : site.name  
                 %td= site.head
                 %td= site.address
                 %td= site.notes
-                %td= site_labour_amount(site)
-                %td= (site.materials.sum(:total_spent) + site.initial_material_amount)
-                %td= (site.paints.sum(:amount) + site.old_paint_amount)
-                %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.initial_material_amount))
-                %td
-                  %span#siteStatus
-                    = site.is_active
-                %td
-                  = link_to '#', class: 'siteStatusBtn', data: {id: site.id, active: site.is_active} do
-                    = site.is_active ? 'deactivate' : 'activate'
+                - if current_user.has_role?(:super)
+                  %td= site_labour_amount(site)
+                  %td= (site.materials.sum(:total_spent) + site.initial_material_amount)
+                  %td= (site.paints.sum(:amount) + site.old_paint_amount)
+                  %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.initial_material_amount))
+                  %td
+                    %span#siteStatus
+                      = site.is_active
+                  %td
+                    = link_to '#', class: 'siteStatusBtn', data: {id: site.id, active: site.is_active} do
+                      = site.is_active ? 'deactivate' : 'activate'
                 %td
                   = link_to site, class: 'btn btn-default btn-xs' do
                     = fa_icon 'eye'
                 %td
                   = link_to edit_site_path(site), class: 'btn btn-info btn-xs' do
                     = fa_icon 'edit'
-                %td
-                  = link_to site, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
-                    = fa_icon 'trash'
+                - if current_user.has_role?(:super)
+                  %td
+                    = link_to site, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
+                      = fa_icon 'trash'
 = render 'sites/invoice_payment_modal'
 

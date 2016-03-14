@@ -1,6 +1,7 @@
 class BonusController < ApplicationController
   load_and_authorize_resource
   before_action :set_bonu, only: [:show, :edit, :update, :destroy]
+  before_action :check_user_permission
 
   # GET /bonus
   # GET /bonus.json
@@ -72,5 +73,11 @@ class BonusController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bonu_params
       params.require(:bonu).permit(:amount, :date_applicable, :painter_id)
+    end
+
+    def check_user_permission
+      if current_user.has_role?(:staff)
+        raise CanCan::AccessDenied
+      end
     end
 end

@@ -5,6 +5,7 @@
 			= render 'shared/settings_side_nav'
 
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			= flash_messages if show_layout_flash?
 			.pull-right
 				= link_to new_user_account_path, class: 'btn btn-info' do
 					= fa_icon 'plus', text: 'New User'
@@ -27,6 +28,6 @@
 								%td= user.try(:user_type).try(:name)
 								%td= user.try(:last_sign_in_at).strftime("%m/%d/%Y at %I:%M%p") unless user.last_sign_in_at.nil?
 								%td
-									= link_to 'Edit', '#'
+									= link_to 'Edit', edit_user_account_url(user), class: 'btn btn-info btn-xs'
 								%td
-									= link_to 'Destroy', '#'
+									= link_to 'Destroy', user_account_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'
