@@ -18,7 +18,7 @@
         %td= track_painter_item.try(:site).try(:name)
         %td= track_painter_item.try(:date_attended)
         %td= track_painter_item.try(:daily_wage)
-        %td= track_painter_item.try(:track_painter).try(:painter.name)
+        %td= track_painter_item.try(:track_painter).try(:painter).try(:name)
         %td= track_painter_item.try(:daily_allowance)
         %td= link_to 'Show', track_painter_item
         %td= link_to 'Edit', edit_track_painter_item_path(track_painter_item)
