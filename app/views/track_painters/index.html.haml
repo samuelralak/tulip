@@ -5,18 +5,18 @@
         %tr
             %th Painter
             %th Week number
-            %th Year
+            %th Count
             %th weekly total
-            %th
-            %th
-            %th
+            / %th
+            / %th
+            / %th
 
     %tbody
         - @track_painters.each do |track_painter|
             %tr
-                %td= track_painter.try(:painter).try(:name)
+                %td= track_painter.try(:name)
                 %td= track_painter.try(:week_number)
-                %td= track_painter.try(:year)
+                %td= track_painter.try(:count)
                 %td= track_painter.try(:weekly_total)
                 / %td= link_to 'Show', track_painter
                 / %td= link_to 'Edit', edit_track_painter_path(track_painter)
