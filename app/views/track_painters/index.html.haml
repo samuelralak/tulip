@@ -1,52 +1,27 @@
-.container
-    %h1 Listing track_painters
+%h1 Listing track_painters
 
-    .row
-        %ol
-            - @track_painters.map do |key, value|
-                %li
-                    %h4
-                        = link_to 'view data', '#', data: { toggle: 'collapse', target: "#weekNumber#{key}"}, class: 'btn btn-info btn-sm pull-right'
-                        = "Week ##{key}"
-                    .collapse{ :id => "weekNumber#{key}" }
-                        .table-responsive
-                            %table.table
-                                %thead
-                                    %tr
-                                        %th Painter
-                                        %th Week number
-                                        %th Year
-                                        %th weekly total
-                                %tbody
-                                    - value.each do |track_painter|
-                                        %tr                 
-                                            %td= track_painter.painter.name
-                                            %td= track_painter.week_number
-                                            %td= track_painter.year
-                                            %td= track_painter.weekly_total
+%table.table
+    %thead
+        %tr
+            %th Painter
+            %th Week number
+            %th Year
+            %th weekly total
+            %th
+            %th
+            %th
 
-/ %table.table
-/     %thead
-/         %tr
-/             %th Painter
-/             %th Week number
-/             %th Year
-/             %th weekly total
-/             %th
-/             %th
-/             %th
+    %tbody
+        - @track_painters.each do |track_painter|
+            %tr
+                %td= track_painter.try(:painter).try(:name)
+                %td= track_painter.try(:week_number)
+                %td= track_painter.try(:year)
+                %td= track_painter.try(:weekly_total)
+                / %td= link_to 'Show', track_painter
+                / %td= link_to 'Edit', edit_track_painter_path(track_painter)
+                / %td= link_to 'Destroy', track_painter, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-/     %tbody
-/         - @track_painters.each do |track_painter|
-/             %tr
-/                 %td= track_painter.painter.name
-/                 %td= track_painter.week_number
-/                 %td= track_painter.year
-/                 %td= track_painter.weekly_total
-/                 %td= link_to 'Show', track_painter
-/                 %td= link_to 'Edit', edit_track_painter_path(track_painter)
-/                 %td= link_to 'Destroy', track_painter, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-/     %br
+    %br
 
 = link_to 'New Track painter', new_track_painter_path
