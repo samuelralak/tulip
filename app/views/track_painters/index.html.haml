@@ -1,4 +1,5 @@
 %h1 Listing track_painters
+= @track_painters.inspect
 
 %table.table
     %thead
@@ -6,7 +7,6 @@
             %th Painter
             %th Week number
             %th Count
-            %th weekly total
             / %th
             / %th
             / %th
@@ -17,7 +17,6 @@
                 %td= track_painter.try(:name)
                 %td= track_painter.try(:week_number)
                 %td= track_painter.try(:count)
-                %td= track_painter.try(:weekly_total)
                 / %td= link_to 'Show', track_painter
                 / %td= link_to 'Edit', edit_track_painter_path(track_painter)
                 / %td= link_to 'Destroy', track_painter, :method => :delete, :data => { :confirm => 'Are you sure?' }
