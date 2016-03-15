@@ -7,7 +7,8 @@ class TrackPaintersController < ApplicationController
       track_painter_ids = TrackPainterItem.pluck(:track_painter_id)
 
     # @track_painters = TrackPainter.where("id NOT IN (?)", track_painter_ids)
-    @track_painters = TrackPainter.joins(:painter).order('painters.name ASC').group_by(&:week_number)
+    @track_painters = TrackPainter.joins(:painter).group(['id', 'painter_id', 'week_number']).having('count(painter_id) > 1')
+    # @track_painters = TrackPainter.joins(:painter).order('painters.name ASC').group_by(&:week_number)
   end
 
   # GET /track_painters/1
