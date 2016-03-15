@@ -6,7 +6,8 @@ class TrackPaintersController < ApplicationController
   def index
       track_painter_ids = TrackPainterItem.pluck(:track_painter_id)
 
-    @track_painters = TrackPainter.where("id NOT IN (?)", track_painter_ids)
+    # @track_painters = TrackPainter.where("id NOT IN (?)", track_painter_ids)
+    @track_painters = TrackPainter.joins(:painter).order('painters.name ASC')
   end
 
   # GET /track_painters/1
