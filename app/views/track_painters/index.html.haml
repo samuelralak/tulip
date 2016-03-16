@@ -16,7 +16,7 @@
                         %tbody
                             - value.each do |tp|
                                 %tr
-                                    %td= track_painter.try(:name)
+                                    %td= track_painter.try(:painter).try(:name)
                                     %td= track_painter.try(:week_number)
                                     %td= track_painter.try(:weekly_total)
     / = @track_painters.inspect
