@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202100605) do
+ActiveRecord::Schema.define(version: 20160315082801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,6 +320,7 @@ ActiveRecord::Schema.define(version: 20160202100605) do
     t.text     "notes"
   end
 
+  add_index "track_painters", ["painter_id", "year", "week_number"], name: "index_track_painters_on_painter_id_and_year_and_week_number", unique: true, using: :btree
   add_index "track_painters", ["painter_id"], name: "index_track_painters_on_painter_id", using: :btree
 
   create_table "user_types", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
