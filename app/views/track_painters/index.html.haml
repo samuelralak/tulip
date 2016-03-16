@@ -13,12 +13,14 @@
                                 %th Painter
                                 %th Week number
                                 %th Weekly total
+                                %th
                         %tbody
                             - value.each do |tp|
                                 %tr
                                     %td= tp.try(:painter).try(:name)
                                     %td= tp.try(:week_number)
                                     %td= tp.try(:weekly_total)
+                                    %td= link_to 'Destroy', tp, :method => :delete, :data => { :confirm => 'Are you sure?' }
     / = @track_painters.inspect
 
     / %table.table

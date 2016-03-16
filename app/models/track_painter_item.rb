@@ -6,8 +6,8 @@ class TrackPainterItem < ActiveRecord::Base
 
 	private
 		def update_weekly_total
-			track_painter = TrackPainter.find(self.track_painter_id)
-			unless track_painter.nil?
+			unless self.track_painter
+				track_painter = TrackPainter.find(self.track_painter_id)
 				weekly_total = track_painter.track_painter_items.sum(:daily_allowance)
 				track_painter.update_attributes!(weekly_total: weekly_total)
 			end
