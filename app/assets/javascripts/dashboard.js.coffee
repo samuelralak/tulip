@@ -34,6 +34,8 @@ jQuery ->
 			type: "POST"
 			success: (data, status, response) -> 
 				toastr.success('site successfully assigned!', 'Success')
+			error: (data, status, response) -> 
+				toastr.error('site not assigned!', 'Error')
 			dataType: "JSON"
 			
 
