@@ -25,7 +25,9 @@
 								%td= s[0]
 								%td
 									- s[1].each_with_index do |t, index|
-										- total += t.track_painter.weekly_total
+										- if t.nil? || t.track_painter.nil? || t.track_painter.weekly_total.nil?
+											- t.try(:track_painter).try(:weekly_total) = 0.0
+										- total += t.try(:track_painter).try(:weekly_total)
 										- site_total += total
 										- if index.eql?(s[1].length - 1) 
 											= total
