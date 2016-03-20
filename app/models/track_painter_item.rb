@@ -2,7 +2,7 @@ class TrackPainterItem < ActiveRecord::Base
 	belongs_to :track_painter, inverse_of: :track_painter_items
 	belongs_to :site, 		inverse_of: :track_painter_items
 
-	validates :site_id, :track_painter_id, :weekly_total, presence: true
+	validates :site_id, :track_painter_id, presence: true
 	
 	after_commit :update_weekly_total
 
