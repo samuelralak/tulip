@@ -10,7 +10,7 @@
 			.pull-right
 				= link_to '#', class: 'btn btn-info import-data' do
 					= fa_icon 'download', text: 'Import from previous week'
-				= link_to reset_week_path(start_date: @start_date), method: :post, class: 'btn btn-danger' do
+				= link_to reset_week_path(start_date: @start_date), method: :post, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' do
 					= fa_icon 'trash', text: 'Reset'
 			= form_tag root_path, method: :get, class: 'form-inline' do
 				= select_tag :query, options_from_collection_for_select(Site.where(is_active: true), "id", "name", @selected), prompt: "- filter by site -", class: 'form-control'
