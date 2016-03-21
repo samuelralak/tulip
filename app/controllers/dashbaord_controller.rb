@@ -72,7 +72,7 @@ class DashbaordController < ApplicationController
       end
     else
       new_track_painter = TrackPainter.create!(week_number: params[:week_number], 
-        year: params[:year].to_i, painter_id: params[:painter_id])
+        year: params[:year].to_i, painter_id: params[:painter_id], weekly_total: 0.0)
       new_track_painter.track_painter_items.create!(
         site_id: params[:site_id], date_attended: params[:date], daily_wage: @painter.daily_wage,
         daily_allowance: @painter.daily_allowance
