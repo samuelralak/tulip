@@ -10,7 +10,7 @@
 							- if day.eql?(tp.date_attended)
 								= tp.try(:site).try(:name)
 				%td 
-					= painter.track_painters.find_by(week_number: locals[:start_date].strftime("%U").to_i).try(:weekly_total)
+					= painter.track_painters.find_by(week_number: locals[:start_date].strftime("%U").to_i).try(:weekly_total)/2
 		%tr
 			%td{ :colspan => "9", :style => "text-align: right"}
 				%strong Total:

@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   post 'dashbaord/import_from_previous', as: :import_from_previous
   post 'dashbaord/assign_site',          as: :assign_site
+  post 'dashbaord/reset_week',           as: :reset_week
   post 'dashbaord/add_notes', 	         as: :add_notes
 
   put  'update_monthly_income', to: "painter_monthly_incomes#update"

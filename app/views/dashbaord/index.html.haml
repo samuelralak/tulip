@@ -7,8 +7,11 @@
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 			= flash_messages if show_layout_flash?
 			%h1.page-header Dashboard
-			= link_to '#', class: 'btn btn-info pull-right import-data' do
-				= fa_icon 'download', text: 'Import from previous week'
+			.pull-right
+				= link_to '#', class: 'btn btn-info import-data' do
+					= fa_icon 'download', text: 'Import from previous week'
+				= link_to reset_week_path(start_date: @start_date), method: :post, class: 'btn btn-danger' do
+					= fa_icon 'trash', text: 'Reset'
 			= form_tag root_path, method: :get, class: 'form-inline' do
 				= select_tag :query, options_from_collection_for_select(Site.where(is_active: true), "id", "name", @selected), prompt: "- filter by site -", class: 'form-control'
 				= hidden_field_tag 'start_date', @start_date.beginning_of_week

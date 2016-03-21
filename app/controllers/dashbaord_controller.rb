@@ -1,6 +1,6 @@
 class DashbaordController < ApplicationController
   before_action :check_query
-  before_action :set_start_date, only: [:index, :add_notes, :import_from_previous]
+  before_action :set_start_date, only: [:index, :add_notes, :import_from_previous, :reset_week]
 	skip_before_filter :verify_authenticity_token, only: [:assign_site, :add_notes]
 
   def index
@@ -98,7 +98,7 @@ class DashbaordController < ApplicationController
     curr_week_dates = (@start_date.beginning_of_week..@start_date.end_of_week).map { |e| Date.parse(e.to_s) }
 
     track_painters = TrackPainter.where(week_number: prev_week_number, year: prev_date_year)
-    track_painters.each do |tp|
+    track_painters.each_with_index do |tp|
       new_track_painter = TrackPainter.create(
         week_number: @start_date.strftime("%U").to_i, year: @start_date.strftime("%Y").to_i, 
         weekly_total: tp.weekly_total, painter_id: tp.painter_id, notes: tp.notes )
@@ -115,6 +115,20 @@ class DashbaordController < ApplicationController
     end
 
     render json: { message: "data successfully imported" }, status: :ok 
+  end
+
+  def reset_week
+    week_number = @start_date.strftime("%U").to_i
+    year = @start_date.strftime("%Y").to_i
+
+    begin
+      TrackPainter.where(week_number: week_number, year: year).destroy_all
+
+      redirect_to root_path, notice: 'successfully reset week'
+    rescue StandardError => e
+      flash.now[:error] = "An error occured. Please try again"
+      redirect_to root_path
+    end
   end
 
   private
