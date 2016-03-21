@@ -4,14 +4,12 @@ class TrackPainterItem < ActiveRecord::Base
 
 	validates :site_id, :track_painter_id, presence: true
 	
-	after_commit :update_weekly_total
+	after_save :update_weekly_total
 
 	private
 		def update_weekly_total
-			unless self.track_painter
-				track_painter = TrackPainter.find(self.track_painter_id)
-				weekly_total = track_painter.track_painter_items.sum(:daily_allowance)
-				track_painter.update_attributes!(weekly_total: weekly_total)
-			end
+			track_painter = TrackPainter.find(self.track_painter_id)
+			weekly_total = track_painter.track_painter_items.sum(:daily_allowance)
+			track_painter.update_attributes!(weekly_total: weekly_total)
 		end
 end
