@@ -31,7 +31,7 @@ module ApplicationHelper
 		return total
 	end
 
-	def weekly_payable(painter)
+	def weekly_payable
 		total = 1000
 		return total
 	end

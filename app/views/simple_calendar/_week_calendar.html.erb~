@@ -55,10 +55,10 @@
     <% end %>
 
     <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('planning') %>
-      <%= render 'simple_calendar/weekly_planning', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
+      <%= render 'simple_calendar/planning_wages', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
     <% end %>
     <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('costing') %>
-      <%= render 'simple_calendar/weekly_costing', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
+      <%= render 'simple_calendar/costing_wages', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
     <% end %>
   </table>
 </div>

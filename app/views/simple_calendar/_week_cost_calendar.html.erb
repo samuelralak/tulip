@@ -24,11 +24,11 @@
   
   
   <div class="table-responsive">
-  <table id="<%= request.params[:controller].eql?('dashbaord') || request.params[:action].eql?('planning') ? 'dashboardTable' : '' ||request.params[:action].eql?('costing') ? 'dashboardTable' : '' %>" class="table table-striped">
+  <table id="<%= request.params[:controller].eql?('dashbaord') || request.params[:action].eql?('costing') ? 'dashboardTable' : '' %>" class="table table-striped">
     <thead>
       <tr>
         <th></th>
-        <% unless request.params[:action].eql?('planning') || request.params[:action].eql?('costing') %>
+        <% unless request.params[:action].eql?('costing') %>
           <th></th>
         <% end -%>
         <% date_range.slice(0, 7).each do |day| %>
@@ -37,7 +37,7 @@
         <% if request.params[:controller].eql?('dashbaord') %>
           <th>Notes</th>
         <% end -%>
-        <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') || ('costing')%>
+        <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') %>
           <th>Weekly Total</th>
         <% end -%>
         <% if request.params[:controller].eql?('dashbaord') %>
@@ -54,9 +54,6 @@
       <%= render 'simple_calendar/weekly_wages', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
     <% end %>
 
-    <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('planning') %>
-      <%= render 'simple_calendar/weekly_planning', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
-    <% end %>
     <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('costing') %>
       <%= render 'simple_calendar/weekly_costing', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
     <% end %>

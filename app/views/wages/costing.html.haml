@@ -1,0 +1,42 @@
+= render 'shared/navbar'
+.container-fluid
+	.row
+		.col-xs-4.col-sm-3.col-md-2.sidebar
+			= render 'shared/side_nav'
+
+		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			= link_to "Export to PDF", costing_wages_url({format: "pdf", start_date: @start_date}), class: "btn btn-info pull-right"
+			%h1.page-header Costing Wages
+			= week_calendar do |date|
+				= date
+
+			%h2.sub-header Site Totals
+			.table-responsive
+				%table.table.table-striped
+					%thead
+						%tr
+							%th Site
+							%th Sum
+					%tbody
+						- site_total = 0.0
+						- @sites_attended.each do |s|
+							- total = 0.0
+							%tr
+								%td= s[0]
+								%td
+									- s[1].each_with_index do |t, index|
+										- if t.nil? || t.daily_allowance.nil?
+											- daily_allowance = 0.0
+											- daily_wage = 0.0
+											- total += daily_wage + daily_allowance
+										- else
+											- total += t.try(:daily_wage) + t.try(:daily_allowance)
+										- if index.eql?(s[1].length - 1)
+										- site_total += total 
+											= total
+
+						%tr
+							%td{ :style => "text-align: right"} 
+								%strong Total:
+							%td
+								= (site_total)

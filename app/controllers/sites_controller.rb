@@ -10,6 +10,13 @@ class SitesController < ApplicationController
 
   # GET /sites/urgent
   def urgent
+    @sites = Site.where("is_urgent = true")
+    @count = Site.where("is_urgent = true").count.to_s
+  end
+
+
+  # GET /sites/active
+  def active
     @sites = Site.where("is_active = true")
     @count = Site.where("is_active = true").count.to_s
   end
@@ -89,7 +96,7 @@ class SitesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
       params.require(:site).permit(:name, :head, :address, :notes, :start_amount,:additional_costs, :city, :mobile, 
-        :client, :old_paint_amount, :initial_labour_amount, :initial_material_amount, :is_active,
+        :client, :old_paint_amount, :initial_labour_amount, :initial_material_amount, :is_active, :is_urgent,
         site_agreed_amount_attributes: [:id, :internal, :external, :site_id],
         site_square_metre_attributes: [:id, :internal, :external, :site_id],
         site_rate_attributes: [:id, :internal, :external, :site_id])

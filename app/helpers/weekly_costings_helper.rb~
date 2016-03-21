@@ -1,0 +1,8 @@
+module WeeklyCostingHelper
+	def weekly_payable(painter)
+		daily_wage = painter.daily_wage
+		daily_allowance = painter.daily_allowance
+		total = daily_wage + daily_allowance
+		return total
+	end
+end

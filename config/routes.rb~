@@ -21,9 +21,6 @@ Rails.application.routes.draw do
      collection do
         get :urgent
      end
-     collection do
-        get :active
-     end
 
   end
 

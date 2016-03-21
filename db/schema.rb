@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315082801) do
+ActiveRecord::Schema.define(version: 20160321133449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -276,17 +276,18 @@ ActiveRecord::Schema.define(version: 20160315082801) do
     t.string   "head"
     t.string   "address"
     t.text     "notes"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.decimal  "start_amount",            default: 0.0,  null: false
-    t.decimal  "additional_costs",        default: 0.0,  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.decimal  "start_amount",            default: 0.0,   null: false
+    t.decimal  "additional_costs",        default: 0.0,   null: false
     t.string   "client"
     t.string   "city"
     t.string   "mobile"
-    t.decimal  "old_paint_amount",        default: 0.0,  null: false
-    t.decimal  "initial_labour_amount",   default: 0.0,  null: false
-    t.decimal  "initial_material_amount", default: 0.0,  null: false
-    t.boolean  "is_active",               default: true, null: false
+    t.decimal  "old_paint_amount",        default: 0.0,   null: false
+    t.decimal  "initial_labour_amount",   default: 0.0,   null: false
+    t.decimal  "initial_material_amount", default: 0.0,   null: false
+    t.boolean  "is_active",               default: true,  null: false
+    t.boolean  "is_urgent",               default: false, null: false
   end
 
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
@@ -318,6 +319,7 @@ ActiveRecord::Schema.define(version: 20160315082801) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.text     "notes"
+    t.decimal  "weekly_cost"
   end
 
   add_index "track_painters", ["painter_id", "year", "week_number"], name: "index_track_painters_on_painter_id_and_year_and_week_number", unique: true, using: :btree

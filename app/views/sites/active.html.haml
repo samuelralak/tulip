@@ -1,0 +1,39 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-xs-4.col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+        = link_to new_site_path, class: 'btn btn-info' do
+          = fa_icon "plus", text: "New Site"
+      %h1.page-header Sites
+
+      %strong
+      = @count
+      sites 
+
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Name
+              %th Head
+              %th Notes
+              %th
+          
+           
+
+          %tbody
+            - @sites.each do |site|
+              %tr
+                / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
+                %td= link_to site.name, transactions_path(site.id), remote: true 
+                %td= site.head
+                %td= site.notes
+                %td
+                  = link_to site, class: 'btn btn-default btn-xs' do
+                    = fa_icon 'eye'
+        
+

@@ -41,5 +41,5 @@ jQuery ->
 			success: (data, status, response) -> 
 				data = response.responseJSON
 				btn.text(btnOptionTxt[data.is_urgent])
-				row.find('#siteUrgency').text(data.is_urgent)
+				row.find('#siteurgency').text(data.is_urgent)
 			dataType: "JSON"

@@ -22,7 +22,7 @@ class WagesController < ApplicationController
   end
 
   def planning
-  	@painters = Painter.where(is_active: true)
+  	@painters = Painter.all
   	@track_painters = TrackPainter.where(
   		['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i]
   	)
@@ -35,7 +35,25 @@ class WagesController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.pdf { render pdf: 'weekly' }
+      format.pdf { render pdf: 'planning' }
+    end
+  end
+
+
+  def costing
+  	@painters = Painter.all
+  	@track_painters = TrackPainter.where(
+  		['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i]
+  	)
+    @painters = @painters.where('id IN (?)', @track_painters.pluck(:painter_id))
+  	@sites_attended = TrackPainterItem.joins(:site)
+  		.where('date_attended BETWEEN ? AND ?', @start_date.beginning_of_week, @start_date.end_of_week)
+  		.where('track_painter_id IN (?)', @track_painters.pluck(:id))
+      .group_by{ |s| s.site.name }
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render pdf: 'costing' }
     end
   end
 
