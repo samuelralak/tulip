@@ -36,7 +36,6 @@
 						= field_set_tag 'Other Details' do
 							= f.input :additional_costs
 							= f.input :notes
-							= f.input :priority
 				.row
 					.col-md-6
 						= field_set_tag 'Initial amounts for Labour, Material and Paint (KES)' do
