@@ -12,7 +12,15 @@
 				%td 
 					= painter.track_painters.find_by(week_number: locals[:start_date].strftime("%U").to_i).try(:weekly_total)
 		%tr
-			%td{ :colspan => "9", :style => "text-align: right"}
+			%td
+			%td
+			%td
+			%td
+			%td
+			%td
+			%td
+			%td
+			%td{ :style => "text-align: right"}
 				%strong Total:
 			%td
 				= @track_painters.sum(:weekly_total) 

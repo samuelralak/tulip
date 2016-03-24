@@ -37,7 +37,7 @@
         <% if request.params[:controller].eql?('dashbaord') %>
           <th>Notes</th>
         <% end -%>
-        <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') || ('costing')%>
+        <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') || request.params[:action].eql?('costing')%>
           <th>Weekly Total</th>
         <% end -%>
         <% if request.params[:controller].eql?('dashbaord') %>
