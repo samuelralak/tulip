@@ -69,7 +69,7 @@ class UserAccountsController < ApplicationController
 		end
 
 		def check_user_permission
-      		if current_user.has_role?(:staff || :administrator)
+      		if current_user.has_role?(:staff)
         		raise CanCan::AccessDenied
       		end
     	end
