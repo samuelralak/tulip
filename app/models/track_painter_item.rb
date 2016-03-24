@@ -4,7 +4,7 @@ class TrackPainterItem < ActiveRecord::Base
 
 	validates :site_id, :track_painter_id, presence: true
 	
-	after_save :update_weekly_total
+	after_commit :update_weekly_total
 
 	private
 		def update_weekly_total
