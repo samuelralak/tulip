@@ -6,7 +6,7 @@
 
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 			= link_to "Export to PDF", costing_wages_url({format: "pdf", start_date: @start_date}), class: "btn btn-info pull-right"
-			%h1.page-header Costing Wages
+			%h1.page-header costing Wages
 			= week_calendar do |date|
 				= date
 
@@ -25,19 +25,24 @@
 								%td= s[0]
 								%td
 									- s[1].each_with_index do |t, index|
-										- if t.nil? || t.daily_allowance.nil?
-											- daily_allowance = 0.0
-											- daily_wage = 0.0
-											- total += daily_wage + daily_allowance
+										- if t.nil? || t.track_painter.nil? || t.track_painter.weekly_total.nil?
+											- weekly_total = 0.0
+											- total += weekly_total
 										- else
-											- total += t.try(:daily_wage) + t.try(:daily_allowance)
+											- total += t.try(:track_painter).try(:weekly_total)
 										- site_total += total
-										- if index.eql?(s[1].length - 1)
-										- site_total += total 
+										- if index.eql?(s[1].length - 1) 
 											= total
-
+						%tr
+							%td Other*
+							%td
+								- other = (@track_painters.sum(:weekly_total) - site_total) 
+								= other > 0 ? other : 0.0
 						%tr
 							%td{ :style => "text-align: right"} 
 								%strong Total:
 							%td
-								= (site_total)
+								= (site_total + other)
+
+
+
