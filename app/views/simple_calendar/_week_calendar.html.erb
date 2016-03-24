@@ -61,4 +61,33 @@
       <%= render 'simple_calendar/weekly_costing', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
     <% end %>
   </table>
+
+  <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') %>
+  <table class="table table-striped">
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="text-align: right;">
+       <strong>Total</strong>
+      </td>
+      <td style="text-align: right;">
+        <%= @track_painters.sum(:weekly_total)  %>
+      </td>
+    </tr>
+  </table>
+<% end %>
 </div>
+
+
+
+
