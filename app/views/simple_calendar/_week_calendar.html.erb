@@ -28,7 +28,7 @@
     <thead>
       <tr>
         <th></th>
-        <% unless request.params[:action].eql?('planning') || request.params[:action].eql?('costing') %>
+        <% unless request.params[:action].eql?('planning') %>
           <th></th>
         <% end -%>
         <% date_range.slice(0, 7).each do |day| %>
@@ -62,7 +62,7 @@
     <% end %>
   </table>
 
-  <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') %>
+  <% if request.params[:controller].eql?('wages') && (request.params[:action].eql?('weekly') || request.params[:action].eql?('costing')) %>
   <table class="table table-striped">
     <tr>
       <td></td>
@@ -81,7 +81,12 @@
        <strong>Total</strong>
       </td>
       <td style="text-align: right;">
-        <%= @track_painters.sum(:weekly_total)  %>
+        <%- if request.params[:action].eql?('weekly') %>
+          <%= @track_painters.sum(:weekly_total)  %>
+        <% end -%>
+        <%- if request.params[:action].eql?('costing') %>
+          <%= @track_painters.sum(:weekly_cost)  %>
+        <% end -%>
       </td>
     </tr>
   </table>
