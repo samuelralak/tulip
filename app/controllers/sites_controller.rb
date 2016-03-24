@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  skip_load_and_authorize_resource, only: :urgent
+  skip_load_and_authorize_resource only: :urgent
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
   # GET /sites
