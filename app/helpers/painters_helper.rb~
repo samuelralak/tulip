@@ -93,7 +93,6 @@ module PaintersHelper
 		basic_pay = painter.basic_pay
 		allowance = allowance_total(painter, start_date)
 		wages = wages_total(painter, start_date)
-		sundays = sundays_amount(painter, start_date)
 		deductions = deductions_total(painter, start_date)
 		bonus = bonus_total(painter, start_date)
 		if painter.employment_type.code.eql?('MONTHLY')

@@ -51,7 +51,6 @@
 											%td
 												= @painter.daily_wage
 											%td{ :style => 'text-align: right'}
-												= sundays_amount(@painter, @start_date)
 										%tr
 											%td
 												%strong Holidays
