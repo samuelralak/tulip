@@ -1,23 +1,23 @@
 class SitesController < ApplicationController
-  skip_load_and_authorize_resource only: :urgent
+  skip_load_and_authorize_resource only: [:urgent, :active]
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all
+    @sites = Site.all.order('name asc')
   end
 
   # GET /sites/urgent
   def urgent
-    @sites = Site.where("is_urgent = true")
+    @sites = Site.where("is_urgent = true").order('name asc')
     @count = Site.where("is_urgent = true").count.to_s
   end
 
 
   # GET /sites/active
   def active
-    @sites = Site.where("is_active = true")
+    @sites = Site.where("is_active = true").order('name asc')
     @count = Site.where("is_active = true").count.to_s
   end
 

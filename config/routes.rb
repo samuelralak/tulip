@@ -23,6 +23,12 @@ Rails.application.routes.draw do
 	end
   end
 
+  resources :sites do
+  	collection do
+		get :active	
+	end
+  end
+
   resources :bonus
   resources :skills
   resources :paints
@@ -43,8 +49,6 @@ Rails.application.routes.draw do
 
   get  'wages/weekly', 				to: 'wages#weekly',  		 as: :weekly_wages
   get  'wages/planning', 			to: 'wages#planning',  		 as: :planning_wages
-  # get  'sites/urgent', 			        to: 'sites#urgent',  		 as: :urgent_sites
-  get  'sites/active', 			        to: 'sites#active',  		 as: :active_sites
   get  'wages/costing', 			to: 'wages#costing',  		 as: :costing_wages
 
   get  'wages/monthly',       to: 'wages#monthly',     as: :monthly_wages
