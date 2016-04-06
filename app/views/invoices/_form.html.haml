@@ -7,9 +7,9 @@
 				= f.input :invoice_date, :as => :date_picker
 				= f.input :note
 				= f.input :amount
-				= f.input :sub_total
-				= f.input :value_added_tax
-				= f.input :total
+				= f.input :sub_total, input_html: { readonly: true }
+				= f.input :value_added_tax, label: "V.A.T", input_html: { readonly: true }
+				= f.input :total, input_html: { readonly: true }
 				= f.association :site, collection: Site.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
 
 			.form-actions
