@@ -19,14 +19,9 @@ Rails.application.routes.draw do
 
   resources :sites do
   	collection do
-		get :urgent	
-	end
-  end
-
-  resources :sites do
-  	collection do
-		get :active	
-	end
+		  get :urgent	
+      get :active 
+	 end
   end
 
   resources :bonus
