@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  resources :statements
   resources :track_painters
   resources :track_painter_items
   resources :clients

@@ -1,0 +1,179 @@
+%h1 Statement
+%h2 Details 
+.row	
+	.col-md-4
+		.row
+			.col-md-6 
+				Site Name:
+			.col-md-6
+				= @site.name
+		.row
+			.col-md-6
+				Client Name:
+			.col-md-6
+				= @site.client
+		.row
+			.col-md-6
+				SQM INT:	
+			.col-md-6
+				= @site.site_square_metre.internal
+		.row
+			.col-md-6
+				SQM EXT:
+			.col-md-6
+				= @site.site_square_metre.external	
+	
+	.col-md-4
+		.row
+			.col-md-6
+				Site Head:
+			.col-md-6
+				= @site.head
+		.row
+			.col-md-6
+				Address:
+			.col-md-6
+				= @site.address
+		.row
+			.col-md-6
+				Rate INT:	
+			.col-md-6
+				= @site.site_rate.internal
+		.row
+			.col-md-6
+				Rate EXT:
+			.col-md-6
+				= @site.site_rate.external	
+	.col-md-4
+		.row
+			.col-md-6
+				City:
+			.col-md-6
+				= @site.city
+		.row
+			.col-md-6
+				Mobile:
+			.col-md-6
+				= @site.mobile
+		.row
+			.col-md-6
+				Agreed INT:	
+			.col-md-6
+				= @site.site_agreed_amount.internal
+		.row
+			.col-md-6
+				Agreed EXT:
+			.col-md-6
+				= @site.site_agreed_amount.external	
+.row	
+	.col-md-3
+		Notes:
+	.col-md-9
+		= @site.notes
+		
+.row	
+	.col-md-4
+		%h3 Paints
+		- paint_grand_total = 0
+		- @paints.each do |p|
+			.row
+				.col-md-3
+					= p.year
+				.col-md-3
+					= p.month
+				.col-md-3
+					= p.amount		
+				.col-md-3
+					- paint_grand_total+= p.amount						
+					= p.amount
+		.row
+			.col-md-3
+			.col-md-3
+			.col-md-3
+			.col-md-3
+				= paint_grand_total
+	.col-md-2
+		%h3 Labour 
+		- labour_grand_total = 0
+		- @labours.each do |l|
+			.row
+				.col-md-8
+					= l[0]
+				.col-md-4
+					- labour_total = 0
+					- l[1].map { |w| labour_total+=(w.daily_wage + w.daily_allowance)}
+					- labour_grand_total+= labour_total					
+					= labour_total
+		.row
+			.col-md-8
+			.col-md-4
+				= labour_grand_total
+	.col-md-6
+		%h3 Materials
+		- material_grand_total = 0
+		- @materials.each do |m|
+			.row
+				.col-md-2
+					= m.date
+				.col-md-8
+					= m.reason
+				.col-md-2
+					- material_grand_total+= m.total_spent						
+					= m.total_spent
+		.row
+			.col-md-2
+			.col-md-8
+			.col-md-2
+				= material_grand_total
+%h2 Painters 
+.row
+	.col-md-4
+		.col-md-6
+			- @painters.each do |p|
+				= p[0] 
+				= p[1]				
+		.col-md-6
+	.col-md-4
+	.col-md-4
+%h2 Painters 
+.row
+	.col-md-4
+		.col-md-6
+		.col-md-6
+	.col-md-4
+	.col-md-4
+.row
+	.col-md-6
+		%h3 Invoices
+		- invoice_total = 0
+		- @invoices.each do |i|
+		.row
+		- invoice_total += i.amount
+			.col-md-4
+				= i.invoice_date
+			.col-md-4
+				= i.invoice_number
+			.col-md-4	
+				= i.amount
+		.row
+			.col-md-4
+			.col-md-4
+			.col-md-4
+				=invoice_total
+	.col-md-6
+		%h3 Payments
+		- payment_total = 0
+		- @payments.each do |p|
+		.row
+		-payment_total += p.amount
+			.col-md-4
+				= p.payment_date
+			.col-md-4
+				= p.reference
+			.col-md-4	
+				= p.amount 
+		.row
+			.col-md-4
+			.col-md-4
+			.col-md-4
+				=payment_total

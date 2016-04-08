@@ -34,10 +34,10 @@ class UserAccountsController < ApplicationController
 	end
 
 	def update
-		raise CanCan::AccessDenied if current_user.has_role?(:admin)
+	#	raise CanCan::AccessDenied if current_user.has_role?(:admin)
 
 		respond_to do |format|
-      		if @user.update_without_password(user_params)
+      		if @user.update(user_params)
         		format.html { redirect_to user_accounts_url, notice: 'user was successfully updated.' }
         		format.json { render :show, status: :ok, location: @user }
       		else

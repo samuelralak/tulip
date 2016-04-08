@@ -1,6 +1,6 @@
 .row
 	.col-md-6
-		= simple_form_for(@user, url: action_name.eql?("edit") || action_name.eql?("update") ? user_account_url(@user) : user_accounts_url) do |f|
+		= simple_form_for(@user, url: action_name.eql?("edit") ? user_account_url(@user) : user_accounts_url) do |f|
 			= f.error_notification
 
 			.form-inputs

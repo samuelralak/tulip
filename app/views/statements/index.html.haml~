@@ -1,0 +1,11 @@
+%h1 Statements For Sites
+
+
+%table
+	%thead
+		%tr
+			%th Name
+	%tbody
+		-@sites.each do |site|
+			%tr
+				%td= site.name
