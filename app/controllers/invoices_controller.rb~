@@ -5,7 +5,7 @@ class InvoicesController < ApplicationController
   # GET /invoice_numbers
   # GET /invoice_numbers.json
   def index
-    @invoices = Invoice.all.all.order('site_id asc')
+    @invoices = Invoice.all
   end
 
   # GET /invoice_numbers/1

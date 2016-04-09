@@ -5,7 +5,7 @@ class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
   def index
-    @materials = Material.all.order('site_id asc')
+    @materials = Material.all
   end
 
   # GET /materials/1

@@ -5,7 +5,7 @@ class PaintsController < ApplicationController
   # GET /paints
   # GET /paints.json
   def index
-    @paints = Paint.all.order('site_id desc, year, month')
+    @paints = Paint.all.order('month desc, year')
   end
 
   # GET /paints/1
