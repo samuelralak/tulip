@@ -111,6 +111,15 @@
 			= link_to root_path do
 				= fa_icon 'home', text: 'Dashboard'
 		%li
+			= link_to weekly_wages_path do
+				= fa_icon 'circle-o', text: 'Weekly wages'
+		%li
+			= link_to monthly_wages_path do
+				= fa_icon 'circle-o', text: 'Monthly wages'
+		%li
+			= link_to permanent_wages_path do
+				= fa_icon 'circle-o', text: 'Permanent wages'
+		%li
 			= link_to planning_wages_path do
 				= fa_icon 'circle-o', text: 'Weekly planning'
 

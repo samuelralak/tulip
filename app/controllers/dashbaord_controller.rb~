@@ -126,9 +126,8 @@ class DashbaordController < ApplicationController
 
       redirect_to root_path, notice: 'successfully reset week'
     rescue StandardError => e
-	raise e
-      #flash.now[:error] = "An error occured. Please try again"
-      #redirect_to root_path
+      flash.now[:error] = "An error occured. Please try again"
+      redirect_to root_path
     end
   end
 

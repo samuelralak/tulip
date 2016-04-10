@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322045933) do
+ActiveRecord::Schema.define(version: 20160409044026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -289,6 +289,7 @@ ActiveRecord::Schema.define(version: 20160322045933) do
     t.boolean  "is_active",               default: true,  null: false
     t.boolean  "is_urgent",               default: false, null: false
     t.decimal  "priority",                default: 20.0,  null: false
+    t.string   "invoice_name"
   end
 
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

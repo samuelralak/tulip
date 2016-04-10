@@ -103,12 +103,6 @@
 		%li{ :class => "#{'active' if request.params[:controller].eql?('paints')}" }
 			= link_to paints_path do
 				= fa_icon 'circle-o', text: 'Paints'
-		%li{ :class => "#{'active' if request.params[:controller].eql?('skills')}" }
-			= link_to skills_path do
-				= fa_icon 'circle-o', text: 'Skills'
-		%li{ :class => "#{'active' if request.params[:controller].eql?('holidays')}" }
-			= link_to holidays_path do 
-				= fa_icon 'circle-o', text: 'Holidays'
 
 -elsif current_user.has_role?(:staff)
         	
@@ -116,6 +110,15 @@
 		%li{ :class => "#{'active' if request.params[:controller].eql?('dashbaord')}".html_safe }
 			= link_to root_path do
 				= fa_icon 'home', text: 'Dashboard'
+		%li
+			= link_to weekly_wages_path do
+				= fa_icon 'circle-o', text: 'Weekly wages'
+		%li
+			= link_to monthly_wages_path do
+				= fa_icon 'circle-o', text: 'monthly wages'
+		%li
+			= link_to permanent_wages_path do
+				= fa_icon 'circle-o', text: 'Permanent wages'
 		%li
 			= link_to planning_wages_path do
 				= fa_icon 'circle-o', text: 'Weekly planning'

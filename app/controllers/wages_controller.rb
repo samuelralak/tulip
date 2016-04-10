@@ -1,4 +1,5 @@
 class WagesController < ApplicationController
+  before_action :check_query
   before_action :set_start_date
   before_action :set_monthly_painters, only: [:monthly, :painter_monthly]
   before_action :set_permanent_painters, only: [:permanent, :painter_permanent]
@@ -22,20 +23,16 @@ class WagesController < ApplicationController
   end
 
   def planning
-  	@painters = Painter.all
-  	@track_painters = TrackPainter.where(
-  		['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i]
-  	)
-    @painters = @painters.where('id IN (?)', @track_painters.pluck(:painter_id))
-  	@sites_attended = TrackPainterItem.joins(:site)
-  		.includes(:track_painter)
-  		.where(date_attended: @start_date.end_of_week)
-  		.where('track_painter_id IN (?)', @track_painters.pluck(:id))
-      .group_by{ |s| s.site.name }
+  if @selected
+      track_painter_ids = TrackPainterItem.where(site_id: @selected).pluck(:track_painter_id)
+      painter_ids = TrackPainter.where(
+        'id in (?) AND week_number = ? AND year=?', 
+        track_painter_ids, @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i)
+        .pluck(:painter_id)
+      @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true)
 
-    respond_to do |format|
-      format.html {}
-      format.pdf { render pdf: 'planning' }
+    else
+      @painters = Painter.where(is_active: true).order('name ASC')
     end
   end
 
@@ -110,7 +107,11 @@ class WagesController < ApplicationController
     def set_start_date
       @start_date = params[:start_date] ? DateTime.parse(params[:start_date]) : DateTime.now
     end
-
+    def check_query
+      if params[:query] && !params[:query].eql?('')
+        @selected = params[:query]
+      end
+    end
     def set_monthly_painters
       @painters = Painter.where('employment_type_id = ?', EmploymentType.find_by(code: 'MONTHLY').id)  
     end
