@@ -52,7 +52,7 @@ module PaintersHelper
 		if painter.employment_type.code.eql?('MONTHLY')
 			total_allowance = days_worked.sum(:daily_allowance)
 		else
-			total_allowance = days_worked.sum(:daily_allowance)	+ sundays_total
+			total_allowance = days_worked.sum(:daily_allowance)
 		end
 
 		return total_allowance
