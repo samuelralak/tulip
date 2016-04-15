@@ -77,6 +77,11 @@ class WagesController < ApplicationController
     @holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
     @holidays_worked = @sites_attended.where('date_attended IN (?)', @holidays)
     @days_worked_final = @days_worked.where('date_attended IN (?)', @holidays)
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render pdf: 'permanent' }
+    end
   end
 
   def monthly

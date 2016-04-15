@@ -128,9 +128,10 @@ module PaintersHelper
 	def absent_total(painter, start_date)
 		monthly_income = PainterMonthlyIncome.find_by('painter_id = ? AND month = ? AND year = ?', 
 			painter.id, start_date.strftime("%B"), start_date.strftime("%Y")
+		
 		)
 
-		unless monthly_income
+		unless Date.today > start_date.end_of_month 
 			missed_days = days_missed(painter, start_date)
 			total = painter.try(:daily_wage) * missed_days.length
 

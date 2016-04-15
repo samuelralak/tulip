@@ -1,0 +1,94 @@
+%html
+	%head
+		= wicked_pdf_stylesheet_link_tag "application", media: "all"
+.body
+	.container
+		.col-xs-12.main
+			%h1.page-header Permanent Wages
+			.row
+				.col-xs-12
+					= month_calendar do |date|
+						= date
+					%h3 Payable
+					.row
+						.col-xs-8
+							%table.table
+								%thead
+									%tr
+										%th
+										%th
+											days
+										%th
+											daily wage
+										%th{ :style => 'text-align: right'}
+											total
+								%tbody
+									%tr
+										%td
+											%strong Basic Pay
+										%td
+										%td
+										%td{ :style => 'text-align: right'}
+											= @painter.basic_pay
+									%tr
+										%td
+											%strong Allowance
+										%td
+											= @sites_attended.length
+										%td
+											= @painter.daily_allowance
+										%td{ :style => 'text-align: right'}
+											= allowance_total(@painter, @start_date)
+									%tr
+										%td
+											%strong Sundays
+										%td
+											= sundays_worked(@painter, @start_date)
+										%td
+											= @painter.daily_wage
+										%td{ :style => 'text-align: right'}
+											= sundays_amount(@painter, @start_date)
+									%tr
+										%td
+											%strong Holidays
+										%td
+											= @holidays_worked.length
+										%td
+											= @painter.daily_wage
+										%td{ :style => 'text-align: right'}
+											= wages_total(@painter, @start_date)
+									%tr
+										%td
+											%strong Bonus
+										%td
+										%td
+										%td{ :style => 'text-align: right'}
+											= bonus_total(@painter, @start_date)
+									%tr{ :style => 'color: maroon'}
+										%td
+											%strong Days missed
+										%td
+											= (days_missed(@painter, @start_date)).length
+										%td
+										%td{ :style => 'text-align: right'}
+											= "-"
+											%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
+												= "#{absent_total(@painter, @start_date)}"
+							
+									%tr{ :style => 'color: maroon'}
+										%td
+											%strong Deduction (IOU)
+										%td
+										%td
+										%td{ :style => 'text-align: right'}
+											= "- #{deductions_total(@painter, @start_date)}"
+									%tr
+										%td{ :colspan => '3', :style => 'text-align: right'}
+											%strong Total Payable
+										%td{ :style => 'text-align: right'}
+											#payableTotal
+												= payable_total(@painter, @start_date)
+
+
+
+
