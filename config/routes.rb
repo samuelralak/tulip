@@ -21,8 +21,9 @@ Rails.application.routes.draw do
 
   resources :sites do
   	collection do
-		  get :urgent	
-      get :active 
+		  get :payment	
+     		  get :urgent	
+     		  get :active 
 	 end
   end
 

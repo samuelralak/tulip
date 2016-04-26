@@ -8,6 +8,11 @@ class SitesController < ApplicationController
     @sites = Site.all.order('name asc')
   end
 
+  # GET /sites.json
+  def payment
+    @sites = Site.all.order('name asc')
+  end
+
   # GET /sites/urgent
   def urgent
     @sites = Site.where("is_urgent = true").order('name asc')

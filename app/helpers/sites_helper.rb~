@@ -30,14 +30,5 @@ module SitesHelper
 	end
    
         def total_paid(site)
-		total = 0.0
-		payments = Payment.where(client_id: site.id)
-
-		payments.each do |p|
-			total += p.amount
-		end
-	
-		
-		return total
 	end
 end

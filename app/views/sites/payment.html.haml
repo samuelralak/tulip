@@ -1,0 +1,36 @@
+= render 'shared/navbar'
+.container-fluid
+  .row
+    .col-xs-4.col-sm-3.col-md-2.sidebar
+      = render 'shared/side_nav'
+
+    .col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      .pull-right
+
+      %h1.page-header PEYMENT SHCEDULE
+      .table-responsive
+        %table.table.table-striped
+          %thead
+            %tr
+              %th Name
+              - if current_user.has_role?(:super)
+                %th AGREED
+                %th PAID
+                %th BALANCE
+               
+              %th
+              %th
+              - if current_user.has_role?(:super)
+                %th
+
+          %tbody
+            - @sites.each do |site|
+              %tr
+                / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
+                %td
+                  = current_user.has_role?(:super) ? link_to(site.name, transactions_path(site.id), remote: true) : site.name  
+                - if current_user.has_role?(:super)
+                  %td= number_to_currency((site.site_agreed_amount.internal.to_i + site.site_agreed_amount.external.to_i), unit: "")
+                  %td= number_to_currency(total_paid(site), unit: "")
+                  %td= number_to_currency((site.site_agreed_amount.internal.to_i + site.site_agreed_amount.external.to_i - total_paid(site).to_i), unit: "")
+                
