@@ -26,10 +26,11 @@
           %tbody
             - @sites.each do |site|
               %tr
+              - if current_user.has_role?(:super) && (site.site_agreed_amount.internal.to_i + site.site_agreed_amount.external.to_i - total_paid(site).to_i) != 0
+
                 / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
                 %td
                   = current_user.has_role?(:super) ? link_to(site.name, transactions_path(site.id), remote: true) : site.name  
-                - if current_user.has_role?(:super)
                   %td= number_to_currency((site.site_agreed_amount.internal.to_i + site.site_agreed_amount.external.to_i), unit: "")
                   %td= number_to_currency(total_paid(site), unit: "")
                   %td= number_to_currency((site.site_agreed_amount.internal.to_i + site.site_agreed_amount.external.to_i - total_paid(site).to_i), unit: "")
