@@ -36,9 +36,9 @@
 		%li{ :class => "#{'active' if request.params[:controller].eql?('statements')}" }
 			= link_to statements_path do
 				= fa_icon 'circle-o', text: 'Statements'
-		%li{ :class => "#{'active' if request.params[:controller].eql?('total_payments')}" }
-			= link_to link_to payment_sites_path do
-				= fa_icon 'circle-o', text: 'total_payments'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('totalpayments')}" }
+			= link_to urgent_sites_path do
+				= fa_icon 'circle-o', text: 'totalpayments'
 
 	%ul.nav.nav-sidebar
 		%li{ :class => "#{'active' if request.params[:controller].eql?('painters')}" }
