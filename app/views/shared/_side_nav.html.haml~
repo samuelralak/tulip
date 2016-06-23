@@ -33,6 +33,12 @@
 		%li{ :class => "#{'active' if request.params[:controller].eql?('invoices')}" }
 			= link_to invoices_path do
 				= fa_icon 'circle-o', text: 'Invoices'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('statements')}" }
+			= link_to statements_path do
+				= fa_icon 'circle-o', text: 'Statements'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('total_payments')}" }
+			= link_to link_to payment_sites_path do
+				= fa_icon 'circle-o', text: 'total_payments'
 
 	%ul.nav.nav-sidebar
 		%li{ :class => "#{'active' if request.params[:controller].eql?('painters')}" }
