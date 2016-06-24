@@ -37,7 +37,7 @@
 			= link_to statements_path do
 				= fa_icon 'circle-o', text: 'Statements'
 		%li{ :class => "#{'active' if request.params[:controller].eql?('totalpayments')}" }
-			= link_to urgent_sites_path do
+			= link_to payment_sites_path do
 				= fa_icon 'circle-o', text: 'totalpayments'
 
 	%ul.nav.nav-sidebar
