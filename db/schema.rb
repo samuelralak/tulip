@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409044026) do
+ActiveRecord::Schema.define(version: 20160628135042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,9 +213,11 @@ ActiveRecord::Schema.define(version: 20160409044026) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.decimal  "bal_carried_forward"
+    t.uuid     "site_id"
   end
 
   add_index "petty_cash_items", ["petty_cash_id"], name: "index_petty_cash_items_on_petty_cash_id", using: :btree
+  add_index "petty_cash_items", ["site_id"], name: "index_petty_cash_items_on_site_id", using: :btree
 
   create_table "petty_cashes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "paid_to"
@@ -289,7 +291,6 @@ ActiveRecord::Schema.define(version: 20160409044026) do
     t.boolean  "is_active",               default: true,  null: false
     t.boolean  "is_urgent",               default: false, null: false
     t.decimal  "priority",                default: 20.0,  null: false
-    t.string   "invoice_name"
   end
 
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

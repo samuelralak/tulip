@@ -55,7 +55,12 @@ class PettyCashesController < ApplicationController
   # DELETE /petty_cashes/1
   # DELETE /petty_cashes/1.json
   def destroy
-    @petty_cash.destroy
+    begin
+      @petty_cash.destroy  
+    rescue StandardError => e
+      @petty_cash.destroy
+    end
+    
     respond_to do |format|
       format.html { redirect_to petty_cashes_url, notice: 'Petty cash was successfully destroyed.' }
       format.json { head :no_content }
