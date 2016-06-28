@@ -42,9 +42,9 @@
                 %td= site.notes
                 - if current_user.has_role?(:super)
                   %td= site_labour_amount(site)
-                  %td= (site.materials.sum(:total_spent) + site.initial_material_amount)
+                  %td= (site.materials.sum(:total_spent) + site.petty_cash_items.sum(:amount) + site.initial_material_amount)
                   %td= (site.paints.sum(:amount) + site.old_paint_amount)
-                  %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.initial_material_amount))
+                  %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.petty_cash_items.sum(:amount) + site.initial_material_amount))
                   %td
                     %span#siteStatus
                       = site.is_active
