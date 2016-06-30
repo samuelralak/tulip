@@ -33,9 +33,10 @@ class Ability
         can [:create, :read, :update], PainterContact
         can [:create, :read, :update], PainterSkill
         can [:create, :read, :update], Skill
+        can [:create, :read], Material
         can :read, TrackPainter 
         can :read, TrackPainterItem
-        end
+    end
 
 
 end
