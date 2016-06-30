@@ -93,12 +93,13 @@
 							%th{:style => "text-align: right" } Initial Cost
 							%th{:style => "text-align: right" } Cost
 						%tbody
-							- @paints.each do |p|
+							- @paints.each_with_index do |p, index|
 								%tr
 									%td
 										#{p.month}, #{p.year}
 									%td{:style => "text-align: right" }
-										= @site.try(:initial_paint_amount)
+										- if index.eql?(0)
+											= @site.try(:initial_paint_amount)
 									%td{:style => "text-align: right" }
 										= p.amount		
 										- paint_grand_total+= p.amount						
@@ -116,12 +117,13 @@
 							%th{:style => "text-align: right" } Initial Cost
 							%th{:style => "text-align: right" } Cost
 						%tbody
-							- @labours.each do |l|
+							- @labours.each_with_index do |l, index|
 								%tr
 									%td
 										= l[0]
 									%td{:style => "text-align: right" }
-										= @site.try(:initial_labour_amount)
+										- if index.eql?(0)
+											= @site.try(:initial_labour_amount)
 									%td{:style => "text-align: right" }
 										- labour_total = 0
 										- l[1].map { |w| labour_total+=(w.daily_wage + w.daily_allowance)}
@@ -141,14 +143,15 @@
 							%th{:style => "text-align: right" } Initial Cost
 							%th{:style => "text-align: right" } Cost
 						%tbody
-							- @materials.each do |m|
+							- @materials.each_with_index do |m, index|
 								%tr
 									%td
 										= m.date
 									%td
 										= m.reason
 									%td{:style => "text-align: right" }
-										= @site.try(:initial_material_amount)
+										- if index.eql?(0)
+											= @site.try(:initial_material_amount)
 									%td{:style => "text-align: right" }
 										- material_grand_total+= m.total_spent						
 										= m.total_spent
