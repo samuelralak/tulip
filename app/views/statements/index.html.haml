@@ -1,11 +1,15 @@
-%h1 Statements For Sites
-
-
-%table
-	%thead
-		%tr
-			%th Name
-	%tbody
-		-@sites.each do |site|
-			%tr
-				%td= link_to site.name, statement_path(site) 
+= render 'shared/navbar'
+.container-fluid
+	.row
+		.col-xs-4.col-sm-3.col-md-2.sidebar
+			= render 'shared/side_nav'
+		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+			%h3.page-header Statements For Sites
+			%table
+				%thead
+					%tr
+						%th Name
+				%tbody
+					-@sites.each do |site|
+						%tr
+							%td= link_to site.name, statement_path(site) 
