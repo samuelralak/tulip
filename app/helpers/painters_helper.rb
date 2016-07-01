@@ -126,21 +126,25 @@ module PaintersHelper
 	end
 
 	def absent_total(painter, start_date)
-		monthly_income = PainterMonthlyIncome.find_by('painter_id = ? AND month = ? AND year = ?', 
-			painter.id, start_date.strftime("%B"), start_date.strftime("%Y")
-		
-		)
+		missed_days = days_missed(painter, start_date)
+		total = painter.try(:daily_wage) * missed_days.length
 
-		unless Date.today > start_date.end_of_month 
-			missed_days = days_missed(painter, start_date)
-			total = painter.try(:daily_wage) * missed_days.length
+		monthly_income = PainterMonthlyIncome.where('painter_id = ? AND month = ? AND year = ?', 
+			painter.id, start_date.strftime("%B"), start_date.strftime("%Y")).order("created_at ASC")
 
-			monthly_income = PainterMonthlyIncome.create(
-				painter_id: painter.id, month: start_date.strftime("%B"), year: start_date.strftime("%Y"), 
-				absent_total: total, basic_pay: painter.basic_pay
-			)
+		if monthly_income.empty?
+			PainterMonthlyIncome.create(painter_id: painter.id, month: start_date.strftime("%B"), 
+				year: start_date.strftime("%Y"), absent_total: total, basic_pay: painter.basic_pay)
+			monthly_income = PainterMonthlyIncome.where('painter_id = ? AND month = ? AND year = ?', 
+				painter.id, start_date.strftime("%B"), start_date.strftime("%Y")).order("created_at ASC")
+			return monthly_income.last.absent_total
+		else
+			if monthly_income.last.try(:updated_absent_total).nil?
+				monthly_income.last.update_attributes(absent_total: total)
+				return monthly_income.last.absent_total
+			else
+				return monthly_income.last.try(:updated_absent_total)
+			end
 		end
-
-		return monthly_income.absent_total
 	end
 end

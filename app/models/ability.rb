@@ -32,6 +32,8 @@ class Ability
         can [:create, :read, :update], Painter
         can [:create, :read, :update], PainterContact
         can [:create, :read, :update], PainterSkill
+        can [:create, :read], PettyCash
+        can [:create, :read], PettyCashItem
         can [:create, :read, :update], Skill
         can [:create, :read], Material
         can :read, TrackPainter 

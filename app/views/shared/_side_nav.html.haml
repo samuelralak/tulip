@@ -130,7 +130,9 @@
 				= fa_icon 'circle-o', text: 'Weekly planning'
 
 	%ul.nav.nav-sidebar
-
+		%li{ :class => "#{'active' if request.params[:controller].eql?('petty_cashes')}" }
+			= link_to petty_cashes_path do
+				= fa_icon 'circle-o', text: 'Petty Cash'
 	%ul.nav.nav-sidebar
 		%li{ :class => "#{'active' if request.params[:controller].eql?('materials')}" }
 			= link_to materials_path do

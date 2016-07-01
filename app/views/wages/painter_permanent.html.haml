@@ -76,9 +76,17 @@
 												= (days_missed(@painter, @start_date)).length
 											%td
 											%td{ :style => 'text-align: right'}
-												= "-"
-												%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
-													= "#{absent_total(@painter, @start_date)}"
+												- if current_user.has_role?(:super) 
+													= "-"
+													%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
+														= "#{absent_total(@painter, @start_date)}"
+												- else
+													- if @start_date.end_of_month < Date.today.end_of_month
+														= "-"
+														%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
+															= "#{absent_total(@painter, @start_date)}" 
+													- else
+														= "- #{absent_total(@painter, @start_date)}" 
 												
 										%tr{ :style => 'color: maroon'}
 											%td
