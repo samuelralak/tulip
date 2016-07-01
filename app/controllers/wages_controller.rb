@@ -86,6 +86,11 @@ class WagesController < ApplicationController
 
   def monthly
     @total = 0.0
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render pdf: 'monthly' }
+    end
   end
 
   def painter_monthly
@@ -106,6 +111,11 @@ class WagesController < ApplicationController
     @holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
     @holidays_worked = @sites_attended.where('date_attended IN (?)', @holidays)
     @days_worked_final = @days_worked.where('date_attended IN (?)', @holidays)
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render pdf: 'painter_monthly' }
+    end
   end
 
   private

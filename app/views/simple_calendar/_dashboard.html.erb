@@ -7,7 +7,7 @@
               <% week.each do |day| %>
                 <%= content_tag :td, class: locals[:calendar].td_classes_for(day) do %>
                   <%= form_tag(assign_site_path, remote: true, id: "#{painter.id}#{day.strftime('%d%m%Y')}") do %>
-                    <%= select_tag "site_id", options_from_collection_for_select(Site.where(is_active: true), "id", "name", find_site(locals[:start_date].strftime("%U").to_i, day, painter.id)), prompt: '--- select ---', class: 'form-control input-sm site-select' %>
+                    <%= select_tag "site_id", options_from_collection_for_select(locals[:sites], "id", "name", find_site(locals[:start_date].strftime("%U").to_i, day, painter.id)), prompt: '--- select ---', class: 'form-control input-sm site-select' %>
                     <%= hidden_field_tag 'date', day %>
                     <%= hidden_field_tag 'week_number', locals[:start_date].strftime("%U").to_i %>
                     <%= hidden_field_tag 'year', day.strftime("%Y").to_i %>

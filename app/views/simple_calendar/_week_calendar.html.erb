@@ -47,7 +47,7 @@
     </thead>
 
     <% if request.params[:controller].eql?('dashbaord') %>
-      <%= render 'simple_calendar/dashboard', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
+      <%= render 'simple_calendar/dashboard', collection: date_range , locals: { calendar: calendar, start_date: start_date, sites: Site.where(is_active: true) } %>
     <% end %>
 
     <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') %>

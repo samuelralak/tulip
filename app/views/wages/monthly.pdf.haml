@@ -1,0 +1,13 @@
+%html
+	%head
+		= wicked_pdf_stylesheet_link_tag "application", media: "all"
+.body
+	.container
+		.row
+			.col-md-12
+				%h1.page-header Monthly Wages
+				= calendar do |date|
+					= date
+
+
+

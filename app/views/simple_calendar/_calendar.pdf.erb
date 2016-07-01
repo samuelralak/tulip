@@ -1,0 +1,17 @@
+<div class="simple-calendar">
+  <div class="text-center">
+    <nav>
+      <ul class="pager">
+        <li class="previous"><%= link_to "Previous", start_date: date_range.first.beginning_of_month - 1.day  %></li>
+        <li><%= I18n.t("date.month_names")[start_date.month] %> <%= start_date.year %></li>
+        <li class="next"><%= link_to "Next", start_date: date_range.last.end_of_month + 1.day  %></li>
+      </ul>
+    </nav>
+  </div>
+
+<%- if request.params[:action].eql?('permanent') %>
+  <%= render 'simple_calendar/permanent_wages'%>
+<% end -%>
+<%- if request.params[:action].eql?('monthly') %>
+  <%= render 'simple_calendar/monthly_wages'%>
+<% end -%>
