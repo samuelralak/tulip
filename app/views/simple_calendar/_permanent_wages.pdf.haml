@@ -1,0 +1,31 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+      %th Basic Pay
+      %th Days Worked
+      %th Sundays Worked
+      %th Holidays Worked
+      %th Total Allowance
+      %th Total Wages (Holidays)
+      %th Deductions (IOU)
+      %th Bonuses
+      %th Payable
+  %tbody
+    - @painters.each do |painter|
+      %tr
+        %td= painter.name
+        %td= painter.basic_pay
+        %td= days_worked(painter, @start_date)
+        %td= sundays_worked(painter, @start_date)
+        %td= holidays_worked(painter, @start_date)
+        %td= allowance_total(painter, @start_date)
+        %td= wages_total(painter, @start_date)
+        %td= deductions_total(painter, @start_date)
+        %td= bonus_total(painter, @start_date)
+        %td= payable_total(painter, @start_date)
+      - @total += payable_total(painter, @start_date)
+    %tr
+      %td{ :colspan => "8", :style => "text-align: right" }
+        %strong Total
+      %td= @total

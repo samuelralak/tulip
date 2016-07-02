@@ -57,6 +57,11 @@ class WagesController < ApplicationController
   
   def permanent
     @total = 0.0
+
+    respond_to do |format|
+      format.html {}
+      format.pdf { render pdf: 'permanent' }
+    end
   end
 
   def painter_permanent

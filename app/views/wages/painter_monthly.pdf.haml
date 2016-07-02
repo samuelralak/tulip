@@ -5,54 +5,60 @@
 	.container
 		.row
 			.col-xs-12
-				%h1.page-header Monthly Wages for #{@painter.name}
+				%h4.page-header 
+					%strong Monthly Wages
+					%br
+					%small
+						%strong{ :style => 'margin-top: 10px !important;'} Employee: 
+						#{@painter.name}
+					%br
 				.row
 					.col-md-12
 						= month_calendar do |date|
 							= date
-						%h3 Payable
+						%h4 
+							%strong Payable
 						.row
 							.col-md-6
-								.table-responsive
-									%table.table
-										%thead
-											%tr
-												%th
-												%th
-													days
-												%th
-													daily wage
-												%th{ :style => 'text-align: right'}
-													total
-										%tbody
-											%tr
-												%td
-													%strong Wages
-												%td
-													= @sites_attended.length
-												%td
-													= @painter.daily_allowance
-												%td{ :style => 'text-align: right'}
-													= (allowance_total(@painter, @start_date))
-											%tr
-												%td
-													%strong Bonus
-												%td
-												%td
-												%td{ :style => 'text-align: right'}
-													= bonus_total(@painter, @start_date)
-											%tr{ :style => 'color: maroon'}
-												%td
-													%strong Deduction (IOU)
-												%td
-												%td
-												%td{ :style => 'text-align: right'}
-													= "- #{deductions_total(@painter, @start_date)}"
-											%tr
-												%td{ :colspan => '3', :style => 'text-align: right'}
-													%strong Total Payable
-												%td{ :style => 'text-align: right'}
-													= payable_total(@painter, @start_date)
+								%table.table
+									%thead
+										%tr
+											%th
+											%th
+												days
+											%th
+												daily wage
+											%th{ :style => 'text-align: right'}
+												total
+									%tbody
+										%tr
+											%td
+												%strong Wages
+											%td
+												= @sites_attended.length
+											%td
+												= @painter.daily_allowance
+											%td{ :style => 'text-align: right'}
+												= (allowance_total(@painter, @start_date))
+										%tr
+											%td
+												%strong Bonus
+											%td
+											%td
+											%td{ :style => 'text-align: right'}
+												= bonus_total(@painter, @start_date)
+										%tr{ :style => 'color: maroon'}
+											%td
+												%strong Deduction (IOU)
+											%td
+											%td
+											%td{ :style => 'text-align: right'}
+												= "- #{deductions_total(@painter, @start_date)}"
+										%tr
+											%td{ :colspan => '3', :style => 'text-align: right'}
+												%strong Total Payable
+											%td{ :style => 'text-align: right'}
+												= payable_total(@painter, @start_date)
 
 
 
