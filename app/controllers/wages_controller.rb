@@ -5,7 +5,7 @@ class WagesController < ApplicationController
   before_action :set_permanent_painters, only: [:permanent, :painter_permanent]
 
   def weekly
-  	@painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'TEMPORARY').id)
+  	@painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'TEMPORARY').id, is_active: true)
   	@track_painters = TrackPainter.where(
   		['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i]
   	)
@@ -26,7 +26,7 @@ class WagesController < ApplicationController
   if @selected
       track_painter_ids = TrackPainterItem.where(site_id: @selected).pluck(:track_painter_id)
       painter_ids = TrackPainter.where(
-        'id in (?) AND week_number = ? AND year=?', 
+        'id in (?) AND week_number = ? AND year=?',
         track_painter_ids, @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i)
         .pluck(:painter_id)
       @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true)
@@ -54,7 +54,7 @@ class WagesController < ApplicationController
     end
   end
 
-  
+
   def permanent
     @total = 0.0
 
@@ -67,16 +67,16 @@ class WagesController < ApplicationController
   def painter_permanent
     @painter = Painter.find(params[:painter_id])
     @track_painters = TrackPainter.where(painter_id: @painter.id)
-    @sites_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
-      @track_painters.pluck(:id), @start_date.beginning_of_month, @start_date.end_of_month 
+    @sites_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
+      @track_painters.pluck(:id), @start_date.beginning_of_month, @start_date.end_of_month
     )
 
     # get all days excluding sundays
     @working_days = (@start_date.beginning_of_month..@start_date.end_of_month).select { |d| (1..6).include?(d.wday) }
 
     # get all days worked excluding sundays
-    @days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended IN (?) AND date_attended BETWEEN ? AND ?', 
-      @track_painters.pluck(:id), @working_days, @start_date.beginning_of_month, @start_date.end_of_month 
+    @days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended IN (?) AND date_attended BETWEEN ? AND ?',
+      @track_painters.pluck(:id), @working_days, @start_date.beginning_of_month, @start_date.end_of_month
     )
 
     @holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
@@ -101,16 +101,16 @@ class WagesController < ApplicationController
   def painter_monthly
     @painter = Painter.find(params[:painter_id])
     @track_painters = TrackPainter.where(painter_id: @painter.id)
-    @sites_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?', 
-      @track_painters.pluck(:id), @start_date.beginning_of_month, @start_date.end_of_month 
+    @sites_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
+      @track_painters.pluck(:id), @start_date.beginning_of_month, @start_date.end_of_month
     )
 
     # get all days excluding sundays
     @working_days = (@start_date.beginning_of_month..@start_date.end_of_month).select { |d| (1..6).include?(d.wday) }
 
     # get all days worked excluding sundays
-    @days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended IN (?) AND date_attended BETWEEN ? AND ?', 
-      @track_painters.pluck(:id), @working_days, @start_date.beginning_of_month, @start_date.end_of_month 
+    @days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended IN (?) AND date_attended BETWEEN ? AND ?',
+      @track_painters.pluck(:id), @working_days, @start_date.beginning_of_month, @start_date.end_of_month
     )
 
     @holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
@@ -133,10 +133,10 @@ class WagesController < ApplicationController
       end
     end
     def set_monthly_painters
-      @painters = Painter.where('employment_type_id = ?', EmploymentType.find_by(code: 'MONTHLY').id)  
+      @painters = Painter.where('employment_type_id = ?', EmploymentType.find_by(code: 'MONTHLY').id)
     end
 
     def set_permanent_painters
-      @painters = Painter.where('employment_type_id = ?', EmploymentType.find_by(code: 'PERMANENT').id)  
+      @painters = Painter.where('employment_type_id = ?', EmploymentType.find_by(code: 'PERMANENT').id)
     end
 end
