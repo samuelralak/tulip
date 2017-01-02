@@ -29,7 +29,7 @@ module SitesHelper
 		return total
 	end
 
-        def total_paid(site)
+    def total_paid(site)
 		total = 0.0
 		payments = Payment.where(client_id: site.id)
 
@@ -39,5 +39,19 @@ module SitesHelper
 
 
 		return total
+	end
+
+	def sum_petty_cash(site)
+		total = 0
+
+		site.petty_cash_items.each do |p|
+			if %(wage wages).include? p.reason.split(" ")[0].downcase
+				next
+			end
+
+			total += amount
+		end
+
+		total
 	end
 end
