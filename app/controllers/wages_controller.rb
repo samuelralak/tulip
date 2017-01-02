@@ -68,7 +68,7 @@ class WagesController < ApplicationController
 
   def painter_permanent
     @painter = Painter.find(params[:painter_id])
-    @track_painters = TrackPainter.where(painter_id: @painter.id)
+    @track_painters = TrackPainter.where(painter_id: @painter.id, year: @start_date.strftime("Y").to_i)
     @sites_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
       @track_painters.pluck(:id), @start_date.beginning_of_month, @start_date.end_of_month
     )
