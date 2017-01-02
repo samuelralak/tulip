@@ -6,7 +6,7 @@ class WagesController < ApplicationController
 
   def weekly
   	@painters = Painter.where(employment_type_id: EmploymentType.find_by(code: 'TEMPORARY').id)
-  	@track_painters = TrackPainter.where(['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i])
+  	@track_painters = TrackPainter.where(['painter_id IN (?) AND week_number = ? AND year = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i])
     @painters = @painters.where('id IN (?)', @track_painters.pluck(:painter_id))
   	@sites_attended = TrackPainterItem.joins(:site).includes(:track_painter)
         .where(date_attended: @start_date.end_of_week)
