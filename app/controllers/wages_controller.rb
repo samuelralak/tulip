@@ -9,7 +9,7 @@ class WagesController < ApplicationController
         @start_date.strftime("%U").to_i,
         @start_date.strftime("%Y").to_i
     ])
-    @painters = @painters.where('id IN (?) AND employment_type_id = ?',
+    @painters = Painter.where('id IN (?) AND employment_type_id = ?',
         @track_painters.pluck(:painter_id),
         EmploymentType.find_by(code: 'TEMPORARY').id
     )
