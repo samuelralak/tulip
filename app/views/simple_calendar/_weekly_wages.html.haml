@@ -6,7 +6,7 @@
 				%td= painter.daily_allowance
 				- week.each do |day|
 					= content_tag :td, class: locals[:calendar].td_classes_for(day) do
-						- TrackPainter.where(year: locals[:start_date].strftime("%Y").to_i, week_number: locals[:start_date].strftime("%U").to_i, painter_id: painter.id).try(:track_painter_items).try(:each) do |tp|
+						- TrackPainter.where(year: locals[:start_date].strftime("%Y").to_i, week_number: locals[:start_date].strftime("%U").to_i, painter_id: painter.id)[0].try(:track_painter_items).try(:each) do |tp|
 							- if day.eql?(tp.date_attended)
 								= tp.try(:site).try(:name)
 				%td{ :style => "text-align: right" }
