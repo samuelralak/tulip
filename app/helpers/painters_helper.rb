@@ -1,6 +1,6 @@
 module PaintersHelper
 	def days_worked(painter, start_date)
-		track_painters = painter.track_painters.where(year: start_date.beginning_of_month.strftime("%Y").to_i).all
+		track_painters = painter.track_painters.all
 		no_of_days = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		).length
