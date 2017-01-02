@@ -1,7 +1,7 @@
 module SitesHelper
 	def find_site(week, date, painter)
 		# find track painter
-		track_painter = TrackPainter.where(["week_number = ? and painter_id = ?", week, painter]).first
+		track_painter = TrackPainter.where(["year = ? and week_number = ? and painter_id = ?", date.strftime('%Y').to_i, week, painter]).first
 
 		if track_painter
 			track_painter_item = track_painter.track_painter_items.find_by(date_attended: date)
@@ -25,10 +25,10 @@ module SitesHelper
 		end
 
 		total = total + site.initial_labour_amount
-		
+
 		return total
 	end
-   
+
         def total_paid(site)
 		total = 0.0
 		payments = Payment.where(client_id: site.id)
@@ -36,8 +36,8 @@ module SitesHelper
 		payments.each do |p|
 			total += p.amount
 		end
-	
-		
+
+
 		return total
 	end
 end
