@@ -51,7 +51,6 @@ module SitesHelper
 
 			total += amount
 		end
-
 		total
 	end
 end
