@@ -49,7 +49,7 @@ module SitesHelper
 				next
 			end
 
-			total += amount
+			total += p.amount
 		end
 		total
 	end
