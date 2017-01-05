@@ -4,7 +4,12 @@ module SitesHelper
 		track_painter = TrackPainter.where(["year = ? and week_number = ? and painter_id = ?", date.strftime('%Y').to_i, week, painter]).first
 
 		if track_painter
-			track_painter_item = track_painter.track_painter_items.find_by(date_attended: date)
+			if track_painter.painter.name.eql?('Willis')
+				puts "\n\n"
+				puts "TRACK PAINTER ITEMS: #{track_painter.track_painter_items.where(date_attended: date).each{ |t| t.site.name }}"
+				puts "\n\n"
+			end
+			track_painter_item = track_painter.track_painter_items.where(date_attended: date)[0]
 
 			if track_painter_item
 				return track_painter_item.site_id

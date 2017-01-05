@@ -6,7 +6,7 @@ class DashbaordController < ApplicationController
   def index
     if @selected
       track_painter_ids = TrackPainterItem.where(site_id: @selected).pluck(:track_painter_id)
-      painter_ids = TrackPainter.where('id in (?) AND week_number = ? AND year=?', 
+      painter_ids = TrackPainter.where('id in (?) AND week_number = ? AND year=?',
         track_painter_ids, @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i)
         .pluck(:painter_id)
       @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true)
@@ -39,8 +39,8 @@ class DashbaordController < ApplicationController
 
   def assign_site
     @painter = Painter.find(params[:painter_id])
-    @track_painter =  TrackPainter.where(["week_number = ? and painter_id = ?",
-      params[:week_number].to_i, params[:painter_id]]).first
+    @track_painter =  TrackPainter.where(["year = ? and week_number = ? and painter_id = ?",
+      (Date.parse(params[:date])).strftime("%Y").to_i, params[:week_number].to_i, params[:painter_id]]).first
 
     logger.info "PARAMS: #{params.inspect}"
 
