@@ -50,12 +50,14 @@ module SitesHelper
 		total = 0
 
 		site.petty_cash_items.each do |p|
-			if %(wage wages).include? p.reason.split(" ")[0].downcase
-				next
+			if p.reason.split(" ").map(&:downcase).include?('wage') ||
+				p.reason.split(" ").map(&:downcase).include?('wages')
+					next
 			end
 
 			total += p.amount
 		end
+		
 		total
 	end
 end
