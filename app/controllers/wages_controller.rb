@@ -13,10 +13,15 @@ class WagesController < ApplicationController
         @track_painters.pluck(:painter_id),
         EmploymentType.find_by(code: 'TEMPORARY').id
     )
-  	@sites_attended = TrackPainterItem.joins(:site).includes(:track_painter)
+    @temp_track_painters = @track_painters.where('painter_id IN (?)', @painters.pluck(:id))
+    
+  	@sites_attended = TrackPainterItem.where('track_painter_id IN (?)', @track_painters.pluck(:id))
+        .joins(:site).includes(:track_painter)
         .where(date_attended: @start_date.end_of_week)
-        .where('track_painter_id IN (?)', @track_painters.pluck(:id))
+        .where('track_painter_id IN (?)', @track_painters.where('painter_id IN (?)', @painters.pluck(:id)).pluck(:id))
         .group_by{ |s| s.site.name }
+
+    @weekly_sum = @track_painters.where('painter_id IN (?)', @painters.pluck(:id)).sum(:weekly_total)
 
     respond_to do |format|
       format.html {}
