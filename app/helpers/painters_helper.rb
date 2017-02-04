@@ -1,6 +1,6 @@
 module PaintersHelper
 	def days_worked(painter, start_date)
-		track_painters = painter.track_painters.all
+		track_painters = painter.track_painters.where(year: start_date.strftime('%Y').to_i)
 		no_of_days = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		).length
@@ -9,7 +9,7 @@ module PaintersHelper
 	end
 
 	def holidays_worked(painter, start_date)
-		track_painters = painter.track_painters.all
+		track_painters = painter.track_painters.where(year: start_date.strftime('%Y').to_i)
 		track_painter_items = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		)
@@ -21,7 +21,7 @@ module PaintersHelper
 	end
 
 	def sundays_worked(painter, start_date)
-		track_painters = painter.track_painters.all
+		track_painters = painter.track_painters.where(year: start_date.strftime('%Y').to_i)
 		days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		)
@@ -31,7 +31,7 @@ module PaintersHelper
 		return sundays_worked.length
 	end
 	def sundays_amount(painter, start_date)
-	track_painters = painter.track_painters.all
+	track_painters = painter.track_painters.where(year: start_date.strftime('%Y').to_i)
 		days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		)
@@ -42,7 +42,7 @@ module PaintersHelper
 	end
 
 	def allowance_total(painter, start_date)
-		track_painters = painter.track_painters.all
+		track_painters = painter.track_painters.where(year: start_date.strftime('%Y').to_i)
 		days_worked = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		)
@@ -59,7 +59,7 @@ module PaintersHelper
 	end
 
 	def wages_total(painter, start_date)
-		track_painters = painter.track_painters.all
+		track_painters = painter.track_painters.where(year: start_date.strftime('%Y').to_i)
 		track_painter_items = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		)
@@ -112,7 +112,7 @@ module PaintersHelper
 
 	def days_missed(painter, start_date)
 		days_in_month = (start_date.beginning_of_month..start_date.end_of_month).map { |e| Date.parse(e.to_s) }
-		track_painters = painter.track_painters.all
+		track_painters = painter.track_painters.where(year: start_date.strftime('%Y').to_i)
 		days_attended = TrackPainterItem.where('track_painter_id IN (?) AND date_attended BETWEEN ? AND ?',
 			track_painters.pluck(:id), start_date.beginning_of_month, start_date.end_of_month
 		).pluck(:date_attended)
