@@ -46,6 +46,7 @@ group :development do
     gem 'capistrano-bundler', require: false
     gem 'capistrano3-puma',   require: false
 end
+
 gem 'capistrano-passenger'
 
 # Use puma as the app server
