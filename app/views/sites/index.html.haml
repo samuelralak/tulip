@@ -36,15 +36,16 @@
               %tr
                 / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
                 %td
-                  = current_user.has_role?(:super) ? link_to(site.name, transactions_path(site.id), remote: true) : site.name  
+                  = current_user.has_role?(:super) ? link_to(site.name, transactions_path(site.id), remote: true) : site.name
                 %td= site.head
                 %td= site.address
                 %td= site.notes
                 - if current_user.has_role?(:super)
                   %td= site_labour_amount(site)
-                  %td= (site.materials.sum(:total_spent) + site.initial_material_amount)
+                  %td
+                    = (site.materials.sum(:total_spent) + sum_petty_cash(site) + site.initial_material_amount)
                   %td= (site.paints.sum(:amount) + site.old_paint_amount)
-                  %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + site.initial_material_amount))
+                  %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + sum_petty_cash(site) + site.initial_material_amount))
                   %td
                     %span#siteStatus
                       = site.is_active
@@ -68,4 +69,3 @@
                     = link_to site, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
                       = fa_icon 'trash'
 = render 'sites/invoice_payment_modal'
-

@@ -1,28 +1,28 @@
 <div class="simple-calendar">
   <div class="text-center">
     <nav>
-    
+
       <ul class="pager">
       <% if params[:query] %>
         <%- if !request.params[:controller].eql?('dashbaord') || current_user.has_role?(:super) %>
-          <li class="previous"><%= link_to("Previous", {start_date: date_range.first - 1.day, query: params[:query]})  %></li> 
+          <li class="previous"><%= link_to("Previous", {start_date: date_range.first - 1.day, query: params[:query]})  %></li>
         <% end -%>
         <li><%= I18n.t("date.month_names")[start_date.month] %>, Week <%= start_date.strftime("%U").to_i %></li>
         <li class="next"><%= link_to("Next", {start_date: date_range.last + 1.day, query: params[:query]})  %></li>
       <% else %>
         <%- if !request.params[:controller].eql?('dashbaord') || current_user.has_role?(:super)  %>
-          <li class="previous"><%= link_to "Previous", start_date: date_range.first - 1.day  %></li> 
+          <li class="previous"><%= link_to "Previous", start_date: date_range.first - 1.day  %></li>
         <% end -%>
         <li><%= I18n.t("date.month_names")[start_date.month] %>, Week <%= start_date.strftime("%U").to_i %></li>
         <li class="next"><%= link_to "Next", start_date: date_range.last + 1.day  %></li>
       <% end%>
       </ul>
     </nav>
-    
+
   </div>
-  
-  
-  
+
+
+
   <div class="table-responsive">
   <table id="<%= request.params[:controller].eql?('dashbaord') || request.params[:action].eql?('planning') ? 'dashboardTable' : '' ||request.params[:action].eql?('costing') ? 'dashboardTable' : '' %>" class="table table-striped">
     <thead>
@@ -47,7 +47,7 @@
     </thead>
 
     <% if request.params[:controller].eql?('dashbaord') %>
-      <%= render 'simple_calendar/dashboard', collection: date_range , locals: { calendar: calendar, start_date: start_date } %>
+      <%= render 'simple_calendar/dashboard', collection: date_range , locals: { calendar: calendar, start_date: start_date, sites: Site.where(is_active: true) } %>
     <% end %>
 
     <% if request.params[:controller].eql?('wages') && request.params[:action].eql?('weekly') %>
@@ -82,7 +82,7 @@
       </td>
       <td style="text-align: right;">
         <%- if request.params[:action].eql?('weekly') %>
-          <%= @track_painters.sum(:weekly_total)  %>
+          <%= @weekly_sum  %>
         <% end -%>
         <%- if request.params[:action].eql?('costing') %>
           <%= @track_painters.sum(:weekly_cost)  %>
@@ -92,7 +92,3 @@
   </table>
 <% end %>
 </div>
-
-
-
-

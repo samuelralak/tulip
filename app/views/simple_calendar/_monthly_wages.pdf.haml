@@ -1,0 +1,23 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+      %th Days Worked
+      %th Daily Wage
+      %th Deductions (IOU)
+      %th Bonuses
+      %th Payable
+  %tbody
+    - @painters.each do |painter|
+      %tr
+        %td= painter.name
+        %td= days_worked(painter, @start_date)
+        %td= painter.daily_allowance
+        %td= deductions_total(painter, @start_date)
+        %td= bonus_total(painter, @start_date)
+        %td= payable_total(painter, @start_date)
+      - @total += payable_total(painter, @start_date)
+    %tr
+      %td{ :colspan => "4", :style => "text-align: right" }
+        %strong Total
+      %td= @total

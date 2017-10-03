@@ -16,7 +16,7 @@ class PettyCashItemsController < ApplicationController
   # GET /petty_cash_items/new
   def new
     @petty_cash_item = @petty_cash.petty_cash_items.new
-    @petty_cash_item.bal_carried_forward = @pet
+    # @petty_cash_item.bal_carried_forward = @pet
 
     respond_to do |format|
       format.js {}
@@ -30,7 +30,7 @@ class PettyCashItemsController < ApplicationController
 
     respond_to do |format|
       if @petty_cash_item.save
-        format.html { redirect_to petty_cashes_path, notice: 'Petty cash item was successfully created.' }
+        format.html { redirect_to petty_cashes_path, notice: 'Payment successfully created.' }
         format.json { render :show, status: :created, location: @petty_cash_item }
       else
         format.html { render :new }
@@ -51,6 +51,6 @@ class PettyCashItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def petty_cash_item_params
-      params.require(:petty_cash_item).permit(:amount, :paid_to, :reason, :date)
+      params.require(:petty_cash_item).permit(:amount, :paid_to, :reason, :date, :site_id)
     end
 end

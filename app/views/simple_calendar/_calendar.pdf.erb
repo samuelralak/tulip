@@ -1,0 +1,13 @@
+<div class="row text-center">
+  <div class="col-md-12">
+    <h3><strong><%= I18n.t("date.month_names")[start_date.month] %> <%= start_date.year %></strong></h3>
+    
+  </div>
+</div>
+
+<%- if request.params[:action].eql?('permanent') %>
+  <%= render 'simple_calendar/permanent_wages'%>
+<% end -%>
+<%- if request.params[:action].eql?('monthly') %>
+  <%= render 'simple_calendar/monthly_wages'%>
+<% end -%>

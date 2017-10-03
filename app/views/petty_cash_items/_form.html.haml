@@ -1,11 +1,12 @@
 = simple_form_for([locals[:petty_cash], locals[:petty_cash_item]]) do |f|
-  = f.error_notification
+	= f.error_notification
 
-  .form-inputs
-    = f.input :amount
-    = f.input :paid_to
-    = f.input :reason
-    = f.input :date
+	.form-inputs
+		= f.input :site_id, collection: Site.all, include_blank: true, input_html: { class: 'chosen-select', id: "painterSkills" }
+		= f.input :amount
+		= f.input :paid_to
+		= f.input :reason
+		= f.input :date
 
-  .form-actions
-    = f.button :submit, 'make payment'
+	.form-actions
+		= f.button :submit, 'make payment'

@@ -24,12 +24,7 @@ set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 
-## Defaults:
-# set :scm,           :git
-# set :branch,        :master
-# set :format,        :pretty
-# set :log_level,     :debug
-# set :keep_releases, 5
+
 
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/database.yml config/application.yml}
@@ -79,7 +74,3 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
-
-# ps aux | grep puma    # Get puma pid
-# kill -s SIGUSR2 pid   # Restart puma
-# kill -s SIGTERM pid   # Stop puma

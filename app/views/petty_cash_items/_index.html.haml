@@ -2,6 +2,7 @@
   %thead
     %tr
       %th Date
+      %th Site
       %th Paid to
       %th Reason
       %th Amount
@@ -10,12 +11,13 @@
     - petty_cash_items.each do |petty_cash_item|
       %tr
         %td= petty_cash_item.date
+        %td= petty_cash_item.try(:site).try(:name)
         %td= petty_cash_item.paid_to
         %td= petty_cash_item.reason
         %td{:style => "color: maroon"}
           = "- #{petty_cash_item.amount}"
     %tr
-      %td{ :colspan => "3"}
+      %td{ :colspan => "4"}
         %strong.pull-right Total
       %td{:style => "color: maroon"}
         = "- #{petty_cash_items.sum(:amount)}"

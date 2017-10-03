@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+# ruby '2.2.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -30,7 +30,7 @@ gem 'jquery-datatables-rails'
 gem 'nprogress-rails'
 gem 'jquery-ui-rails'
 
-# sweet alert
+# use sweet alert
 gem 'sweet-alert'
 
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -46,6 +46,7 @@ group :development do
     gem 'capistrano-bundler', require: false
     gem 'capistrano3-puma',   require: false
 end
+
 gem 'capistrano-passenger'
 
 # Use puma as the app server
@@ -72,6 +73,8 @@ gem 'actionpack-action_caching'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+gem 'therubyracer'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -88,4 +91,3 @@ end
 group :production do
   gem 'rails_12factor'
 end
-

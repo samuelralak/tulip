@@ -23,7 +23,7 @@
 							- total = 0.0
 							%tr
 								%td= s[0]
-								%td
+								%td.sum
 									- s[1].each_with_index do |t, index|
 										- if t.nil? || t.track_painter.nil? || t.track_painter.weekly_total.nil?
 											- weekly_total = 0.0
@@ -31,18 +31,15 @@
 										- else
 											- total += t.try(:track_painter).try(:weekly_total)
 										- site_total += total
-										- if index.eql?(s[1].length - 1) 
+										- if index.eql?(s[1].length - 1)
 											= total
 						%tr
 							%td Other*
-							%td
-								- other = (@track_painters.sum(:weekly_total) - site_total) 
+							%td.other
+								- other = (@temp_track_painters.sum(:weekly_total) - site_total)
 								= other > 0 ? other : 0.0
 						%tr
-							%td{ :style => "text-align: right"} 
+							%td{ :style => "text-align: right"}
 								%strong Total:
-							%td
+							%td.site_totals
 								= (site_total + other)
-
-
-

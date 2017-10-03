@@ -4,8 +4,11 @@
 		.col-xs-4.col-sm-3.col-md-2.sidebar
 			= render 'shared/side_nav'
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-			%h1.page-header STATEMENT
-			%h2 Details 
+			.pull-right
+				= link_to "Back", statements_path, class: "btn btn-default btn-sm"
+			%h3.page-header STATEMENT
+			%h4 
+				%strong Details 
 			.row	
 				.col-md-4
 					.row
@@ -76,96 +79,140 @@
 					Notes:
 				.col-md-9
 					= @site.notes
+
+			%hr
 		
 			.row	
 				.col-md-3
-					%h3 Paints
+					%h4 
+						%strong Paints
 					- paint_grand_total = 0
-					- @paints.each do |p|
-						.row
-							.col-md-4
-								= p.year
-							.col-md-4
-								= p.month
-							.col-md-4
-								= p.amount		
-								- paint_grand_total+= p.amount						
-								
-					.row
-						.col-md-4
-						.col-md-4
-						.col-md-4
-							= paint_grand_total
+					%table.table.table-striped
+						%thead
+							%th
+							%th{:style => "text-align: right" } Initial Cost
+							%th{:style => "text-align: right" } Cost
+						%tbody
+							- @paints.each_with_index do |p, index|
+								%tr
+									%td
+										#{p.month}, #{p.year}
+									%td{:style => "text-align: right" }
+										- if index.eql?(0)
+											= @site.try(:initial_paint_amount)
+									%td{:style => "text-align: right" }
+										= p.amount		
+										- paint_grand_total+= p.amount						
+									
+							.tr
+								%td{ :colspan => "3", :style => "text-align: right" }
+									= paint_grand_total
 				.col-md-3
-					%h3 Labour 
+					%h4 
+						%strong Labour
 					- labour_grand_total = 0
-					- @labours.each do |l|
-						.row
-							.col-md-8
-								= l[0]
-							.col-md-4
-								- labour_total = 0
-								- l[1].map { |w| labour_total+=(w.daily_wage + w.daily_allowance)}
-								- labour_grand_total+= labour_total					
-								= labour_total
-					.row
-						.col-md-8
-						.col-md-4
-							= labour_grand_total
+					%table.table.table-striped
+						%thead
+							%th
+							%th{:style => "text-align: right" } Initial Cost
+							%th{:style => "text-align: right" } Cost
+						%tbody
+							- @labours.each_with_index do |l, index|
+								%tr
+									%td
+										= l[0]
+									%td{:style => "text-align: right" }
+										- if index.eql?(0)
+											= @site.try(:initial_labour_amount)
+									%td{:style => "text-align: right" }
+										- labour_total = 0
+										- l[1].map { |w| labour_total+=(w.daily_wage + w.daily_allowance)}
+										- labour_grand_total+= labour_total					
+										= labour_total
+							%tr
+								%td{ :colspan => "3", :style => "text-align: right" }
+									= labour_grand_total
 				.col-md-6
-					%h3 Materials
+					%h4 
+						%strong Materials
 					- material_grand_total = 0
-					- @materials.each do |m|
-						.row
-							.col-md-2
-								= m.date
-							.col-md-8
-								= m.reason
-							.col-md-2
-								- material_grand_total+= m.total_spent						
-								= m.total_spent
-					.row
-						.col-md-2
-						.col-md-8
-						.col-md-2
-							= material_grand_total
-			%h2 Painters 
+					%table.table.table-striped
+						%thead
+							%th
+							%th Reason
+							%th{:style => "text-align: right" } Initial Cost
+							%th{:style => "text-align: right" } Cost
+						%tbody
+							- @materials.each_with_index do |m, index|
+								%tr
+									%td
+										= m.date
+									%td
+										= m.reason
+									%td{:style => "text-align: right" }
+										- if index.eql?(0)
+											= @site.try(:initial_material_amount)
+									%td{:style => "text-align: right" }
+										- material_grand_total+= m.total_spent						
+										= m.total_spent
+							%tr
+								%td{ :colspan => "4", :style => "text-align: right" }
+									= material_grand_total
+			%hr
+
+			%h4 
+				%strong Painters 
 			.row
 				.col-md-12
-					- @painters.each do |p|
-						= "#{p.name} - #{attendance(p, @site)}"	
+					- @painters.each_with_index do |p, index|
+						= "#{p.name} - #{attendance(p, @site)}#{index.eql?(@painters.size - 1) ? '' : ','}"	
+			%hr
 			.row
 				.col-md-6
-					%h3 Invoices
+					%h4 
+						%strong Invoices
 					- invoice_total = 0
-					- @invoices.each do |i|
-					.row
-					- invoice_total += i.amount
-						.col-md-4
-							= i.invoice_date
-						.col-md-4
-							= i.invoice_number
-						.col-md-4	
-							= i.amount
-					.row
-						.col-md-4
-						.col-md-4
-						.col-md-4
-							=invoice_total
+					%table.table.table-striped
+						%thead
+							%th Date
+							%th Invoice No.
+							%th{ :style => "text-align: right" }	 Amount
+						%tbody
+							- @invoices.each do |i|
+								%tr
+									- invoice_total += i.amount
+									%td
+										= i.invoice_date
+									%td
+										= i.invoice_number
+									%td{ :style => "text-align: right" }
+										= i.amount
+							%tr
+								%td{ :colspan => "2", :style => "text-align: right" }
+									%strong Grand Total
+								%td{ :style => "text-align: right" }
+									= invoice_total
 				.col-md-6
-					%h3 Payments
+					%h4 
+						%strong Payments
 					- payment_total = 0
-					- @payments.each do |p|
-					.row
-					-payment_total += p.amount
-						.col-md-4
-							= p.payment_date
-						.col-md-4
-							= p.reference
-						.col-md-4	
-							= p.amount 
-					.row
-						.col-md-4
-						.col-md-4
-						.col-md-4
-							=payment_total
+					%table.table.table-striped
+						%thead
+							%th Date
+							%th Reference
+							%th{ :style => "text-align: right" }	 Amount
+						%tbody
+							- @payments.each do |p|
+								%tr
+									- payment_total += p.amount
+									%td
+										= p.payment_date
+									%td
+										= p.reference
+									%td{ :style => "text-align: right" }	
+										= p.amount 
+							%tr
+								%td{ :colspan => "2", :style => "text-align: right" }
+									%strong Grand Total
+								%td{ :style => "text-align: right" }
+									= payment_total

@@ -5,7 +5,7 @@
 			= render 'shared/side_nav'
 
 		.col-xs-8.col-xs-offset-4.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-			=link_to 'PDF', painter_permanent_wage_path(@painter, format: :pdf), class: "btn btn-info pull-right"   
+			=link_to 'PDF', painter_permanent_wage_path(@painter, start_date: @start_date, format: :pdf), class: "btn btn-info pull-right"   
 			%h1.page-header Permanent Wages
 			.row
 				.col-md-2
@@ -76,9 +76,17 @@
 												= (days_missed(@painter, @start_date)).length
 											%td
 											%td{ :style => 'text-align: right'}
-												= "-"
-												%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
-													= "#{absent_total(@painter, @start_date)}"
+												- if current_user.has_role?(:super) 
+													= "-"
+													%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
+														= "#{absent_total(@painter, @start_date)}"
+												- else
+													- if @start_date.end_of_month < Date.today.end_of_month
+														= "-"
+														%a{ :href => "#", :id => "missedDays", data: { :type => "text", :url => "/update_monthly_income?painter=#{@painter.id}&start_date=#{@start_date}", :title => "enter figuure", :pk => 1 } }
+															= "#{absent_total(@painter, @start_date)}" 
+													- else
+														= "- #{absent_total(@painter, @start_date)}" 
 												
 										%tr{ :style => 'color: maroon'}
 											%td

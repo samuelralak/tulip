@@ -4,12 +4,17 @@
 .body
 	.container
 		.col-xs-12.main
-			%h1.page-header Permanent Wages
+			%h4.page-header 
+				%strong  Permanent Wages
+				%br
+				%small
+					%strong Employee: #{@painter.name}
 			.row
 				.col-xs-12
 					= month_calendar do |date|
 						= date
-					%h3 Payable
+					%h4 
+						%strong Payable
 					.row
 						.col-xs-8
 							%table.table
