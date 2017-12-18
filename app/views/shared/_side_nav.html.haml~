@@ -132,6 +132,9 @@
 	%ul.nav.nav-sidebar
 
 	%ul.nav.nav-sidebar
+		%li{ :class => "#{'active' if request.params[:controller].eql?('materials')}" }
+			= link_to materials_path do
+				= fa_icon 'circle-o', text: 'materials'
 		%li{ :class => "#{'active' if request.params[:controller].eql?('painters')}" }
 			= link_to painters_path do
 				= fa_icon 'circle-o', text: 'Painters'
