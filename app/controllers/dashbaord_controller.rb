@@ -9,11 +9,14 @@ class DashbaordController < ApplicationController
       painter_ids = TrackPainter.where('id in (?) AND week_number = ? AND year=?',
         track_painter_ids, @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i)
         .pluck(:painter_id)
-      @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true)
+      @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true).
+        includes(:employment_type, track_painters: :track_painter_items)
       # employment_type = EmploymentType.find(@selected)
       # @painters = employment_type.painters.where(is_active: true).order('name ASC')
     else
-      @painters = Painter.where(is_active: true).order('name ASC')
+      @painters = Painter.where(is_active: true).
+        includes(:employment_type, track_painters: :track_painter_items).
+        order('name ASC')
     end
     # logger.info "####### WEEK: #{start_date.strftime("%U").to_i}"
 

@@ -1,10 +1,10 @@
 module SitesHelper
 	def find_site(week, date, painter)
 		# find track painter
-		track_painter = TrackPainter.where(["year = ? and week_number = ? and painter_id = ?", date.strftime('%Y').to_i, week, painter]).first
+    track_painter = painter.track_painters.select { |track_painter| track_painter.year == date.strftime('%Y').to_i && track_painter.week_number == week }.try(:first)
 
 		if track_painter
-			if track_painter.painter.name.eql?('Willis')
+			if painter.name.eql?('Willis')
 				puts "\n\n"
 				puts "TRACK PAINTER ITEMS: #{track_painter.track_painter_items.where(date_attended: date).each{ |t| t.site.name }}"
 				puts "\n\n"
