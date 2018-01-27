@@ -38,6 +38,13 @@ class Ability
         can [:create, :read], Material
         can :read, TrackPainter 
         can :read, TrackPainterItem
+        can [:create, :read, :update], Material
+        can [:create, :read, :update], Payment
+        can [:create, :read, :update], Deduction
+        can [:create, :read, :update], Holiday
+        can [:create, :read, :update], Invoice
+        can [:create, :read, :update], InvoiceItem
+        can [:create, :read, :update], Paint
     end
 
 

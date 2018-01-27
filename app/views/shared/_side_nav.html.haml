@@ -130,9 +130,18 @@
 				= fa_icon 'circle-o', text: 'Weekly planning'
 
 	%ul.nav.nav-sidebar
+		%li{ :class => "#{'active' if request.params[:controller].eql?('deductions')}" }
+			= link_to deductions_path do
+				= fa_icon 'circle-o', text: 'Deductions (IOU)'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('payments')}" }
+			= link_to payments_path do
+				= fa_icon 'circle-o', text: 'Payments'
 		%li{ :class => "#{'active' if request.params[:controller].eql?('petty_cashes')}" }
 			= link_to petty_cashes_path do
 				= fa_icon 'circle-o', text: 'Petty Cash'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('invoices')}" }
+			= link_to invoices_path do
+				= fa_icon 'circle-o', text: 'Invoices'
 	%ul.nav.nav-sidebar
 		%li{ :class => "#{'active' if request.params[:controller].eql?('materials')}" }
 			= link_to materials_path do
@@ -143,6 +152,16 @@
 		%li{ :class => "#{'active' if request.params[:controller].eql?('sites')}" }
 			= link_to urgent_sites_path do
 				= fa_icon 'circle-o', text: 'Sites'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('paints')}" }
+			= link_to paints_path do
+				= fa_icon 'circle-o', text: 'Paints'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('skills')}" }
+			= link_to skills_path do
+				= fa_icon 'circle-o', text: 'Skills'
+		%li{ :class => "#{'active' if request.params[:controller].eql?('holidays')}" }
+			= link_to holidays_path do 
+				= fa_icon 'circle-o', text: 'Holidays'
+
 
 
 
