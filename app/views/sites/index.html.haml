@@ -9,6 +9,7 @@
         = link_to new_site_path, class: 'btn btn-info' do
           = fa_icon "plus", text: "New Site"
       %h1.page-header Sites
+      - is_super = current_user.has_role?(:super)
       .table-responsive
         %table.table.table-striped
           %thead
@@ -17,7 +18,7 @@
               %th Head
               %th Address
               %th Notes
-              - if current_user.has_role?(:super)
+              - if is_super
                 %th Total Spent on Labour
                 %th Total Spent on Material
                 %th Total Spent on Paint
@@ -28,7 +29,7 @@
                 %th
               %th
               %th
-              - if current_user.has_role?(:super)
+              - if is_super
                 %th
 
           %tbody
@@ -36,16 +37,19 @@
               %tr
                 / %td= link_to site.name, '#', data: { :toggle => "modal", :target => "#invoicePaymentModal" }
                 %td
-                  = current_user.has_role?(:super) ? link_to(site.name, transactions_path(site.id), remote: true) : site.name
+                  = is_super ? link_to(site.name, transactions_path(site.id), remote: true) : site.name
                 %td= site.head
                 %td= site.address
                 %td= site.notes
-                - if current_user.has_role?(:super)
+                - if is_super
+                  - materials_total_spent_sum = (site.materials.map(&:total_spent) - [nil]).reduce(:+) || 0
+                  - petty_cash_sum = sum_petty_cash(site)
+                  - paints_amount_sum = (site.paints.map(&:amount) - [nil]).reduce(:+) || 0
                   %td= site_labour_amount(site)
                   %td
-                    = (site.materials.sum(:total_spent) + sum_petty_cash(site) + site.initial_material_amount)
-                  %td= (site.paints.sum(:amount) + site.old_paint_amount)
-                  %td= (site_labour_amount(site) + (site.paints.sum(:amount) + site.old_paint_amount) + (site.materials.sum(:total_spent) + sum_petty_cash(site) + site.initial_material_amount))
+                    = (materials_total_spent_sum + petty_cash_sum + site.initial_material_amount)
+                  %td= (paints_amount_sum + site.old_paint_amount)
+                  %td= (site_labour_amount(site) + (paints_amount_sum + site.old_paint_amount) + (materials_total_spent_sum + petty_cash_sum + site.initial_material_amount))
                   %td
                     %span#siteStatus
                       = site.is_active
@@ -64,8 +68,9 @@
                 %td
                   = link_to edit_site_path(site), class: 'btn btn-info btn-xs' do
                     = fa_icon 'edit'
-                - if current_user.has_role?(:super)
+                - if is_super
                   %td
                     = link_to site, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger btn-xs' do
                       = fa_icon 'trash'
 = render 'sites/invoice_payment_modal'
+

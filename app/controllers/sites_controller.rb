@@ -5,7 +5,11 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
-    @sites = Site.all.order('name asc')
+    @sites = Site.all.includes(:petty_cash_items,
+                               :materials,
+                               :paints,
+                               track_painter_items: {track_painter: {painter: :employment_type}}
+                              ).order('name asc')
   end
 
   # GET /sites.json

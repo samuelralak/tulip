@@ -19,7 +19,7 @@ module SitesHelper
 
 	def site_labour_amount(site)
 		total = 0.0
-		track_painter_items = TrackPainterItem.where(site_id: site.id)
+    track_painter_items = site.track_painter_items
 
 		track_painter_items.each do |tpi|
 			if !tpi.track_painter.painter.nil? && tpi.track_painter.painter.employment_type.code.eql?('PERMANENT')
@@ -61,3 +61,4 @@ module SitesHelper
 		total
 	end
 end
+
