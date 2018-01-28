@@ -50,7 +50,7 @@
 											%td
 												= sundays_worked(@painter, @start_date)
 											%td
-												= @painter.daily_wage
+												= "#{@painter.daily_wage}+200"
 											%td{ :style => 'text-align: right'}
 												= sundays_amount(@painter, @start_date)
 										%tr
@@ -59,7 +59,7 @@
 											%td
 												= @holidays_worked.length
 											%td
-												= @painter.daily_wage
+												= "#{@painter.daily_wage}+200"
 											%td{ :style => 'text-align: right'}
 												= wages_total(@painter, @start_date)
 										%tr

@@ -38,6 +38,7 @@ module PaintersHelper
 		sundays_total = 0.0
 		sundays_worked = days_worked.select { |d| d.date_attended.wday.eql?(0) }
 		sundays_worked.each { |s| sundays_total += s.daily_wage }
+		sundays_total += sundays_worked.size * 200
 		return sundays_total
 	end
 
@@ -65,9 +66,11 @@ module PaintersHelper
 		)
 
 		holidays = Holiday.pluck(:date).map { |d| DateTime.parse(d) }
-		total_wage = track_painter_items.where('date_attended IN (?)', holidays).sum(:daily_wage)
-		total_allowance = track_painter_items.where('date_attended IN (?)', holidays).sum(:daily_allowance)
-		total = total_wage
+		holidays_worked = track_painter_items.where('date_attended IN (?)', holidays)
+		total_wage = holidays_worked.sum(:daily_wage)
+		total_allowance = holidays_worked.sum(:daily_allowance)
+		total_bonus = holidays_worked.count * 200
+		total = total_wage + total_bonus
 
 		return total
 	end
