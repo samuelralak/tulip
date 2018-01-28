@@ -43,7 +43,7 @@ class DashbaordController < ApplicationController
   def assign_site
     @painter = Painter.find(params[:painter_id])
     @track_painter =  TrackPainter.where(["year = ? and week_number = ? and painter_id = ?",
-      (Date.parse(params[:date])).strftime("%Y").to_i, params[:week_number].to_i, params[:painter_id]]).first
+      (Date.parse(params[:date])).end_of_week.strftime("%Y").to_i, params[:week_number].to_i, params[:painter_id]]).first
 
     logger.info "PARAMS: #{params.inspect}"
 
