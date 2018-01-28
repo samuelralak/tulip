@@ -5,7 +5,7 @@
 				%td= painter.name
 				- week.each do |day|
 					= content_tag :td, class: locals[:calendar].td_classes_for(day) do
-						- TrackPainter.find_by(week_number: locals[:start_date].strftime("%U").to_i, painter_id: painter.id).try(:track_painter_items).try(:each) do |tp|
+						- TrackPainter.find_by(week_number: locals[:start_date].end_of_week.strftime("%U").to_i, painter_id: painter.id).try(:track_painter_items).try(:each) do |tp|
 							- if day.eql?(tp.date_attended)
 								= tp.try(:site).try(:name)
 				

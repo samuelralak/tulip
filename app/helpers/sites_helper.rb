@@ -1,7 +1,7 @@
 module SitesHelper
 	def find_site(week, date, painter)
 		# find track painter
-    track_painter = painter.track_painters.select { |track_painter| track_painter.year == date.strftime('%Y').to_i && track_painter.week_number == week }.try(:first)
+    track_painter = painter.track_painters.select { |track_painter| track_painter.year == date.end_of_week.strftime('%Y').to_i && track_painter.week_number == week }.try(:first)
 
 		if track_painter
 			if painter.name.eql?('Willis')

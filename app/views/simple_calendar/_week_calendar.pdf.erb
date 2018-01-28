@@ -5,10 +5,10 @@
       <ul class="pager">
       <% if params[:query] %>
         
-        <li><%= I18n.t("date.month_names")[start_date.month] %>, Week <%= start_date.strftime("%U").to_i %></li>
+        <li><%= I18n.t("date.month_names")[start_date.month] %>, Week <%= start_date.end_of_week.strftime("%U").to_i + 1 %></li>
       <% else %>
         
-        <li><%= I18n.t("date.month_names")[start_date.month] %>, Week <%= start_date.strftime("%U").to_i %></li>
+        <li><%= I18n.t("date.month_names")[start_date.month] %>, Week <%= start_date.end_of_week.strftime("%U").to_i + 1 %></li>
       <% end%>
       </ul>
     </nav>

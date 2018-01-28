@@ -8,8 +8,8 @@ class WagesController < ApplicationController
   	@temporary = Painter.where("employment_type_id = ?", "74b9a0e1-6e1e-4176-b4a5-51e7c5597c4f")
         @track_painters = TrackPainter.where(['week_number = ? AND year = ? AND painter_id IN (?)',
  
-        @start_date.strftime("%U").to_i,
-        @start_date.strftime("%Y").to_i,
+        @start_date.end_of_week.strftime("%U").to_i,
+        @start_date.end_of_week.strftime("%Y").to_i,
         @temporary.map{|x| x[:id]}])
         
         @painters = Painter.where('id IN (?) AND employment_type_id = ?',
@@ -37,7 +37,7 @@ class WagesController < ApplicationController
       track_painter_ids = TrackPainterItem.where(site_id: @selected).pluck(:track_painter_id)
       painter_ids = TrackPainter.where(
         'id in (?) AND week_number = ? AND year=?',
-        track_painter_ids, @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i)
+        track_painter_ids, @start_date.end_of_week.strftime("%U").to_i, @start_date.end_of_week.strftime("%Y").to_i)
         .pluck(:painter_id)
       @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true)
 
@@ -50,7 +50,7 @@ class WagesController < ApplicationController
   def costing
   	@painters = Painter.all
   	@track_painters = TrackPainter.where(
-  		['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.strftime("%U").to_i]
+  		['painter_id IN (?) AND week_number = ?', @painters.pluck(:id), @start_date.end_of_week.strftime("%U").to_i]
   	)
     @painters = @painters.where('id IN (?)', @track_painters.pluck(:painter_id))
   	@sites_attended = TrackPainterItem.joins(:site)

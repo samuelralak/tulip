@@ -7,7 +7,7 @@ class DashbaordController < ApplicationController
     if @selected
       track_painter_ids = TrackPainterItem.where(site_id: @selected).pluck(:track_painter_id)
       painter_ids = TrackPainter.where('id in (?) AND week_number = ? AND year=?',
-        track_painter_ids, @start_date.strftime("%U").to_i, @start_date.strftime("%Y").to_i)
+        track_painter_ids, @start_date.end_of_week.strftime("%U").to_i, @start_date.end_of_week.strftime("%Y").to_i)
         .pluck(:painter_id)
       @painters = Painter.where('id in (?) AND is_active = ?', painter_ids, true).
         includes(:employment_type, track_painters: :track_painter_items)
@@ -95,14 +95,14 @@ class DashbaordController < ApplicationController
 
   def import_from_previous
     prev_start_date = Date.parse(params[:prev_date])
-    prev_date_year = prev_start_date.strftime("%Y").to_i
-    prev_week_number = prev_start_date.strftime("%U").to_i
+    prev_date_year = prev_start_date.end_of_week.strftime("%Y").to_i
+    prev_week_number = prev_start_date.end_of_week.strftime("%U").to_i
     curr_week_dates = (@start_date.beginning_of_week..@start_date.end_of_week).map { |e| Date.parse(e.to_s) }
 
     track_painters = TrackPainter.where(week_number: prev_week_number, year: prev_date_year)
     track_painters.each_with_index do |tp|
       new_track_painter = TrackPainter.create(
-        week_number: @start_date.strftime("%U").to_i, year: @start_date.strftime("%Y").to_i,
+        week_number: @start_date.end_of_week.strftime("%U").to_i, year: @start_date.end_of_week.strftime("%Y").to_i,
         weekly_total: tp.weekly_total, painter_id: tp.painter_id, notes: tp.notes )
       tp.track_painter_items.each do |tpi|
         curr_week_dates.each do |d|
@@ -120,8 +120,8 @@ class DashbaordController < ApplicationController
   end
 
   def reset_week
-    week_number = @start_date.strftime("%U").to_i
-    year = @start_date.strftime("%Y").to_i
+    week_number = @start_date.end_of_week.strftime("%U").to_i
+    year = @start_date.end_of_week.strftime("%Y").to_i
 
     begin
       TrackPainter.where(week_number: week_number, year: year).destroy_all
