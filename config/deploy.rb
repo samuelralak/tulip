@@ -3,7 +3,7 @@ server '142.4.11.94', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:samuelralak/tulip.git'
 set :application,     'tulip'
-set :user,            'root'
+set :user,            'ascentnp'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 set :port, 			  3000
