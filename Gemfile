@@ -13,25 +13,25 @@ gem 'sass-rails', '~> 5.0'
 gem 'compass-rails', '~> 2.0.4'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
-gem "haml-rails"
-gem "font-awesome-rails"
-gem 'chosen-rails'
-gem 'bootstrap-chosen-rails'
+gem "haml-rails", '~> 0.9.0'
+gem "font-awesome-rails", '~> 4.5.0.0'
+gem 'chosen-rails', '~> 1.4.3'
+gem 'bootstrap-chosen-rails', '~> 0.0.4'
 
 # javascript
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jquery-turbolinks'
+gem 'jquery-rails', '~> 4.1.0'
+gem 'turbolinks', '~> 2.5.3'
+gem 'jquery-turbolinks', '~> 2.1.0'
 gem 'jbuilder', '~> 2.0'
-gem 'toastr-rails'
+gem 'toastr-rails', '~> 1.0.3'
 gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
-gem 'jquery-datatables-rails'
-gem 'nprogress-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-datatables-rails', '~> 3.3.0'
+gem 'nprogress-rails', '~> 0.1.6.7'
+gem 'jquery-ui-rails', '~> 5.0.5'
 
 # use sweet alert
-gem 'sweet-alert'
+gem 'sweet-alert', '~> 0.0.9'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -50,30 +50,30 @@ end
 gem 'capistrano-passenger', '~> 0.2.0'
 
 # Use puma as the app server
-gem 'puma'
+gem 'puma', '~> 2.15.3'
 
 # Forms
-gem 'simple_form'
+gem 'simple_form', '~> 3.2.1'
 
 # Authentication & Authorization
-gem 'devise'
-gem 'cancancan'
-gem "rolify"
+gem 'devise', '~> 3.5.3'
+gem 'cancancan', '~> 1.13.1'
+gem "rolify", '~> 5.0.0'
 
 # Calender
-gem "simple_calendar"
+gem "simple_calendar", '~> 2.0.3'
 
 # Console
-gem 'hirb'
+gem 'hirb', '~> 0.7.3'
 
 # Caching
-gem 'actionpack-action_caching'
+gem 'actionpack-action_caching', '~> 1.1.1'
 
 # Generate PDF
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf', '~> 1.0.3'
+gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
 
-gem 'therubyracer'
+gem 'therubyracer', '~> 0.12.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
