@@ -50,7 +50,7 @@ end
 gem 'capistrano-passenger', '~> 0.2.0'
 
 # Use puma as the app server
-gem 'puma', '~> 2.15.3'
+gem 'puma'
 
 # Forms
 gem 'simple_form', '~> 3.2.1'

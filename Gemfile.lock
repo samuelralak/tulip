@@ -186,7 +186,7 @@ GEM
     nprogress-rails (0.1.6.8)
     orm_adapter (0.5.0)
     pg (0.21.0)
-    puma (2.15.3)
+    puma (3.11.3)
     rack (1.6.9)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -318,7 +318,7 @@ DEPENDENCIES
   momentjs-rails (~> 2.9)!
   nprogress-rails (~> 0.1.6.7)
   pg (~> 0.21)
-  puma (~> 2.15.3)
+  puma
   rails (= 4.2.7)
   rails_12factor
   rolify (~> 5.0.0)
