@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20160630161417) do
 
   create_table "petty_cashes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "paid_to"
-    t.decimal  "amount"
+    t.decimal  "amount",              default: 0.0, null: false
     t.text     "reason"
     t.date     "date_paid"
     t.datetime "created_at",                        null: false

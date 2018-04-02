@@ -71,7 +71,7 @@ gem 'actionpack-action_caching', '~> 1.1.1'
 
 # Generate PDF
 gem 'wicked_pdf', '~> 1.0.3'
-gem 'wkhtmltopdf-binary', '~> 0.9.9.3'
+gem 'wkhtmltopdf-binary'
 
 gem 'therubyracer', '~> 0.12.3'
 
