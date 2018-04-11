@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630161417) do
+ActiveRecord::Schema.define(version: 20180402125558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20160630161417) do
 
   create_table "petty_cashes", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "paid_to"
-    t.decimal  "amount",              default: 0.0, null: false
+    t.decimal  "amount"
     t.text     "reason"
     t.date     "date_paid"
     t.datetime "created_at",                        null: false
@@ -232,6 +232,30 @@ ActiveRecord::Schema.define(version: 20160630161417) do
     t.decimal  "bal_carried_forward", default: 0.0, null: false
     t.decimal  "total",               default: 0.0, null: false
   end
+
+  create_table "quotation_items", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.text     "description"
+    t.decimal  "amount"
+    t.uuid     "quotation_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "quotation_items", ["quotation_id"], name: "index_quotation_items_on_quotation_id", using: :btree
+
+  create_table "quotations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.integer  "quotation_number",               null: false
+    t.date     "quotation_date"
+    t.decimal  "sub_total",        default: 0.0, null: false
+    t.decimal  "value_added_tax",  default: 0.0, null: false
+    t.decimal  "total",            default: 0.0, null: false
+    t.uuid     "site_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "quotations", ["quotation_number"], name: "index_quotations_on_quotation_number", unique: true, using: :btree
+  add_index "quotations", ["site_id"], name: "index_quotations_on_site_id", using: :btree
 
   create_table "roles", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "name"
@@ -292,6 +316,7 @@ ActiveRecord::Schema.define(version: 20160630161417) do
     t.boolean  "is_active",               default: true,  null: false
     t.boolean  "is_urgent",               default: false, null: false
     t.decimal  "priority",                default: 20.0,  null: false
+    t.boolean  "put_away"
   end
 
   create_table "skills", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

@@ -2,16 +2,17 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: localhost
-  username: samuelralak	
+  username: masud	
   pool: 20
 
 development:
   <<: *default
-  password: samiralak1
+  password: Openpostgres1!
   database: novel_development
 
 test:
   <<: *default
+  password: Openpostgres1!
   database: novel_test
 
 production:
